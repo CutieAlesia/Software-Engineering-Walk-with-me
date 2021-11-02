@@ -9,5 +9,5 @@
 
 #### Branches
 
-![https://github.com/Kushurando/Software-Engineering-Walk-with-me](https://img.shields.io/badge/master-1.0-blue)
+![https://github.com/Kushurando/Software-Engineering-Walk-with-me](https://img.shields.io/badge/master-1.3-blue)
 ![](https://img.shields.io/badge/dev-1.3-blue)
