@@ -13,7 +13,7 @@ public class Main {
   private static Server server;
   private static Database database;
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws SQLException {
     //server = new Server(25565);
     database = new Database();
   }
