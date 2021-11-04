@@ -1,14 +1,25 @@
 package com.acmseproject.WebService.User;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@Component
+import java.util.List;
+
+@Service
 public class UserService {
 
+    private final UserRepository userRepository;
+
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @GetMapping
-    public String getUsers() {
-        return new User("Clemens", "pw1234", "abc@gmail.com").toString();
+    public List<User> getUsers() {
+        return userRepository.findAll();
     }
 
 }
