@@ -17,3 +17,24 @@ ___
 
 ![](https://img.shields.io/github/issues-raw/Kushurando/Software-Engineering-Walk-with-me?style=for-the-badge)
 ![](https://img.shields.io/github/issues-pr-raw/Kushurando/Software-Engineering-Walk-with-me?style=for-the-badge)
+___
+# API Documentation
+
+
+### HTTPS {GET}
+> __/api/v1__
+>
+> > Return format: JSON
+___
+##### User
+> __/user/getUsers__
+> > Returns all users in the DB (password excluded)
+>
+> __/user/getById?id={%id%}__
+> > Returns the user with the given integer ID
+>
+> __/user/getByUsername?username={%username%}__
+> > Returns the user with the given username
+> 
+> __/user/getByEmail?email={%email%}__
+> > Returns the user with the given email
