@@ -1,13 +1,18 @@
 # Software-Engineering-Walk-with-me
+___
+### Repository Info
+![](https://img.shields.io/badge/Website-None-red?style=for-the-badge)
+![](https://img.shields.io/badge/App-None-red?style=for-the-badge)
+![](https://img.shields.io/badge/Backend-1.3-blue?style=for-the-badge)
+___
+### Master
+![](https://img.shields.io/github/last-commit/Kushurando/Software-Engineering-Walk-with-me?style=for-the-badge)
+### Dev
+![](https://img.shields.io/github/last-commit/Kushurando/Software-Engineering-Walk-with-me/dev?style=for-the-badge)
+___
+### Statistics
+![](https://img.shields.io/tokei/lines/github/Kushurando/Software-Engineering-Walk-with-me?style=for-the-badge)
+![](https://img.shields.io/github/repo-size/Kushurando/Software-Engineering-Walk-with-me?style=for-the-badge)
 
-![](https://img.shields.io/badge/Last%20update-02.11.21-blue?logo=github)
-
-![](https://img.shields.io/badge/App%20version-None-red?logo=android)
-![](https://img.shields.io/badge/Browser%20version-None-red?logo=firefox)
-![](https://img.shields.io/badge/Backend%20version-1.3-blue)
-
-
-#### Branches
-
-![https://github.com/Kushurando/Software-Engineering-Walk-with-me](https://img.shields.io/badge/master-1.3-blue)
-![](https://img.shields.io/badge/dev-1.3-blue)
+![](https://img.shields.io/github/issues-raw/Kushurando/Software-Engineering-Walk-with-me?style=for-the-badge)
+![](https://img.shields.io/github/issues-pr-raw/Kushurando/Software-Engineering-Walk-with-me?style=for-the-badge)
