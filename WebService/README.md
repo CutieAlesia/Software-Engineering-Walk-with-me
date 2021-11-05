@@ -38,3 +38,26 @@ ___
 > 
 > __/user/getByEmail?email={%email%}__
 > > Returns the user with the given email
+___
+### API Example
+> HTTP Request
+> >GET http://localhost:8080/api/v1/user/getUsers
+>
+> Response
+> >[
+{
+"id": 1,
+"username": "admin",
+"password": "#zubat74#",
+"email": "admin@testUser.de",
+"create_time": "2021-11-04T21:02:01"
+},
+> 
+> >{
+"id": 2,
+"username": "testUser2",
+"password": "testPW1234",
+"email": "user@testUser.com",
+"create_time": "2021-11-04T21:39:54"
+}
+]
