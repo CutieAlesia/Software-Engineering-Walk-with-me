@@ -1,21 +1,31 @@
 package com.acmseproject.WebService.User;
 
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+@Entity
+@Table
 public class User {
 
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
-    private String name;
+    private String username;
     private String password;
     private String email;
+    private LocalDateTime create_time;
 
-    public User(int id, String name, String password, String email) {
-        this.id = id;
-        this.name = name;
-        this.password = password;
-        this.email = email;
+    public User() {
+
     }
 
-    public User(String name, String password, String email) {
-        this.name = name;
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public User(String username, String password, String email) {
+        this.username = username;
         this.password = password;
         this.email = email;
     }
@@ -24,9 +34,57 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    public String toCredentials() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + username + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public LocalDateTime getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(LocalDateTime create_time) {
+        this.create_time = create_time;
     }
 }
