@@ -108,4 +108,56 @@ POST /changePassword?id={id}&password={new_password}
 ```
 ### Relation API
 
+#### Getting a relationship
+```html
+GET /getRelation?id={id}&id2={id2}
+```
+```json
+{
+  "id_first": 1,
+  "id_second": 4,
+  "liked": 1,
+  "blocked": 0
+}
+```
+
+#### Creating a relationship
+```html
+GET /createRelation?id={id}&id2={id2}
+```
+```text
+"done"
+```
+
+#### Adding a like
+```html
+POST /addLike?id={id}&id2={id2}
+```
+```text
+"done"
+```
+
+#### Removing a like
+```html
+POST /removeLike?id={id}&id2={id2}
+```
+```text
+"done"
+```
+
+#### Adding a block
+```html
+POST /addBlock?id={id}&id2={id2}
+```
+```text
+"done"
+```
+#### Removing a block
+```html
+GET /removeBlock?id={id}&id2={id2}
+```
+```text
+"done"
+```
+
 ### Report API
