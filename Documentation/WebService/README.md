@@ -1,9 +1,6 @@
 ## WebService API Documentation
 
 ### Framework
-For this project we're using the Spring framework for our backend. It comes with a ton 
-of feature packed libraries that include a tomcat webserver or a security library that we use
-for oAuth authentification.
 
 [Spring Framework](https://spring.io/) --- [Spring Framework Documentation](https://docs.spring.io/spring-framework/docs/current/reference/html/)
 ___
