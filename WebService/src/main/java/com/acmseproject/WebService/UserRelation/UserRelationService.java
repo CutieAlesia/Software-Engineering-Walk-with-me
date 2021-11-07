@@ -1,2 +1,4 @@
-package com.acmseproject.WebService.UserRelation;public class UserRelationService {
+package com.acmseproject.WebService.UserRelation;
+
+public class UserRelationService {
 }
