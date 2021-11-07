@@ -1,9 +1,10 @@
-# Software-Engineering-Walk-with-me
+# WebService Module
 ___
-### Repository Info
-![](https://img.shields.io/badge/Website-None-red?style=for-the-badge)
-![](https://img.shields.io/badge/App-None-red?style=for-the-badge)
-![](https://img.shields.io/badge/Backend-1.5-blue?style=for-the-badge)
+### Module Info
+![](https://img.shields.io/badge/Java%20JDK-17-orange?style=for-the-badge)
+![](https://img.shields.io/badge/Build%20&%20Deployment-Maven-purple?style=for-the-badge)
+
+![](https://img.shields.io/badge/Package-org.acmseproject.WebService-green?style=for-the-badge)
 ___
 ### Master
 ![](https://img.shields.io/github/last-commit/Kushurando/Software-Engineering-Walk-with-me?style=for-the-badge)
@@ -16,3 +17,4 @@ ___
 
 ![](https://img.shields.io/github/issues-raw/Kushurando/Software-Engineering-Walk-with-me?style=for-the-badge)
 ![](https://img.shields.io/github/issues-pr-raw/Kushurando/Software-Engineering-Walk-with-me?style=for-the-badge)
+___
