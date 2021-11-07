@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 public class User {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String username;
     private String password;
@@ -24,10 +24,10 @@ public class User {
         this.password = password;
     }
 
-    public User(String username, String password, String email) {
+    public User(int id, String username, String password) {
+        this.id = id;
         this.username = username;
         this.password = password;
-        this.email = email;
     }
 
     @Override
