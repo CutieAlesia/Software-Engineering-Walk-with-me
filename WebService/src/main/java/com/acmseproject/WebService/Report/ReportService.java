@@ -1,2 +1,7 @@
-package com.acmseproject.WebService.Report;public class ReportService {
+package com.acmseproject.WebService.Report;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class ReportService {
 }
