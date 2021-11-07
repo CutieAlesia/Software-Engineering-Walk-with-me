@@ -17,7 +17,7 @@ public class UserController {
 //    }
     private final UserRepository userRepository;
 
-
+    
     @Autowired
     public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -49,10 +49,23 @@ public class UserController {
     }
 
     @PostMapping(path = "/newUser")
-    public @ResponseBody String newUser(@RequestParam String username, @RequestParam String password) {
-        User x = new User(username, password);
-        System.out.println(x);
-        userRepository.save(x);
-        return x + " was created";
+    public String newUser(@RequestParam String username, @RequestParam String password) {
+        userRepository.save(new User(username, password));
+        return "User was created";
+    }
+
+    @PostMapping(path = "/deleteUser")
+    public void deleteUser(@RequestParam int id) {
+        userRepository.deleteById(id);
+    }
+
+    @PostMapping(path = "/changeEmail")
+    public void changeEmail(@RequestParam int id, @RequestParam String email) {
+        userRepository.changeEmail(id, email);
+    }
+
+    @PostMapping(path = "/changePassword")
+    public void changePassword(@RequestParam int id, @RequestParam String password) {
+        userRepository.changePassword(id, password);
     }
 }
