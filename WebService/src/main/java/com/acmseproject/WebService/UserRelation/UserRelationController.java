@@ -20,21 +20,33 @@ public class UserRelationController {
     }
 
     @PostMapping(path = "/addRelation")
-    public void addRelation(@RequestParam int id, @RequestParam int id2) {
+    public String addRelation(@RequestParam int id, @RequestParam int id2) {
         userRelationRepository.save(new UserRelation(id, id2, 0 ,0));
+        return "done";
     }
 
     @PostMapping(path = "/addLike")
     public String addLike(@RequestParam int id, @RequestParam int id2) {
         userRelationRepository.addLike(id, id2);
-        return "Done";
+        return "done";
     }
 
-//    @PostMapping(path = "/removedLike")
-//
-//    @PostMapping(path = "/addBlock")
-//
-//    @PostMapping(path = "/removeBlock")
+    @PostMapping(path = "/removeLike")
+    public String removeLike(@RequestParam int id, @RequestParam int id2) {
+        userRelationRepository.removeLike(id, id2);
+        return "done";
+    }
 
+    @PostMapping(path = "/addBlock")
+    public String addBlock (@RequestParam int id, @RequestParam int id2){
+        userRelationRepository.addBlock(id, id2);
+        return "done";
+    }
+
+    @PostMapping(path = "/removeBlock")
+    public String removeBlock (@RequestParam int id, @RequestParam int id2){
+        userRelationRepository.removeBlock(id, id2);
+        return "done";
+    }
 
 }
