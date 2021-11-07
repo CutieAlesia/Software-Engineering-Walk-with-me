@@ -3,7 +3,7 @@ ___
 ### Repository Info
 ![](https://img.shields.io/badge/Website-None-red?style=for-the-badge)
 ![](https://img.shields.io/badge/App-None-red?style=for-the-badge)
-![](https://img.shields.io/badge/Backend-1.3-blue?style=for-the-badge)
+![](https://img.shields.io/badge/Backend-1.5-blue?style=for-the-badge)
 ___
 ### Master
 ![](https://img.shields.io/github/last-commit/Kushurando/Software-Engineering-Walk-with-me?style=for-the-badge)
