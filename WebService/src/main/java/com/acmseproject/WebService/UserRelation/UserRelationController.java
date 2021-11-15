@@ -3,6 +3,9 @@ package com.acmseproject.WebService.UserRelation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/relations")
 public class UserRelationController {
@@ -15,7 +18,7 @@ public class UserRelationController {
     }
 
     @GetMapping(path = "/getRelation")
-    public UserRelation getRelation(@RequestParam int id, @RequestParam int id2) {
+    public String getRelation(@RequestParam int id, @RequestParam int id2) {
         return userRelationRepository.getRelation(id, id2);
     }
 

@@ -6,17 +6,19 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public interface UserRelationRepository extends JpaRepository<UserRelation, Integer> {
 
     @Query(value = "" +
-            "SELECT liked, blocked " +
+            "SELECT * " +
             "FROM se.user_relation " +
             "WHERE id_first = :id " +
             "AND id_second = :id2",
             nativeQuery = true)
-    UserRelation getRelation(int id,int id2);
+    String getRelation(int id, int id2);
 
     @Modifying
     @Transactional
