@@ -1,5 +1,6 @@
 package com.acmseproject.WebService.UserRelation;
 
+import com.acmseproject.WebService.User.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -12,13 +13,15 @@ import java.util.List;
 @Repository
 public interface UserRelationRepository extends JpaRepository<UserRelation, Integer> {
 
-    @Query(value = "" +
-            "SELECT * " +
-            "FROM se.user_relation " +
-            "WHERE id_first = :id " +
-            "AND id_second = :id2",
-            nativeQuery = true)
-    String getRelation(int id, int id2);
+//    UserRelation findByIds(int id_first, int id_second);
+//
+//    @Query(value = "" +
+//            "SELECT * " +
+//            "FROM se.user_relation " +
+//            "WHERE id_first = :id " +
+//            "AND id_second = :id2",
+//            nativeQuery = true)
+//    String getRelation(int id, int id2);
 
     @Modifying
     @Transactional

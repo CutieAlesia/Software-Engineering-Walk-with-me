@@ -3,6 +3,10 @@ package com.acmseproject.WebService.User;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+/**
+ * @author Dubsky
+ * @version 1.2
+ */
 @Entity
 @Table
 public class User {
