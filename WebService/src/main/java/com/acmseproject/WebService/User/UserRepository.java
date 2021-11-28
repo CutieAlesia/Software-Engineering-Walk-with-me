@@ -24,4 +24,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query(value="UPDATE se.user SET password = :password WHERE id = :id", nativeQuery=true)
     @Transactional
     void changePassword(int id, String password);
+
+    @Query(value="SELECT apikey FROM se.api_keys WHERE apikey = :key", nativeQuery=true)
+    String checkAuth(String key);
 }

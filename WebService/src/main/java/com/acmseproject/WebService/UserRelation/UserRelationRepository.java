@@ -63,5 +63,7 @@ public interface UserRelationRepository extends JpaRepository<UserRelation, Inte
             nativeQuery = true)
     void removeBlock(int id, int id2);
 
+    @Query(value="SELECT apikey FROM se.api_keys WHERE apikey = :key", nativeQuery=true)
+    String checkAuth(String key);
 
 }
