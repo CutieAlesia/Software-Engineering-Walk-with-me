@@ -1,5 +1,5 @@
-# Software-Engineering-Walk-with-me
-___
+# [Software Engineering] Walk-with-me
+
 ### Repository Info
 ![](https://img.shields.io/badge/Website-In%20Work-red?style=for-the-badge&logo=React)
 ![](https://img.shields.io/badge/App-1.0-green?style=for-the-badge&logo=Android)
