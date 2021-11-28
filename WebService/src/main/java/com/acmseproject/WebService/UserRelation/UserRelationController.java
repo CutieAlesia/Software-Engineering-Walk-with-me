@@ -18,21 +18,29 @@ public class UserRelationController {
         this.userRelationRepository = userRelationRepository;
     }
 
-//    @GetMapping(path = "/findByIds")
-//    public UserRelation findByIds(@RequestParam int id, @RequestParam int id2) {
-//        return userRelationRepository.findByIds(id, id2);
-//    }
-//
-//    @GetMapping(path = "/getRelation")
-//    public String getRelation(@RequestParam int id, @RequestParam int id2) {
-//        return userRelationRepository.getRelation(id, id2);
-//    }
-//
-//    @PostMapping(path = "/addRelation")
-//    public String addRelation(@RequestParam int id, @RequestParam int id2) {
-//        userRelationRepository.save(new UserRelation(id, id2, 0 ,0));
-//        return "done";
-//    }
+    @GetMapping(path = "/getRelations")
+    public List<UserRelation> getRelations(@RequestParam String key) {
+        if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
+            return userRelationRepository.findAll();
+        } else {
+            return null;
+        }
+    }
+
+    @GetMapping(path = "/getRelation")
+    public UserRelation getRelation(@RequestParam String key, @RequestParam int id, @RequestParam int id2) {
+        if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
+            return userRelationRepository.findByFirstAndSecond(id, id2);
+        } else {
+            return null;
+        }
+    }
+
+    @PostMapping(path = "/addRelation")
+    public String addRelation(@RequestParam int id, @RequestParam int id2) {
+        userRelationRepository.save(new UserRelation(id, id2, 0 ,0));
+        return "done";
+    }
 
     @PostMapping(path = "/addLike")
     public String addLike(@RequestParam String key, @RequestParam int id, @RequestParam int id2) {

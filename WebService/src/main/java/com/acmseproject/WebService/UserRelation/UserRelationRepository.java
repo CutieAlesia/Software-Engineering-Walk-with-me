@@ -13,23 +13,29 @@ import java.util.List;
 @Repository
 public interface UserRelationRepository extends JpaRepository<UserRelation, Integer> {
 
-//    UserRelation findByIds(int id_first, int id_second);
-//
+//    /**
+//     * @param id User as subject
+//     * @param id2 User as target
+//     * @return String /w relation information
+//     */
 //    @Query(value = "" +
-//            "SELECT * " +
+//            "SELECT liked, blocked " +
 //            "FROM se.user_relation " +
 //            "WHERE id_first = :id " +
 //            "AND id_second = :id2",
 //            nativeQuery = true)
-//    String getRelation(int id, int id2);
+
+
+    List<UserRelation> findAll();
+    UserRelation findByFirstAndSecond(int first, int second);
 
     @Modifying
     @Transactional
     @Query(value = "" +
             "UPDATE se.user_relation " +
             "SET liked = 1 " +
-            "WHERE id_first = :id " +
-            "AND id_second = :id2",
+            "WHERE first = :id " +
+            "AND second = :id2",
             nativeQuery = true)
     void addLike(int id, int id2);
 
@@ -38,8 +44,8 @@ public interface UserRelationRepository extends JpaRepository<UserRelation, Inte
     @Query(value = "" +
             "UPDATE se.user_relation " +
             "SET liked = 0 " +
-            "WHERE id_first = :id " +
-            "AND id_second = :id2",
+            "WHERE first = :id " +
+            "AND second = :id2",
             nativeQuery = true)
     void removeLike(int id, int id2);
 
@@ -48,8 +54,8 @@ public interface UserRelationRepository extends JpaRepository<UserRelation, Inte
     @Query(value = "" +
             "UPDATE se.user_relation " +
             "SET blocked = 1 " +
-            "WHERE id_first = :id " +
-            "AND id_second = :id2",
+            "WHERE first = :id " +
+            "AND second = :id2",
             nativeQuery = true)
     void addBlock(int id, int id2);
 
@@ -58,8 +64,8 @@ public interface UserRelationRepository extends JpaRepository<UserRelation, Inte
     @Query(value = "" +
             "UPDATE se.user_relation " +
             "SET blocked = 0 " +
-            "WHERE id_first = :id " +
-            "AND id_second = :id2",
+            "WHERE first = :id " +
+            "AND second = :id2",
             nativeQuery = true)
     void removeBlock(int id, int id2);
 
