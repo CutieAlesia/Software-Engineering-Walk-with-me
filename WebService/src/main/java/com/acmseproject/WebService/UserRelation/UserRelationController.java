@@ -3,6 +3,9 @@ package com.acmseproject.WebService.UserRelation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/relations")
 public class UserRelationController {
@@ -14,16 +17,21 @@ public class UserRelationController {
         this.userRelationRepository = userRelationRepository;
     }
 
-    @GetMapping(path = "/getRelation")
-    public UserRelation getRelation(@RequestParam int id, @RequestParam int id2) {
-        return userRelationRepository.getRelation(id, id2);
-    }
-
-    @PostMapping(path = "/addRelation")
-    public String addRelation(@RequestParam int id, @RequestParam int id2) {
-        userRelationRepository.save(new UserRelation(id, id2, 0 ,0));
-        return "done";
-    }
+//    @GetMapping(path = "/findByIds")
+//    public UserRelation findByIds(@RequestParam int id, @RequestParam int id2) {
+//        return userRelationRepository.findByIds(id, id2);
+//    }
+//
+//    @GetMapping(path = "/getRelation")
+//    public String getRelation(@RequestParam int id, @RequestParam int id2) {
+//        return userRelationRepository.getRelation(id, id2);
+//    }
+//
+//    @PostMapping(path = "/addRelation")
+//    public String addRelation(@RequestParam int id, @RequestParam int id2) {
+//        userRelationRepository.save(new UserRelation(id, id2, 0 ,0));
+//        return "done";
+//    }
 
     @PostMapping(path = "/addLike")
     public String addLike(@RequestParam int id, @RequestParam int id2) {
