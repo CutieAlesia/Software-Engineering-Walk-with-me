@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("api/v1/user")
@@ -24,48 +25,78 @@ public class UserController {
     }
 
     @GetMapping(path="/getUsers")
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<User> getAllUsers(@RequestParam String key) {
+        if(Objects.equals(key, userRepository.checkAuth(key))) {
+            return userRepository.findAll();
+        } else {
+            return null;
+        }
     }
 
     @GetMapping(path="/findByUsername")
-    public User findByUsername(@RequestParam String username) {
-        return userRepository.findByUsername(username);
+    public User findByUsername(@RequestParam String key, @RequestParam String username) {
+        if (Objects.equals(key, userRepository.checkAuth(key))) {
+            return userRepository.findByUsername(username);
+        } else {
+            return null;
+        }
     }
 
     @GetMapping(path="/login")
-    public Boolean login(@RequestParam String username, @RequestParam String password) {
-        return userRepository.login(username, password).getUsername().equals(username) && userRepository.login(username, password).getPassword().equals(password);
+    public Boolean login(@RequestParam String key, @RequestParam String username, @RequestParam String password) {
+        if (Objects.equals(key, userRepository.checkAuth(key))) {
+            return userRepository.login(username, password).getUsername().equals(username) && userRepository.login(username, password).getPassword().equals(password);
+        } else {
+            return null;
+        }
     }
 
     @GetMapping(path="/findById")
-    public User findById(@RequestParam int id) {
-        return userRepository.findById(id);
+    public User findById(@RequestParam String key, @RequestParam int id) {
+        if (Objects.equals(key, userRepository.checkAuth(key))) {
+            return userRepository.findById(id);
+        } else {
+            return null;
+        }
     }
 
     @GetMapping(path="/findByEmail")
-    public User findByEmail(@RequestParam String email) {
-        return userRepository.findByEmail(email);
+    public User findByEmail(@RequestParam String key, @RequestParam String email) {
+        if (Objects.equals(key, userRepository.checkAuth(key))) {
+            return userRepository.findByEmail(email);
+        } else {
+            return null;
+        }
     }
 
     @PostMapping(path = "/newUser")
-    public String newUser(@RequestParam String username, @RequestParam String password) {
-        userRepository.save(new User(username, password));
-        return "User was created";
+    public String newUser(@RequestParam String key, @RequestParam String username, @RequestParam String password) {
+        if (Objects.equals(key, userRepository.checkAuth(key))) {
+            userRepository.save(new User(username, password));
+            return "User was created";
+        } else {
+            return "Error";
+        }
     }
 
     @PostMapping(path = "/deleteUser")
-    public void deleteUser(@RequestParam int id) {
-        userRepository.deleteById(id);
+    public void deleteUser(@RequestParam String key, @RequestParam int id) {
+        if (Objects.equals(key, userRepository.checkAuth(key))) {
+            userRepository.deleteById(id);
+        }
     }
 
     @PostMapping(path = "/changeEmail")
-    public void changeEmail(@RequestParam int id, @RequestParam String email) {
-        userRepository.changeEmail(id, email);
+    public void changeEmail(@RequestParam String key, @RequestParam int id, @RequestParam String email) {
+        if (Objects.equals(key, userRepository.checkAuth(key))) {
+            userRepository.changeEmail(id, email);
+        }
     }
 
     @PostMapping(path = "/changePassword")
-    public void changePassword(@RequestParam int id, @RequestParam String password) {
-        userRepository.changePassword(id, password);
+    public void changePassword(@RequestParam String key, @RequestParam int id, @RequestParam String password) {
+        if (Objects.equals(key, userRepository.checkAuth(key))) {
+            userRepository.changePassword(id, password);
+        }
     }
 }

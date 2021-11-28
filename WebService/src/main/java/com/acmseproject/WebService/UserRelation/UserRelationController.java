@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("api/v1/relations")
@@ -34,27 +35,43 @@ public class UserRelationController {
 //    }
 
     @PostMapping(path = "/addLike")
-    public String addLike(@RequestParam int id, @RequestParam int id2) {
-        userRelationRepository.addLike(id, id2);
-        return "done";
+    public String addLike(@RequestParam String key, @RequestParam int id, @RequestParam int id2) {
+        if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
+            userRelationRepository.addLike(id, id2);
+            return "done";
+        } else {
+            return "error";
+        }
     }
 
     @PostMapping(path = "/removeLike")
-    public String removeLike(@RequestParam int id, @RequestParam int id2) {
-        userRelationRepository.removeLike(id, id2);
-        return "done";
+    public String removeLike(@RequestParam String key, @RequestParam int id, @RequestParam int id2) {
+        if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
+            userRelationRepository.removeLike(id, id2);
+            return "done";
+        } else {
+            return "error";
+        }
     }
 
     @PostMapping(path = "/addBlock")
-    public String addBlock (@RequestParam int id, @RequestParam int id2){
-        userRelationRepository.addBlock(id, id2);
-        return "done";
+    public String addBlock (@RequestParam String key, @RequestParam int id, @RequestParam int id2){
+        if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
+            userRelationRepository.addBlock(id, id2);
+            return "done";
+        } else {
+            return "error";
+        }
     }
 
     @PostMapping(path = "/removeBlock")
-    public String removeBlock (@RequestParam int id, @RequestParam int id2){
-        userRelationRepository.removeBlock(id, id2);
-        return "done";
+    public String removeBlock (@RequestParam String key, @RequestParam int id, @RequestParam int id2){
+        if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
+            userRelationRepository.removeBlock(id, id2);
+            return "done";
+        } else {
+            return "error";
+        }
     }
 
 }
