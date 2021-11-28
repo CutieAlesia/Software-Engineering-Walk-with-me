@@ -12,19 +12,19 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     User findById(int id);
     User findByEmail(String email);
 
-    @Query(value="SELECT * FROM se.user WHERE username = :user AND password = :pw", nativeQuery=true)
+    @Query(value="SELECT * FROM walkwithme.user WHERE username = :user AND password = :pw", nativeQuery=true)
     User login(String user, String pw);
 
     @Modifying(clearAutomatically = true)
-    @Query(value="UPDATE se.user SET email = :email WHERE id = :id", nativeQuery=true)
+    @Query(value="UPDATE walkwithme.user SET email = :email WHERE id = :id", nativeQuery=true)
     @Transactional
     void changeEmail(int id, String email);
 
     @Modifying(clearAutomatically = true)
-    @Query(value="UPDATE se.user SET password = :password WHERE id = :id", nativeQuery=true)
+    @Query(value="UPDATE walkwithme.user SET password = :password WHERE id = :id", nativeQuery=true)
     @Transactional
     void changePassword(int id, String password);
 
-    @Query(value="SELECT apikey FROM se.api_keys WHERE apikey = :key", nativeQuery=true)
+    @Query(value="SELECT apikey FROM walkwithme.api_keys WHERE apikey = :key", nativeQuery=true)
     String checkAuth(String key);
 }

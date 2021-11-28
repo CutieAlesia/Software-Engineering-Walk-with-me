@@ -32,7 +32,7 @@ public interface UserRelationRepository extends JpaRepository<UserRelation, Inte
     @Modifying
     @Transactional
     @Query(value = "" +
-            "UPDATE se.user_relation " +
+            "UPDATE walkwithme.user_relation " +
             "SET liked = 1 " +
             "WHERE first = :id " +
             "AND second = :id2",
@@ -42,7 +42,7 @@ public interface UserRelationRepository extends JpaRepository<UserRelation, Inte
     @Modifying
     @Transactional
     @Query(value = "" +
-            "UPDATE se.user_relation " +
+            "UPDATE walkwithme.user_relation " +
             "SET liked = 0 " +
             "WHERE first = :id " +
             "AND second = :id2",
@@ -52,7 +52,7 @@ public interface UserRelationRepository extends JpaRepository<UserRelation, Inte
     @Modifying
     @Transactional
     @Query(value = "" +
-            "UPDATE se.user_relation " +
+            "UPDATE walkwithme.user_relation " +
             "SET blocked = 1 " +
             "WHERE first = :id " +
             "AND second = :id2",
@@ -62,14 +62,14 @@ public interface UserRelationRepository extends JpaRepository<UserRelation, Inte
     @Modifying
     @Transactional
     @Query(value = "" +
-            "UPDATE se.user_relation " +
+            "UPDATE walkwithme.user_relation " +
             "SET blocked = 0 " +
             "WHERE first = :id " +
             "AND second = :id2",
             nativeQuery = true)
     void removeBlock(int id, int id2);
 
-    @Query(value="SELECT apikey FROM se.api_keys WHERE apikey = :key", nativeQuery=true)
+    @Query(value="SELECT apikey FROM walkwithme.api_keys WHERE apikey = :key", nativeQuery=true)
     String checkAuth(String key);
 
 }
