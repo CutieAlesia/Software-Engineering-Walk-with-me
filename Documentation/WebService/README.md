@@ -7,32 +7,30 @@ ___
 ## API Documentation
 
 ### API Call URLs
-> https://localhost/api/
+> https://localhost:8080/api/
 
-> https://walkwithme.com/api/
+> https://185.194.217.213:8080/api/
 
 ### API layout
-> /api/{api_key}/{version}/{module}/{function}{parameters}
+> /api/{version}/{module}/{function}?{api_key}{parameters}
 ___
-### User API (_/api/{key}/v1/users_)
+### User API (_/api/v1/users_)
 
 #### Creating a new user
 ```html
-POST /newUser?username={username}&password={password}
+POST /newUser?{api_key}&username={username}&password={password}
 ```
 ```text
-"done"
 ```
 #### Deleting a user
 ```html
-POST /deleteUser?id={id}
+POST /deleteUser?{api_key}&id={id}
 ```
 ```text
-"done"
 ```
 #### Getting all users
 ```html
-POST /getUsers
+POST /getUsers?{api_key}
 ```
 ```json
 {
@@ -52,7 +50,7 @@ POST /getUsers
 ```
 #### Find user by ID
 ```html
-POST /findByID?id={id}
+POST /findByID?{api_key}&id={id}
 ```
 ```json
 {
@@ -65,7 +63,7 @@ POST /findByID?id={id}
 ```
 #### Find user by username
 ```html
-POST /findByUsername?username={username}
+POST /findByUsername?{api_key}&username={username}
 ```
 ```json
 {
@@ -78,7 +76,7 @@ POST /findByUsername?username={username}
 ```
 #### Find user by email
 ```html
-POST /findByEmail?email={email}
+POST /findByEmail?{api_key}&email={email}
 ```
 ```json
 {
@@ -91,28 +89,26 @@ POST /findByEmail?email={email}
 ```
 #### Changing user email
 ```html
-POST /changeEmail?id={id}&email={new_email}
+POST /changeEmail?{api_key}&id={id}&email={new_email}
 ```
 ```text
-"done"
 ```
 #### Changing user password
 ```html
-POST /changePassword?id={id}&password={new_password}
+POST /changePassword?{api_key}&id={id}&password={new_password}
 ```
 ```text
-"done"
 ```
 ### Relation API
 
 #### Getting a relationship
 ```html
-GET /getRelation?id={id}&id2={id2}
+GET /getRelation?{api_key}&id={id}&id2={id2}
 ```
 ```json
 {
-  "id_first": 1,
-  "id_second": 4,
+  "first": 1,
+  "second": 4,
   "liked": 1,
   "blocked": 0
 }
@@ -120,41 +116,36 @@ GET /getRelation?id={id}&id2={id2}
 
 #### Creating a relationship
 ```html
-GET /createRelation?id={id}&id2={id2}
+GET /createRelation?{api_key}&id={id}&id2={id2}
 ```
 ```text
-"done"
 ```
 
 #### Adding a like
 ```html
-POST /addLike?id={id}&id2={id2}
+POST /addLike?{api_key}&id={id}&id2={id2}
 ```
 ```text
-"done"
 ```
 
 #### Removing a like
 ```html
-POST /removeLike?id={id}&id2={id2}
+POST /removeLike?{api_key}&id={id}&id2={id2}
 ```
 ```text
-"done"
 ```
 
 #### Adding a block
 ```html
-POST /addBlock?id={id}&id2={id2}
+POST /addBlock?{api_key}&id={id}&id2={id2}
 ```
 ```text
-"done"
 ```
 #### Removing a block
 ```html
-GET /removeBlock?id={id}&id2={id2}
+GET /removeBlock?{api_key}&id={id}&id2={id2}
 ```
 ```text
-"done"
 ```
 
 ### Report API
