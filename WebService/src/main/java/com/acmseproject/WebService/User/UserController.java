@@ -1,5 +1,7 @@
 package com.acmseproject.WebService.User;
 
+import com.acmseproject.WebService.UserInfo.UserInfo;
+import com.acmseproject.WebService.UserInfo.UserInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,11 +19,13 @@ public class UserController {
 //        this.userService = userService;
 //    }
     private final UserRepository userRepository;
+    private final UserInfoRepository userInfoRepository;
 
     
     @Autowired
-    public UserController(UserRepository userRepository) {
+    public UserController(UserRepository userRepository, UserInfoRepository userInfoRepository) {
         this.userRepository = userRepository;
+        this.userInfoRepository = userInfoRepository;
     }
 
     @GetMapping(path="/getUsers")
@@ -73,6 +77,8 @@ public class UserController {
     public String newUser(@RequestParam String key, @RequestParam String username, @RequestParam String password) {
         if (Objects.equals(key, userRepository.checkAuth(key))) {
             userRepository.save(new User(username, password));
+            User tmpuser = userRepository.findByUsername(username);
+            userInfoRepository.save(new UserInfo(0, tmpuser.getId()));
             return "User was created";
         } else {
             return "Error";
