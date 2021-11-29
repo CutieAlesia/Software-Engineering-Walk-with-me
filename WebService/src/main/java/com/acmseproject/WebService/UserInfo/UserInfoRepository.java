@@ -13,6 +13,8 @@ import java.util.List;
 @Repository
 public interface UserInfoRepository extends JpaRepository<UserInfo, Integer>{
 
+    UserInfo findByUserid(int userid);
+
     @Query(value="SELECT apikey FROM walkwithme.api_keys WHERE apikey = :key", nativeQuery=true)
     String checkAuth(String key);
 }
