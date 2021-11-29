@@ -22,8 +22,20 @@ public class UserInfoController {
 
     @GetMapping(path="/getUsers")
     public List<UserInfo> getAllUsers(@RequestParam String key) {
+        System.out.format("[Request] getUsers\n[Key] %s\n");
         if(Objects.equals(key, userInfoRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
             return userInfoRepository.findAll();
+        } else {
+            System.out.format("[Verification] Failed\n");
+            return null;
+        }
+    }
+
+    @GetMapping(path="/getUser")
+    public UserInfo getAllUsers(@RequestParam String key, @RequestParam int id) {
+        if(Objects.equals(key, userInfoRepository.checkAuth(key))) {
+            return userInfoRepository.findByUserid(id);
         } else {
             return null;
         }
