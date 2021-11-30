@@ -7,9 +7,9 @@ ___
 ## API Documentation
 
 ### API Call URLs
-> https://localhost:8080/api/
+> https://localhost:8080
 
-> https://185.194.217.213:8080/api/
+> https://185.194.217.213:8080
 
 ### API layout
 > /api/{version}/{module}/{function}?{api_key}{parameters}
@@ -101,6 +101,25 @@ POST /changePassword?{api_key}&id={id}&password={new_password}
 ```
 ### Relation API
 
+#### Getting all relationships
+```html
+GET /getRelations?{api_key}
+```
+```json
+{
+  "first": 1,
+  "second": 4,
+  "liked": 1,
+  "blocked": 0
+}
+{
+  "first": 2,
+  "second": 7,
+  "liked": 1,
+  "blocked": 1
+}
+```
+
 #### Getting a relationship
 ```html
 GET /getRelation?{api_key}&id={id}&id2={id2}
@@ -116,7 +135,7 @@ GET /getRelation?{api_key}&id={id}&id2={id2}
 
 #### Creating a relationship
 ```html
-GET /createRelation?{api_key}&id={id}&id2={id2}
+POST /addRelation?{api_key}&id={id}&id2={id2}
 ```
 ```text
 ```
