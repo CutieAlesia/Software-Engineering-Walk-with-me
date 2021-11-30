@@ -8,7 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Objects;
 
-
+/**
+ * @author Dubsky
+ * @version 1.3
+ */
 @RestController
 @RequestMapping("api/v1/info")
 public class UserInfoController {
@@ -20,10 +23,16 @@ public class UserInfoController {
         this.userInfoRepository = userInfoRepository;
     }
 
-    @GetMapping(path="/getUsers")
+    /**
+     * GET-Method to receive a list of all users
+     *
+     * @param key API-Key for authentication
+     * @return List of all users as a JSON in a list
+     */
+    @GetMapping(path = "/getUsers")
     public List<UserInfo> getAllUsers(@RequestParam String key) {
-        System.out.format("[Request] getUsers\n[Key] %s\n");
-        if(Objects.equals(key, userInfoRepository.checkAuth(key))) {
+        System.out.format("[Request] getUsers\n[Key] %s\n", key);
+        if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
             return userInfoRepository.findAll();
         } else {
@@ -32,9 +41,15 @@ public class UserInfoController {
         }
     }
 
-    @GetMapping(path="/getUser")
-    public UserInfo getAllUsers(@RequestParam String key, @RequestParam int id) {
-        if(Objects.equals(key, userInfoRepository.checkAuth(key))) {
+    /**
+     * GET-Method to receive single user information by ID
+     *
+     * @param key API-Key for authentication
+     * @return User as a JSON
+     */
+    @GetMapping(path = "/getUser")
+    public UserInfo getUser(@RequestParam String key, @RequestParam int id) {
+        if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
             return userInfoRepository.findByUserid(id);
         } else {
             return null;
