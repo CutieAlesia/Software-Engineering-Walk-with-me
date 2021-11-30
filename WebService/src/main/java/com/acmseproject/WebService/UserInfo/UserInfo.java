@@ -21,7 +21,8 @@ public class UserInfo {
     private int height;
     private int weight;
 
-    public UserInfo(){}
+    public UserInfo() {
+    }
 
     public UserInfo(int id, int userid) {
         this.id = id;
