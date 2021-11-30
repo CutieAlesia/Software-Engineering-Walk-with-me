@@ -3,7 +3,7 @@
 ### Repository Info
 ![](https://img.shields.io/badge/Website-In%20Work-red?style=for-the-badge&logo=React)
 ![](https://img.shields.io/badge/App-1.0-green?style=for-the-badge&logo=Android)
-![](https://img.shields.io/badge/Backend-1.8-green?style=for-the-badge&logo=Java)
+![](https://img.shields.io/badge/Backend-2.0-green?style=for-the-badge&logo=Java)
 
 ![](https://img.shields.io/badge/Build-Maven-purple?style=for-the-badge&logo=Apache%20Maven)
 ![](https://img.shields.io/badge/Deployment-Docker-blue?style=for-the-badge&logo=Docker)
