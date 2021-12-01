@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 /**
  * @author Dubsky
- * @version 1.2
+ * @version 1.3
  */
 @Entity
 @Table
@@ -14,6 +14,7 @@ public class UserInfo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int userid;
+    private String username;
     private String bio;
     private String gender;
     private String race;
@@ -24,9 +25,10 @@ public class UserInfo {
     public UserInfo() {
     }
 
-    public UserInfo(int id, int userid) {
+    public UserInfo(int id, int userid, String username) {
         this.id = id;
         this.userid = userid;
+        this.username = username;
     }
 
     public UserInfo(int id, String bio, String gender, String race, int friendly, int height, int weight) {
@@ -43,6 +45,8 @@ public class UserInfo {
     public String toString() {
         return "UserInfo{" +
                 "id=" + id +
+                ", userid=" + userid +
+                ", username='" + username + '\'' +
                 ", bio='" + bio + '\'' +
                 ", gender='" + gender + '\'' +
                 ", race='" + race + '\'' +
@@ -50,6 +54,14 @@ public class UserInfo {
                 ", height=" + height +
                 ", weight=" + weight +
                 '}';
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public int getId() {

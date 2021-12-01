@@ -10,7 +10,7 @@ import java.util.Objects;
 
 /**
  * @author Dubsky
- * @version 1.6
+ * @version 1.7
  */
 @RestController
 @RequestMapping("api/v1/user")
@@ -135,7 +135,7 @@ public class UserController {
         if (Objects.equals(key, userRepository.checkAuth(key))) {
             userRepository.save(new User(username, password));
             User tmpuser = userRepository.findByUsername(username);
-            userInfoRepository.save(new UserInfo(0, tmpuser.getId()));
+            userInfoRepository.save(new UserInfo(0, tmpuser.getId(), tmpuser.getUsername()));
             return "200";
         } else {
             return "400";
