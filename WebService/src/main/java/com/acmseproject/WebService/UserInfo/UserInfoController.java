@@ -31,7 +31,7 @@ public class UserInfoController {
      */
     @GetMapping(path = "/getUsers")
     public List<UserInfo> getAllUsers(@RequestParam String key) {
-        System.out.format("[Request] getUsers\n[Key] %s\n", key);
+        System.out.format("[Request] getAllUserInfo\n[Key] %s\n", key);
         if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
             return userInfoRepository.findAll();
@@ -49,9 +49,12 @@ public class UserInfoController {
      */
     @GetMapping(path = "/getUser")
     public UserInfo getUser(@RequestParam String key, @RequestParam int id) {
+        System.out.format("[Request] getUserInfo\n[Key] %s\n", key);
         if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
             return userInfoRepository.findByUserid(id);
         } else {
+            System.out.format("[Verification] Failed\n");
             return null;
         }
     }

@@ -36,7 +36,9 @@ public class UserController {
      */
     @GetMapping(path = "/loginByUsername")
     public Boolean loginByUsername(@RequestParam String key, @RequestParam String username, @RequestParam String password) {
+        System.out.format("[Request] loginByUsername\n[Key] %s\n", key);
         if (Objects.equals(key, userRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
             return userRepository.loginByUsername(username, password).getUsername().equals(username) && userRepository.loginByUsername(username, password).getPassword().equals(password);
         } else {
             return null;
@@ -53,7 +55,9 @@ public class UserController {
      */
     @GetMapping(path = "/loginByEmail")
     public Boolean loginByEmail(@RequestParam String key, @RequestParam String email, @RequestParam String password) {
+        System.out.format("[Request] loginByEmail\n[Key] %s\n", key);
         if (Objects.equals(key, userRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
             return userRepository.loginByEmail(email, password).getUsername().equals(email) && userRepository.loginByEmail(email, password).getPassword().equals(password);
         } else {
             return null;
@@ -68,7 +72,9 @@ public class UserController {
      */
     @GetMapping(path = "/getUsers")
     public List<User> getAllUsers(@RequestParam String key) {
+        System.out.format("[Request] getAllUsers\n[Key] %s\n", key);
         if (Objects.equals(key, userRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
             return userRepository.findAll();
         } else {
             return null;
@@ -84,7 +90,9 @@ public class UserController {
      */
     @GetMapping(path = "/findByUsername")
     public User findByUsername(@RequestParam String key, @RequestParam String username) {
+        System.out.format("[Request] findByUsername\n[Key] %s\n", key);
         if (Objects.equals(key, userRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
             return userRepository.findByUsername(username);
         } else {
             return null;
@@ -100,7 +108,9 @@ public class UserController {
      */
     @GetMapping(path = "/findById")
     public User findById(@RequestParam String key, @RequestParam int id) {
+        System.out.format("[Request] findByID\n[Key] %s\n", key);
         if (Objects.equals(key, userRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
             return userRepository.findById(id);
         } else {
             return null;
@@ -115,7 +125,9 @@ public class UserController {
      */
     @GetMapping(path = "/findByEmail")
     public User findByEmail(@RequestParam String key, @RequestParam String email) {
+        System.out.format("[Request] findByEmail\n[Key] %s\n", key);
         if (Objects.equals(key, userRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
             return userRepository.findByEmail(email);
         } else {
             return null;
@@ -132,7 +144,9 @@ public class UserController {
      */
     @PostMapping(path = "/newUser")
     public String newUser(@RequestParam String key, @RequestParam String username, @RequestParam String password) {
+        System.out.format("[Request] newUser\n[Key] %s\n", key);
         if (Objects.equals(key, userRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
             userRepository.save(new User(username, password));
             User tmpuser = userRepository.findByUsername(username);
             userInfoRepository.save(new UserInfo(0, tmpuser.getId(), tmpuser.getUsername()));
@@ -150,7 +164,9 @@ public class UserController {
      */
     @PostMapping(path = "/deleteUser")
     public void deleteUser(@RequestParam String key, @RequestParam int id) {
+        System.out.format("[Request] deleteUser\n[Key] %s\n", key);
         if (Objects.equals(key, userRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
             userRepository.deleteById(id);
         }
     }
@@ -164,7 +180,9 @@ public class UserController {
      */
     @PostMapping(path = "/changeEmail")
     public void changeEmail(@RequestParam String key, @RequestParam int id, @RequestParam String email) {
+        System.out.format("[Request] changeEmail\n[Key] %s\n", key);
         if (Objects.equals(key, userRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
             userRepository.changeEmail(id, email);
         }
     }
@@ -178,7 +196,9 @@ public class UserController {
      */
     @PostMapping(path = "/changePassword")
     public void changePassword(@RequestParam String key, @RequestParam int id, @RequestParam String password) {
+        System.out.format("[Request] changePassword\n[Key] %s\n", key);
         if (Objects.equals(key, userRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
             userRepository.changePassword(id, password);
         }
     }
