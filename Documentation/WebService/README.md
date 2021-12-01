@@ -18,7 +18,7 @@ ___
 
 #### Login by username
 ```html
-GET /login?key={api_key}&username={username}&password={password}
+GET /loginByUsername?key={api_key}&username={username}&password={password}
 ```
 ```text
 boolean
@@ -26,7 +26,7 @@ boolean
 
 #### Login by email
 ```html
-GET /login?key={api_key}&email={email}&password={password}
+GET /loginByEmail?key={api_key}&email={email}&password={password}
 ```
 ```text
 boolean
