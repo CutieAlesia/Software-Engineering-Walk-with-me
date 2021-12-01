@@ -18,19 +18,19 @@ ___
 
 #### Creating a new user
 ```html
-POST /newUser?{api_key}&username={username}&password={password}
+POST /newUser?key={api_key}&username={username}&password={password}
 ```
 ```text
 ```
 #### Deleting a user
 ```html
-POST /deleteUser?{api_key}&id={id}
+POST /deleteUser?key={api_key}&id={id}
 ```
 ```text
 ```
 #### Getting all users
 ```html
-POST /getUsers?{api_key}
+POST /getUsers?key={api_key}
 ```
 ```json
 {
@@ -50,7 +50,7 @@ POST /getUsers?{api_key}
 ```
 #### Find user by ID
 ```html
-POST /findByID?{api_key}&id={id}
+POST /findByID?key={api_key}&id={id}
 ```
 ```json
 {
@@ -63,7 +63,7 @@ POST /findByID?{api_key}&id={id}
 ```
 #### Find user by username
 ```html
-POST /findByUsername?{api_key}&username={username}
+POST /findByUsername?key={api_key}&username={username}
 ```
 ```json
 {
@@ -76,7 +76,7 @@ POST /findByUsername?{api_key}&username={username}
 ```
 #### Find user by email
 ```html
-POST /findByEmail?{api_key}&email={email}
+POST /findByEmail?key={api_key}&email={email}
 ```
 ```json
 {
@@ -89,13 +89,13 @@ POST /findByEmail?{api_key}&email={email}
 ```
 #### Changing user email
 ```html
-POST /changeEmail?{api_key}&id={id}&email={new_email}
+POST /changeEmail?key={api_key}&id={id}&email={new_email}
 ```
 ```text
 ```
 #### Changing user password
 ```html
-POST /changePassword?{api_key}&id={id}&password={new_password}
+POST /changePassword?key={api_key}&id={id}&password={new_password}
 ```
 ```text
 ```
@@ -103,7 +103,7 @@ POST /changePassword?{api_key}&id={id}&password={new_password}
 
 #### Getting all relationships
 ```html
-GET /getRelations?{api_key}
+GET /getRelations?key={api_key}
 ```
 ```json
 {
@@ -122,7 +122,7 @@ GET /getRelations?{api_key}
 
 #### Getting a relationship
 ```html
-GET /getRelation?{api_key}&id={id}&id2={id2}
+GET /getRelation?key={api_key}&id={id}&id2={id2}
 ```
 ```json
 {
@@ -135,36 +135,82 @@ GET /getRelation?{api_key}&id={id}&id2={id2}
 
 #### Creating a relationship
 ```html
-POST /addRelation?{api_key}&id={id}&id2={id2}
+POST /addRelation?key={api_key}&id={id}&id2={id2}
 ```
 ```text
 ```
 
 #### Adding a like
 ```html
-POST /addLike?{api_key}&id={id}&id2={id2}
+POST /addLike?key={api_key}&id={id}&id2={id2}
 ```
 ```text
 ```
 
 #### Removing a like
 ```html
-POST /removeLike?{api_key}&id={id}&id2={id2}
+POST /removeLike?key={api_key}&id={id}&id2={id2}
 ```
 ```text
 ```
 
 #### Adding a block
 ```html
-POST /addBlock?{api_key}&id={id}&id2={id2}
+POST /addBlock?key={api_key}&id={id}&id2={id2}
 ```
 ```text
 ```
 #### Removing a block
 ```html
-GET /removeBlock?{api_key}&id={id}&id2={id2}
+GET /removeBlock?key={api_key}&id={id}&id2={id2}
 ```
 ```text
 ```
 
-### Report API
+### Info API
+
+#### Getting all available user information
+```html
+GET /getRelations?key={api_key}
+```
+```json
+{
+  "id": 1,
+  "userid": 1,
+  "username": "dubsky",
+  "bio": "I am a dog",
+  "gender": "female",
+  "race": "tamaskan",
+  "friendly": 1,
+  "height": 92,
+  "weight": 36
+}
+{
+  "id": 2,
+  "userid": 7,
+  "username": "anotheruser",
+  "bio": "I am a cat",
+  "gender": "male",
+  "race": "russian-blue",
+  "friendly": 1,
+  "height": 23,
+  "weight": 3
+}
+```
+#### Getting specific user information
+```html
+GET /getRelation?key={api_key}&id={id}
+```
+```json
+{
+  "id": 1,
+  "userid": 1,
+  "username": "dubsky",
+  "bio": "I am a dog",
+  "gender": "female",
+  "race": "tamaskan",
+  "friendly": 1,
+  "height": 92,
+  "weight": 36
+}
+```
