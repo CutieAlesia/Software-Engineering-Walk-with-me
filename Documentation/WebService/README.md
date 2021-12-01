@@ -20,16 +20,28 @@ ___
 ```html
 GET /loginByUsername?key={api_key}&username={username}&password={password}
 ```
-```text
-boolean
+```json
+{
+  "id": 2,
+  "username": "frankie",
+  "password": "itsmeagain41",
+  "email": "test@hotmail.com",
+  "create_time": null
+}
 ```
 
 #### Login by email
 ```html
 GET /loginByEmail?key={api_key}&email={email}&password={password}
 ```
-```text
-boolean
+```json
+{
+  "id": 2,
+  "username": "frankie",
+  "password": "itsmeagain41",
+  "email": "test@hotmail.com",
+  "create_time": null
+}
 ```
 
 #### Creating a new user
