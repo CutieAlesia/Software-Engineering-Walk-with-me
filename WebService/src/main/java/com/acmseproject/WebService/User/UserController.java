@@ -19,7 +19,6 @@ public class UserController {
     private final UserRepository userRepository;
     private final UserInfoRepository userInfoRepository;
 
-
     @Autowired
     public UserController(UserRepository userRepository, UserInfoRepository userInfoRepository) {
         this.userRepository = userRepository;
@@ -29,17 +28,21 @@ public class UserController {
     /**
      * GET-Method to verify login information
      *
-     * @param key API-Key for authentication
+     * @param key      API-Key for authentication
      * @param username Username used to logging in
      * @param password Password used to logging in
      * @return User information in a JSON format
      */
     @GetMapping(path = "/loginByUsername")
-    public Boolean loginByUsername(@RequestParam String key, @RequestParam String username, @RequestParam String password) {
+    public User loginByUsername(@RequestParam String key, @RequestParam String username, @RequestParam String password) {
         System.out.format("[Request] loginByUsername\n[Key] %s\n", key);
         if (Objects.equals(key, userRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
-            return userRepository.loginByUsername(username, password).getUsername().equals(username) && userRepository.loginByUsername(username, password).getPassword().equals(password);
+            User tmpUser = userRepository.loginByUsername(username, password);
+            if (tmpUser != null && tmpUser.getUsername().equals(username) && tmpUser.getPassword().equals(password)) {
+                return tmpUser;
+            }
+            return null;
         } else {
             return null;
         }
@@ -48,17 +51,21 @@ public class UserController {
     /**
      * GET-Method to verify login information
      *
-     * @param key API-Key for authentication
-     * @param email Username used to logging in
+     * @param key      API-Key for authentication
+     * @param email    Username used to logging in
      * @param password Password used to logging in
      * @return User information in a JSON format
      */
     @GetMapping(path = "/loginByEmail")
-    public Boolean loginByEmail(@RequestParam String key, @RequestParam String email, @RequestParam String password) {
+    public User loginByEmail(@RequestParam String key, @RequestParam String email, @RequestParam String password) {
         System.out.format("[Request] loginByEmail\n[Key] %s\n", key);
         if (Objects.equals(key, userRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
-            return userRepository.loginByEmail(email, password).getUsername().equals(email) && userRepository.loginByEmail(email, password).getPassword().equals(password);
+            User tmpUser = userRepository.loginByEmail(email, password);
+            if (tmpUser.getEmail().equals(email) && tmpUser.getPassword().equals(password)) {
+                return tmpUser;
+            }
+            return null;
         } else {
             return null;
         }
@@ -84,7 +91,7 @@ public class UserController {
     /**
      * GET-Method to receive user information by username
      *
-     * @param key API-Key for authentication
+     * @param key      API-Key for authentication
      * @param username Username to search by
      * @return User information in a JSON format
      */
@@ -103,7 +110,7 @@ public class UserController {
      * GET-Method to receive user information by ID
      *
      * @param key API-Key for authentication
-     * @param id User ID to search by
+     * @param id  User ID to search by
      * @return User information in a JSON format
      */
     @GetMapping(path = "/findById")
@@ -137,7 +144,7 @@ public class UserController {
     /**
      * POST-Method to create a new user
      *
-     * @param key API-Key for authentication
+     * @param key      API-Key for authentication
      * @param username Username for the account to be created
      * @param password Password for the account to be created
      * @return Response code
@@ -160,7 +167,7 @@ public class UserController {
      * POST-Method to delete a user
      *
      * @param key API-Key for authentication
-     * @param id User ID to be deleted
+     * @param id  User ID to be deleted
      */
     @PostMapping(path = "/deleteUser")
     public void deleteUser(@RequestParam String key, @RequestParam int id) {
@@ -174,8 +181,8 @@ public class UserController {
     /**
      * POST-Method to change a user email
      *
-     * @param key API-Key for authentication
-     * @param id User ID connected to the change
+     * @param key   API-Key for authentication
+     * @param id    User ID connected to the change
      * @param email Email to be changed to
      */
     @PostMapping(path = "/changeEmail")
@@ -190,8 +197,8 @@ public class UserController {
     /**
      * POST-Method to change a user email
      *
-     * @param key API-Key for authentication
-     * @param id User ID connected to the change
+     * @param key      API-Key for authentication
+     * @param id       User ID connected to the change
      * @param password Password to be changed to
      */
     @PostMapping(path = "/changePassword")
