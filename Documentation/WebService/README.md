@@ -16,6 +16,22 @@ ___
 ___
 ### User API (_/api/v1/users_)
 
+#### Login by username
+```html
+GET /login?key={api_key}&username={username}&password={password}
+```
+```text
+boolean
+```
+
+#### Login by email
+```html
+GET /login?key={api_key}&email={email}&password={password}
+```
+```text
+boolean
+```
+
 #### Creating a new user
 ```html
 POST /newUser?key={api_key}&username={username}&password={password}
