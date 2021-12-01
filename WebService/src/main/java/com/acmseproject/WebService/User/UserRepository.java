@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 
 /**
  * @author Dubsky
- * @version 1.2
+ * @version 1.3
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
@@ -20,7 +20,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     User findByEmail(String email);
 
     @Query(value = "SELECT * FROM walkwithme.user WHERE username = :username AND password = :password", nativeQuery = true)
-    User login(String username, String password);
+    User loginByUsername(String username, String password);
+
+    @Query(value = "SELECT * FROM walkwithme.user WHERE email = :email AND password = :password", nativeQuery = true)
+    User loginByEmail(String email, String password);
 
     @Modifying(clearAutomatically = true)
     @Query(value = "UPDATE walkwithme.user SET email = :email WHERE id = :id", nativeQuery = true)

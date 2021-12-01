@@ -10,7 +10,7 @@ import java.util.Objects;
 
 /**
  * @author Dubsky
- * @version 1.5
+ * @version 1.6
  */
 @RestController
 @RequestMapping("api/v1/user")
@@ -34,10 +34,27 @@ public class UserController {
      * @param password Password used to logging in
      * @return User information in a JSON format
      */
-    @GetMapping(path = "/login")
-    public Boolean login(@RequestParam String key, @RequestParam String username, @RequestParam String password) {
+    @GetMapping(path = "/loginByUsername")
+    public Boolean loginByUsername(@RequestParam String key, @RequestParam String username, @RequestParam String password) {
         if (Objects.equals(key, userRepository.checkAuth(key))) {
-            return userRepository.login(username, password).getUsername().equals(username) && userRepository.login(username, password).getPassword().equals(password);
+            return userRepository.loginByUsername(username, password).getUsername().equals(username) && userRepository.loginByUsername(username, password).getPassword().equals(password);
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * GET-Method to verify login information
+     *
+     * @param key API-Key for authentication
+     * @param email Username used to logging in
+     * @param password Password used to logging in
+     * @return User information in a JSON format
+     */
+    @GetMapping(path = "/loginByEmail")
+    public Boolean loginByEmail(@RequestParam String key, @RequestParam String email, @RequestParam String password) {
+        if (Objects.equals(key, userRepository.checkAuth(key))) {
+            return userRepository.loginByEmail(email, password).getUsername().equals(email) && userRepository.loginByEmail(email, password).getPassword().equals(password);
         } else {
             return null;
         }
