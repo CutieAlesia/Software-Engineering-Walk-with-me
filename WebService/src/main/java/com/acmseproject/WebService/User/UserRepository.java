@@ -37,9 +37,4 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query(value = "SELECT apikey FROM walkwithme.api_keys WHERE apikey = :key", nativeQuery = true)
     String checkAuth(String key);
-
-    @Modifying(clearAutomatically = true)
-    @Query(value = "UPDATE walkwithme.user SET avatar = :image WHERE id = :id", nativeQuery = true)
-    @Transactional
-    void changeAvatar(int id, String image);
 }

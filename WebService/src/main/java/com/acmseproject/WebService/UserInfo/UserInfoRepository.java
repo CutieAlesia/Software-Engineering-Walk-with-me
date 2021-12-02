@@ -20,6 +20,11 @@ public interface UserInfoRepository extends JpaRepository<UserInfo, Integer> {
 
     UserInfo findByUserid(int userid);
 
+    @Modifying(clearAutomatically = true)
+    @Query(value = "UPDATE walkwithme.user_info SET avatar = :image WHERE id = :id", nativeQuery = true)
+    @Transactional
+    void changeAvatar(int id, String image);
+
     @Query(value = "SELECT apikey FROM walkwithme.api_keys WHERE apikey = :key", nativeQuery = true)
     String checkAuth(String key);
 }

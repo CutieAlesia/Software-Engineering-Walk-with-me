@@ -21,6 +21,8 @@ public class UserInfo {
     private int friendly;
     private int height;
     private int weight;
+    private String avatar;
+    private String images;
 
     public UserInfo() {
     }
@@ -53,7 +55,25 @@ public class UserInfo {
                 ", friendly=" + friendly +
                 ", height=" + height +
                 ", weight=" + weight +
+                ", avatar='" + avatar + '\'' +
+                ", images='" + images + '\'' +
                 '}';
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getImages() {
+        return images;
+    }
+
+    public void setImages(String images) {
+        this.images = images;
     }
 
     public String getUsername() {

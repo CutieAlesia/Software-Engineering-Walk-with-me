@@ -20,8 +20,6 @@ public class User {
     private String password;
     private String email;
     private LocalDateTime create_time;
-    private String avatar;
-    private String images;
 
     public User() {
 
@@ -46,8 +44,6 @@ public class User {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", create_time=" + create_time +
-                ", avatar='" + avatar + '\'' +
-                ", images='" + images + '\'' +
                 '}';
     }
 
@@ -57,22 +53,6 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public String getImages() {
-        return images;
-    }
-
-    public void setImages(String images) {
-        this.images = images;
     }
 
     public String getUsername() {
