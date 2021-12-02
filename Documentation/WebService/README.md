@@ -127,6 +127,13 @@ POST /changePassword?key={api_key}&id={id}&password={new_password}
 ```
 ```text
 ```
+
+#### Changing user avatar
+```html
+POST /changeAvatar?key={api_key}&id={id}&image={image_id}
+```
+```text
+```
 ### Relation API
 
 #### Getting all relationships
