@@ -7,6 +7,7 @@
 
 ![](https://img.shields.io/badge/Build-Maven-purple?style=for-the-badge&logo=Apache%20Maven)
 ![](https://img.shields.io/badge/Deployment-Docker-blue?style=for-the-badge&logo=Docker)
+![](https://img.shields.io/badge/Server-Ubuntu%2020.04%20LTS-orange?style=for-the-badge&logo=Ubuntu)
 ___
 ### Tracker
 ![](https://img.shields.io/github/last-commit/Kushurando/Software-Engineering-Walk-with-me/dev?style=for-the-badge)
