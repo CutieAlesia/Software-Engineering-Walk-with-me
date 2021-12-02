@@ -30,9 +30,12 @@ public class UserRelationController {
      */
     @GetMapping(path = "/getRelations")
     public List<UserRelation> getRelations(@RequestParam String key) {
+        System.out.format("[Request] getRelations\n[Key] %s\n", key);
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
             return userRelationRepository.findAll();
         } else {
+            System.out.format("[Verification] Failed\n");
             return null;
         }
     }
@@ -47,9 +50,12 @@ public class UserRelationController {
      */
     @GetMapping(path = "/getRelation")
     public UserRelation getRelation(@RequestParam String key, @RequestParam int id, @RequestParam int id2) {
+        System.out.format("[Request] getRelation\n[Key] %s\n", key);
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
             return userRelationRepository.findByFirstAndSecond(id, id2);
         } else {
+            System.out.format("[Verification] Failed\n");
             return null;
         }
     }
@@ -63,11 +69,13 @@ public class UserRelationController {
      */
     @PostMapping(path = "/addRelation")
     public String addRelation(@RequestParam String key, @RequestParam int id, @RequestParam int id2) {
-
+        System.out.format("[Request] addRelation\n[Key] %s\n", key);
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
             userRelationRepository.save(new UserRelation(id, id2, 0, 0));
             return "done";
         } else {
+            System.out.format("[Verification] Failed\n");
             return "error";
         }
     }
@@ -81,10 +89,13 @@ public class UserRelationController {
      */
     @PostMapping(path = "/addLike")
     public String addLike(@RequestParam String key, @RequestParam int id, @RequestParam int id2) {
+        System.out.format("[Request] addLike\n[Key] %s\n", key);
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
             userRelationRepository.addLike(id, id2);
             return "done";
         } else {
+            System.out.format("[Verification] Failed\n");
             return "error";
         }
     }
@@ -98,10 +109,13 @@ public class UserRelationController {
      */
     @PostMapping(path = "/removeLike")
     public String removeLike(@RequestParam String key, @RequestParam int id, @RequestParam int id2) {
+        System.out.format("[Request] removeLike\n[Key] %s\n", key);
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
             userRelationRepository.removeLike(id, id2);
             return "done";
         } else {
+            System.out.format("[Verification] Failed\n");
             return "error";
         }
     }
@@ -115,10 +129,13 @@ public class UserRelationController {
      */
     @PostMapping(path = "/addBlock")
     public String addBlock(@RequestParam String key, @RequestParam int id, @RequestParam int id2) {
+        System.out.format("[Request] addBlock\n[Key] %s\n", key);
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
             userRelationRepository.addBlock(id, id2);
             return "done";
         } else {
+            System.out.format("[Verification] Failed\n");
             return "error";
         }
     }
@@ -132,10 +149,13 @@ public class UserRelationController {
      */
     @PostMapping(path = "/removeBlock")
     public String removeBlock(@RequestParam String key, @RequestParam int id, @RequestParam int id2) {
+        System.out.format("[Request] removeBlock\n[Key] %s\n", key);
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
             userRelationRepository.removeBlock(id, id2);
             return "done";
         } else {
+            System.out.format("[Verification] Failed\n");
             return "error";
         }
     }
