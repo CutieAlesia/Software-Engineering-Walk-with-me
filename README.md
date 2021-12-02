@@ -1,12 +1,13 @@
-# Software-Engineering-Walk-with-me
-___
+# [Software Engineering] Walk-with-me
+
 ### Repository Info
 ![](https://img.shields.io/badge/Website-In%20Work-red?style=for-the-badge&logo=React)
 ![](https://img.shields.io/badge/App-1.0-green?style=for-the-badge&logo=Android)
-![](https://img.shields.io/badge/Backend-1.7-green?style=for-the-badge&logo=Java)
+![](https://img.shields.io/badge/Backend-2.0-green?style=for-the-badge&logo=Java)
 
 ![](https://img.shields.io/badge/Build-Maven-purple?style=for-the-badge&logo=Apache%20Maven)
 ![](https://img.shields.io/badge/Deployment-Docker-blue?style=for-the-badge&logo=Docker)
+![](https://img.shields.io/badge/Server-Ubuntu%2020.04%20LTS-orange?style=for-the-badge&logo=Ubuntu)
 ___
 ### Tracker
 ![](https://img.shields.io/github/last-commit/Kushurando/Software-Engineering-Walk-with-me/dev?style=for-the-badge)

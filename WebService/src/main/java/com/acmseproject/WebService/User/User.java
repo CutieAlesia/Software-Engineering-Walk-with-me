@@ -1,11 +1,13 @@
 package com.acmseproject.WebService.User;
 
+import org.json.JSONObject;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 /**
  * @author Dubsky
- * @version 1.2
+ * @version 1.3
  */
 @Entity
 @Table
@@ -38,17 +40,10 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + username + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                '}';
-    }
-
-    public String toCredentials() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + username + '\'' +
-                ", email='" + email + '\'' +
+                ", create_time=" + create_time +
                 '}';
     }
 

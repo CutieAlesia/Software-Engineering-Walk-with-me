@@ -5,7 +5,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+/**
+ * @author Dubsky
+ * @version 1.3
+ */
 @RestController
 @RequestMapping("api/v1/relations")
 public class UserRelationController {
@@ -17,44 +22,142 @@ public class UserRelationController {
         this.userRelationRepository = userRelationRepository;
     }
 
-//    @GetMapping(path = "/findByIds")
-//    public UserRelation findByIds(@RequestParam int id, @RequestParam int id2) {
-//        return userRelationRepository.findByIds(id, id2);
-//    }
-//
-//    @GetMapping(path = "/getRelation")
-//    public String getRelation(@RequestParam int id, @RequestParam int id2) {
-//        return userRelationRepository.getRelation(id, id2);
-//    }
-//
-//    @PostMapping(path = "/addRelation")
-//    public String addRelation(@RequestParam int id, @RequestParam int id2) {
-//        userRelationRepository.save(new UserRelation(id, id2, 0 ,0));
-//        return "done";
-//    }
+    /**
+     * GET-Method for a list of all relation information
+     *
+     * @param key API-Key for authentication
+     * @return List of all user relations
+     */
+    @GetMapping(path = "/getRelations")
+    public List<UserRelation> getRelations(@RequestParam String key) {
+        System.out.format("[Request] getRelations\n[Key] %s\n", key);
+        if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            return userRelationRepository.findAll();
+        } else {
+            System.out.format("[Verification] Failed\n");
+            return null;
+        }
+    }
 
+    /**
+     * GET-Method for a single relation information
+     *
+     * @param key API-Key for authentication
+     * @param id First User ID
+     * @param id2 Second User ID
+     * @return Single user relation
+     */
+    @GetMapping(path = "/getRelation")
+    public UserRelation getRelation(@RequestParam String key, @RequestParam int id, @RequestParam int id2) {
+        System.out.format("[Request] getRelation\n[Key] %s\n", key);
+        if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            return userRelationRepository.findByFirstAndSecond(id, id2);
+        } else {
+            System.out.format("[Verification] Failed\n");
+            return null;
+        }
+    }
+
+    /**
+     * POST-Method to add a new user relation
+     *
+     * @param key API-Key for authentication
+     * @param id First User ID
+     * @param id2 Second User ID
+     */
+    @PostMapping(path = "/addRelation")
+    public String addRelation(@RequestParam String key, @RequestParam int id, @RequestParam int id2) {
+        System.out.format("[Request] addRelation\n[Key] %s\n", key);
+        if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            userRelationRepository.save(new UserRelation(id, id2, 0, 0));
+            return "done";
+        } else {
+            System.out.format("[Verification] Failed\n");
+            return "error";
+        }
+    }
+
+    /**
+     * POST-Method to add a like
+     *
+     * @param key API-Key for authentication
+     * @param id First User ID
+     * @param id2 Second User ID
+     */
     @PostMapping(path = "/addLike")
-    public String addLike(@RequestParam int id, @RequestParam int id2) {
-        userRelationRepository.addLike(id, id2);
-        return "done";
+    public String addLike(@RequestParam String key, @RequestParam int id, @RequestParam int id2) {
+        System.out.format("[Request] addLike\n[Key] %s\n", key);
+        if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            userRelationRepository.addLike(id, id2);
+            return "done";
+        } else {
+            System.out.format("[Verification] Failed\n");
+            return "error";
+        }
     }
 
+    /**
+     * POST-Method to remove a like
+     *
+     * @param key API-Key for authentication
+     * @param id First User ID
+     * @param id2 Second User ID
+     */
     @PostMapping(path = "/removeLike")
-    public String removeLike(@RequestParam int id, @RequestParam int id2) {
-        userRelationRepository.removeLike(id, id2);
-        return "done";
+    public String removeLike(@RequestParam String key, @RequestParam int id, @RequestParam int id2) {
+        System.out.format("[Request] removeLike\n[Key] %s\n", key);
+        if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            userRelationRepository.removeLike(id, id2);
+            return "done";
+        } else {
+            System.out.format("[Verification] Failed\n");
+            return "error";
+        }
     }
 
+    /**
+     * POST-Method to add a block
+     *
+     * @param key API-Key for authentication
+     * @param id First User ID
+     * @param id2 Second User ID
+     */
     @PostMapping(path = "/addBlock")
-    public String addBlock (@RequestParam int id, @RequestParam int id2){
-        userRelationRepository.addBlock(id, id2);
-        return "done";
+    public String addBlock(@RequestParam String key, @RequestParam int id, @RequestParam int id2) {
+        System.out.format("[Request] addBlock\n[Key] %s\n", key);
+        if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            userRelationRepository.addBlock(id, id2);
+            return "done";
+        } else {
+            System.out.format("[Verification] Failed\n");
+            return "error";
+        }
     }
 
+    /**
+     * POST-Method to remove a block
+     *
+     * @param key API-Key for authentication
+     * @param id First User ID
+     * @param id2 Second User ID
+     */
     @PostMapping(path = "/removeBlock")
-    public String removeBlock (@RequestParam int id, @RequestParam int id2){
-        userRelationRepository.removeBlock(id, id2);
-        return "done";
+    public String removeBlock(@RequestParam String key, @RequestParam int id, @RequestParam int id2) {
+        System.out.format("[Request] removeBlock\n[Key] %s\n", key);
+        if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            userRelationRepository.removeBlock(id, id2);
+            return "done";
+        } else {
+            System.out.format("[Verification] Failed\n");
+            return "error";
+        }
     }
 
 }

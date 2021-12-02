@@ -7,32 +7,58 @@ ___
 ## API Documentation
 
 ### API Call URLs
-> https://localhost/api/
+> https://localhost:8080
 
-> https://walkwithme.com/api/
+> https://185.194.217.213:8080
 
 ### API layout
-> /api/{api_key}/{version}/{module}/{function}{parameters}
+> /api/{version}/{module}/{function}?{api_key}{parameters}
 ___
-### User API (_/api/{key}/v1/users_)
+### User API (_/api/v1/users_)
+
+#### Login by username
+```html
+GET /loginByUsername?key={api_key}&username={username}&password={password}
+```
+```json
+{
+  "id": 2,
+  "username": "frankie",
+  "password": "itsmeagain41",
+  "email": "test@hotmail.com",
+  "create_time": null
+}
+```
+
+#### Login by email
+```html
+GET /loginByEmail?key={api_key}&email={email}&password={password}
+```
+```json
+{
+  "id": 2,
+  "username": "frankie",
+  "password": "itsmeagain41",
+  "email": "test@hotmail.com",
+  "create_time": null
+}
+```
 
 #### Creating a new user
 ```html
-POST /newUser?username={username}&password={password}
+POST /newUser?key={api_key}&username={username}&password={password}
 ```
 ```text
-"done"
 ```
 #### Deleting a user
 ```html
-POST /deleteUser?id={id}
+POST /deleteUser?key={api_key}&id={id}
 ```
 ```text
-"done"
 ```
 #### Getting all users
 ```html
-POST /getUsers
+GET /getUsers?key={api_key}
 ```
 ```json
 {
@@ -52,7 +78,7 @@ POST /getUsers
 ```
 #### Find user by ID
 ```html
-POST /findByID?id={id}
+GET /findByID?key={api_key}&id={id}
 ```
 ```json
 {
@@ -65,7 +91,7 @@ POST /findByID?id={id}
 ```
 #### Find user by username
 ```html
-POST /findByUsername?username={username}
+GET /findByUsername?key={api_key}&username={username}
 ```
 ```json
 {
@@ -78,7 +104,7 @@ POST /findByUsername?username={username}
 ```
 #### Find user by email
 ```html
-POST /findByEmail?email={email}
+GET /findByEmail?key={api_key}&email={email}
 ```
 ```json
 {
@@ -91,28 +117,45 @@ POST /findByEmail?email={email}
 ```
 #### Changing user email
 ```html
-POST /changeEmail?id={id}&email={new_email}
+POST /changeEmail?key={api_key}&id={id}&email={new_email}
 ```
 ```text
-"done"
 ```
 #### Changing user password
 ```html
-POST /changePassword?id={id}&password={new_password}
+POST /changePassword?key={api_key}&id={id}&password={new_password}
 ```
 ```text
-"done"
 ```
 ### Relation API
 
-#### Getting a relationship
+#### Getting all relationships
 ```html
-GET /getRelation?id={id}&id2={id2}
+GET /getRelations?key={api_key}
 ```
 ```json
 {
-  "id_first": 1,
-  "id_second": 4,
+  "first": 1,
+  "second": 4,
+  "liked": 1,
+  "blocked": 0
+}
+{
+  "first": 2,
+  "second": 7,
+  "liked": 1,
+  "blocked": 1
+}
+```
+
+#### Getting a relationship
+```html
+GET /getRelation?key={api_key}&id={id}&id2={id2}
+```
+```json
+{
+  "first": 1,
+  "second": 4,
   "liked": 1,
   "blocked": 0
 }
@@ -120,41 +163,95 @@ GET /getRelation?id={id}&id2={id2}
 
 #### Creating a relationship
 ```html
-GET /createRelation?id={id}&id2={id2}
+POST /addRelation?key={api_key}&id={id}&id2={id2}
 ```
 ```text
-"done"
 ```
 
 #### Adding a like
 ```html
-POST /addLike?id={id}&id2={id2}
+POST /addLike?key={api_key}&id={id}&id2={id2}
 ```
 ```text
-"done"
 ```
 
 #### Removing a like
 ```html
-POST /removeLike?id={id}&id2={id2}
+POST /removeLike?key={api_key}&id={id}&id2={id2}
 ```
 ```text
-"done"
 ```
 
 #### Adding a block
 ```html
-POST /addBlock?id={id}&id2={id2}
+POST /addBlock?key={api_key}&id={id}&id2={id2}
 ```
 ```text
-"done"
 ```
 #### Removing a block
 ```html
-GET /removeBlock?id={id}&id2={id2}
+GET /removeBlock?key={api_key}&id={id}&id2={id2}
 ```
 ```text
-"done"
 ```
 
-### Report API
+### Info API
+
+#### Getting all available user information
+```html
+GET /getRelations?key={api_key}
+```
+```json
+{
+  "id": 1,
+  "userid": 1,
+  "username": "dubsky",
+  "bio": "I am root",
+  "gender": null,
+  "race": null,
+  "friendly": 0,
+  "height": 0,
+  "weight": 0,
+  "avatar": "{\"image\": \"5\"}",
+  "images": null
+}
+{
+  "id": 2,
+  "userid": 7,
+  "username": "anotheruser",
+  "bio": "I am a cat",
+  "gender": "male",
+  "race": "russian-blue",
+  "friendly": 1,
+  "height": 23,
+  "weight": 3,
+  "avatar": "{\"image\": \"8\"}",
+  "images": null
+}
+```
+#### Getting specific user information
+```html
+GET /getRelation?key={api_key}&id={id}
+```
+```json
+{
+  "id": 1,
+  "userid": 1,
+  "username": "dubsky",
+  "bio": "I am root",
+  "gender": null,
+  "race": null,
+  "friendly": 0,
+  "height": 0,
+  "weight": 0,
+  "avatar": "{\"image\": \"5\"}",
+  "images": null
+}
+```
+
+#### Changing user avatar
+```html
+POST /changeAvatar?key={api_key}&id={id}&image={image_id}
+```
+```text
+```
