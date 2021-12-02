@@ -2,6 +2,7 @@ package com.acmseproject.WebService.User;
 
 import com.acmseproject.WebService.UserInfo.UserInfo;
 import com.acmseproject.WebService.UserInfo.UserInfoRepository;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -207,6 +208,25 @@ public class UserController {
         if (Objects.equals(key, userRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
             userRepository.changePassword(id, password);
+        }
+    }
+
+    /**
+     * POST-Method to change a user avatar
+     *
+     * @param key   API-Key for authentication
+     * @param id    User ID connected to the change
+     * @param image Image ID
+     */
+    @PostMapping(path = "/changeAvatar")
+    public void changeAvatar(@RequestParam String key, @RequestParam int id, @RequestParam int image) {
+        System.out.format("[Request] changeAvatar\n[Key] %s\n", key);
+        if (Objects.equals(key, userRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            String jsonString = new JSONObject()
+                    .put("image", Integer.toString(image))
+                    .toString();
+            userRepository.changeAvatar(id, jsonString);
         }
     }
 }
