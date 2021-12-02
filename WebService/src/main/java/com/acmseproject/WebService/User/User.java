@@ -1,6 +1,5 @@
 package com.acmseproject.WebService.User;
 
-import org.json.JSONObject;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,14 +15,13 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String username;
     private String password;
     private String email;
     private LocalDateTime create_time;
 
-    public User() {
-
-    }
+    public User() {}
 
     public User(String username, String password) {
         this.username = username;
@@ -38,13 +36,21 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", email='" + email + '\'' +
-                ", create_time=" + create_time +
-                '}';
+        return "User{"
+                + "id="
+                + id
+                + ", username='"
+                + username
+                + '\''
+                + ", password='"
+                + password
+                + '\''
+                + ", email='"
+                + email
+                + '\''
+                + ", create_time="
+                + create_time
+                + '}';
     }
 
     public int getId() {

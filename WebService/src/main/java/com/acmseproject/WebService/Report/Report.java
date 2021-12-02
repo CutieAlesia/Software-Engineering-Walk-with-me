@@ -9,11 +9,9 @@ import java.util.Date;
 @Table
 public class Report {
 
-    @Id
-    private int id;
+    @Id private int id;
     private int id_reporter;
     private int id_reported;
     private String reason;
     private Date date;
-
 }

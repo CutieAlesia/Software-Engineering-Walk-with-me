@@ -19,10 +19,16 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     User findByEmail(String email);
 
-    @Query(value = "SELECT * FROM walkwithme.user WHERE username = :username AND password = :password", nativeQuery = true)
+    @Query(
+            value =
+                    "SELECT * FROM walkwithme.user WHERE username = :username AND password ="
+                        + " :password",
+            nativeQuery = true)
     User loginByUsername(String username, String password);
 
-    @Query(value = "SELECT * FROM walkwithme.user WHERE email = :email AND password = :password", nativeQuery = true)
+    @Query(
+            value = "SELECT * FROM walkwithme.user WHERE email = :email AND password = :password",
+            nativeQuery = true)
     User loginByEmail(String email, String password);
 
     @Modifying(clearAutomatically = true)
@@ -31,7 +37,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     void changeEmail(int id, String email);
 
     @Modifying(clearAutomatically = true)
-    @Query(value = "UPDATE walkwithme.user SET password = :password WHERE id = :id", nativeQuery = true)
+    @Query(
+            value = "UPDATE walkwithme.user SET password = :password WHERE id = :id",
+            nativeQuery = true)
     @Transactional
     void changePassword(int id, String password);
 

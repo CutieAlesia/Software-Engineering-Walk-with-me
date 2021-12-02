@@ -3,7 +3,6 @@ package com.acmseproject.WebService.UserRelation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,8 +14,7 @@ import java.util.Objects;
 @RequestMapping("api/v1/relations")
 public class UserRelationController {
 
-    @Autowired
-    public final UserRelationRepository userRelationRepository;
+    @Autowired public final UserRelationRepository userRelationRepository;
 
     public UserRelationController(UserRelationRepository userRelationRepository) {
         this.userRelationRepository = userRelationRepository;
@@ -49,7 +47,8 @@ public class UserRelationController {
      * @return Single user relation
      */
     @GetMapping(path = "/getRelation")
-    public UserRelation getRelation(@RequestParam String key, @RequestParam int id, @RequestParam int id2) {
+    public UserRelation getRelation(
+            @RequestParam String key, @RequestParam int id, @RequestParam int id2) {
         System.out.format("[Request] getRelation\n[Key] %s\n", key);
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
@@ -68,7 +67,8 @@ public class UserRelationController {
      * @param id2 Second User ID
      */
     @PostMapping(path = "/addRelation")
-    public String addRelation(@RequestParam String key, @RequestParam int id, @RequestParam int id2) {
+    public String addRelation(
+            @RequestParam String key, @RequestParam int id, @RequestParam int id2) {
         System.out.format("[Request] addRelation\n[Key] %s\n", key);
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
@@ -108,7 +108,8 @@ public class UserRelationController {
      * @param id2 Second User ID
      */
     @PostMapping(path = "/removeLike")
-    public String removeLike(@RequestParam String key, @RequestParam int id, @RequestParam int id2) {
+    public String removeLike(
+            @RequestParam String key, @RequestParam int id, @RequestParam int id2) {
         System.out.format("[Request] removeLike\n[Key] %s\n", key);
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
@@ -148,7 +149,8 @@ public class UserRelationController {
      * @param id2 Second User ID
      */
     @PostMapping(path = "/removeBlock")
-    public String removeBlock(@RequestParam String key, @RequestParam int id, @RequestParam int id2) {
+    public String removeBlock(
+            @RequestParam String key, @RequestParam int id, @RequestParam int id2) {
         System.out.format("[Request] removeBlock\n[Key] %s\n", key);
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
@@ -159,5 +161,4 @@ public class UserRelationController {
             return "error";
         }
     }
-
 }

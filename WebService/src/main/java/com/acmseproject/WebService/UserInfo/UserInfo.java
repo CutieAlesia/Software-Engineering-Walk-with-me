@@ -13,6 +13,7 @@ public class UserInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private int userid;
     private String username;
     private String bio;
@@ -24,8 +25,7 @@ public class UserInfo {
     private String avatar;
     private String images;
 
-    public UserInfo() {
-    }
+    public UserInfo() {}
 
     public UserInfo(int id, int userid, String username) {
         this.id = id;
@@ -33,7 +33,8 @@ public class UserInfo {
         this.username = username;
     }
 
-    public UserInfo(int id, String bio, String gender, String race, int friendly, int height, int weight) {
+    public UserInfo(
+            int id, String bio, String gender, String race, int friendly, int height, int weight) {
         this.id = id;
         this.bio = bio;
         this.gender = gender;
@@ -45,19 +46,36 @@ public class UserInfo {
 
     @Override
     public String toString() {
-        return "UserInfo{" +
-                "id=" + id +
-                ", userid=" + userid +
-                ", username='" + username + '\'' +
-                ", bio='" + bio + '\'' +
-                ", gender='" + gender + '\'' +
-                ", race='" + race + '\'' +
-                ", friendly=" + friendly +
-                ", height=" + height +
-                ", weight=" + weight +
-                ", avatar='" + avatar + '\'' +
-                ", images='" + images + '\'' +
-                '}';
+        return "UserInfo{"
+                + "id="
+                + id
+                + ", userid="
+                + userid
+                + ", username='"
+                + username
+                + '\''
+                + ", bio='"
+                + bio
+                + '\''
+                + ", gender='"
+                + gender
+                + '\''
+                + ", race='"
+                + race
+                + '\''
+                + ", friendly="
+                + friendly
+                + ", height="
+                + height
+                + ", weight="
+                + weight
+                + ", avatar='"
+                + avatar
+                + '\''
+                + ", images='"
+                + images
+                + '\''
+                + '}';
     }
 
     public String getAvatar() {
