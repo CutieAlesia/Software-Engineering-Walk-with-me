@@ -58,7 +58,7 @@ POST /deleteUser?key={api_key}&id={id}
 ```
 #### Getting all users
 ```html
-POST /getUsers?key={api_key}
+GET /getUsers?key={api_key}
 ```
 ```json
 {
@@ -78,7 +78,7 @@ POST /getUsers?key={api_key}
 ```
 #### Find user by ID
 ```html
-POST /findByID?key={api_key}&id={id}
+GET /findByID?key={api_key}&id={id}
 ```
 ```json
 {
@@ -91,7 +91,7 @@ POST /findByID?key={api_key}&id={id}
 ```
 #### Find user by username
 ```html
-POST /findByUsername?key={api_key}&username={username}
+GET /findByUsername?key={api_key}&username={username}
 ```
 ```json
 {
@@ -104,7 +104,7 @@ POST /findByUsername?key={api_key}&username={username}
 ```
 #### Find user by email
 ```html
-POST /findByEmail?key={api_key}&email={email}
+GET /findByEmail?key={api_key}&email={email}
 ```
 ```json
 {
