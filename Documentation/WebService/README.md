@@ -127,13 +127,6 @@ POST /changePassword?key={api_key}&id={id}&password={new_password}
 ```
 ```text
 ```
-
-#### Changing user avatar
-```html
-POST /changeAvatar?key={api_key}&id={id}&image={image_id}
-```
-```text
-```
 ### Relation API
 
 #### Getting all relationships
@@ -213,12 +206,14 @@ GET /getRelations?key={api_key}
   "id": 1,
   "userid": 1,
   "username": "dubsky",
-  "bio": "I am a dog",
-  "gender": "female",
-  "race": "tamaskan",
-  "friendly": 1,
-  "height": 92,
-  "weight": 36
+  "bio": "I am root",
+  "gender": null,
+  "race": null,
+  "friendly": 0,
+  "height": 0,
+  "weight": 0,
+  "avatar": "{\"image\": \"5\"}",
+  "images": null
 }
 {
   "id": 2,
@@ -229,7 +224,9 @@ GET /getRelations?key={api_key}
   "race": "russian-blue",
   "friendly": 1,
   "height": 23,
-  "weight": 3
+  "weight": 3,
+  "avatar": "{\"image\": \"8\"}",
+  "images": null
 }
 ```
 #### Getting specific user information
@@ -241,11 +238,20 @@ GET /getRelation?key={api_key}&id={id}
   "id": 1,
   "userid": 1,
   "username": "dubsky",
-  "bio": "I am a dog",
-  "gender": "female",
-  "race": "tamaskan",
-  "friendly": 1,
-  "height": 92,
-  "weight": 36
+  "bio": "I am root",
+  "gender": null,
+  "race": null,
+  "friendly": 0,
+  "height": 0,
+  "weight": 0,
+  "avatar": "{\"image\": \"5\"}",
+  "images": null
 }
+```
+
+#### Changing user avatar
+```html
+POST /changeAvatar?key={api_key}&id={id}&image={image_id}
+```
+```text
 ```
