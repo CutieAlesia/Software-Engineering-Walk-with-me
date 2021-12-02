@@ -14,9 +14,10 @@ public class ImageListAdapter extends ArrayAdapter<String> {
     private ArrayList<Integer> mImages;
     private ArrayList<String> mImagesUrls;
 
-    public ImageListAdapter(Activity context, ArrayList<String> listOfValues, ArrayList<String> images) {
-        //The listOfValues is used when you make item click to get value
-        //Each image must to have a text value
+    public ImageListAdapter(
+            Activity context, ArrayList<String> listOfValues, ArrayList<String> images) {
+        // The listOfValues is used when you make item click to get value
+        // Each image must to have a text value
         super(context, R.layout.imagelist_item, listOfValues);
         mContext = context;
         mImagesUrls = images;

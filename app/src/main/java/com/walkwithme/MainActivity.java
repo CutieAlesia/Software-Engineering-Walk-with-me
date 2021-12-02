@@ -21,11 +21,11 @@ public class MainActivity extends AppCompatActivity {
     public static final String apiKey = "e62579d4-b8f7-41c0-8513-6c00e1c30c13";
     private static int loggedInUserId = 0;
 
-    public static void setLoggedInUserId(int newId){
+    public static void setLoggedInUserId(int newId) {
         loggedInUserId = newId;
     }
 
-    public static int getLoggedInUserId(){
+    public static int getLoggedInUserId() {
         return loggedInUserId;
     }
 
@@ -39,20 +39,16 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar);
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        NavController navController =
+                Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-
     }
-/**
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-**/
+    /**
+     * @Override public boolean onCreateOptionsMenu(Menu menu) { // Inflate the menu; this adds
+     * items to the action bar if it is present. getMenuInflater().inflate(R.menu.menu_main, menu);
+     * return true; }
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -70,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        NavController navController =
+                Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
     }

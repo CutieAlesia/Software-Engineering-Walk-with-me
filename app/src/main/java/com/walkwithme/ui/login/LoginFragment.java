@@ -36,15 +36,16 @@ public class LoginFragment extends Fragment {
 
     private FragmentLoginBinding binding;
     private static final String TAG = "LoginFragment";
+
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+    public View onCreateView(
+            @NonNull LayoutInflater inflater,
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
 
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
     }
 
     @Override
@@ -60,151 +61,215 @@ public class LoginFragment extends Fragment {
 
         unsuccessful.setVisibility(View.GONE);
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-
-                RequestQueue queue = Volley.newRequestQueue(getContext());
-                String url = "";
-                if(patternMatches(usernameEditText.getText().toString())){
-                    url = MainActivity.url+"user/loginByEmail?key="+MainActivity.apiKey+"&email="+usernameEditText.getText().toString()+"&password="+passwordEditText.getText().toString();
-                }else{
-                    url = MainActivity.url+"user/loginByUsername?key="+MainActivity.apiKey+"&username="+usernameEditText.getText().toString()+"&password="+passwordEditText.getText().toString();
-                }
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>(){
+        loginButton.setOnClickListener(
+                new View.OnClickListener() {
                     @Override
-                    public void onResponse(JSONObject response){
-                        if(response != null){
-                            try {
-                                if(response.length()>0){
-                                    int uId = response.getInt("id");
-                                    MainActivity.setLoggedInUserId(uId);
-                                    NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_loginFragment_to_FirstFragment);
-                                }else{
-                                    unsuccessful.setVisibility(View.VISIBLE);
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }else{
-                            unsuccessful.setVisibility(View.VISIBLE);
-                        }
-                    }
-                }, new Response.ErrorListener() {
+                    public void onClick(View view) {
 
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        unsuccessful.setVisibility(View.VISIBLE);
-                        /**VolleyLog.d(TAG, "Error: " + error.getMessage());
-                        Toast.makeText(getContext(),
-                                error.getMessage(), Toast.LENGTH_SHORT).show();**/
-                        // hide the progress dialog
-                    }
-                });
-
-
-                queue.add(jsonObjectRequest);
-            }
-
-
-        });
-
-
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RequestQueue queue = Volley.newRequestQueue(getContext());
-                String url = "";
-                url = MainActivity.url + "user/newUser?key=" + MainActivity.apiKey + "&username=" + usernameEditText.getText().toString() + "&password=" + passwordEditText.getText().toString();
-
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        if (response != null) {
-                            try {
-                                if (response.length() > 0) {
-                                    int uId = response.getInt("id");
-                                    MainActivity.setLoggedInUserId(uId);
-                                    NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_loginFragment_to_FirstFragment);
-                                } else {
-                                    unsuccessful.setVisibility(View.VISIBLE);
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                        RequestQueue queue = Volley.newRequestQueue(getContext());
+                        String url = "";
+                        if (patternMatches(usernameEditText.getText().toString())) {
+                            url =
+                                    MainActivity.url
+                                            + "user/loginByEmail?key="
+                                            + MainActivity.apiKey
+                                            + "&email="
+                                            + usernameEditText.getText().toString()
+                                            + "&password="
+                                            + passwordEditText.getText().toString();
                         } else {
-                            unsuccessful.setVisibility(View.VISIBLE);
+                            url =
+                                    MainActivity.url
+                                            + "user/loginByUsername?key="
+                                            + MainActivity.apiKey
+                                            + "&username="
+                                            + usernameEditText.getText().toString()
+                                            + "&password="
+                                            + passwordEditText.getText().toString();
                         }
-                    }
-                }, new Response.ErrorListener() {
+                        JsonObjectRequest jsonObjectRequest =
+                                new JsonObjectRequest(
+                                        Request.Method.GET,
+                                        url,
+                                        null,
+                                        new Response.Listener<JSONObject>() {
+                                            @Override
+                                            public void onResponse(JSONObject response) {
+                                                if (response != null) {
+                                                    try {
+                                                        if (response.length() > 0) {
+                                                            int uId = response.getInt("id");
+                                                            MainActivity.setLoggedInUserId(uId);
+                                                            NavHostFragment.findNavController(
+                                                                            LoginFragment.this)
+                                                                    .navigate(
+                                                                            R.id.action_loginFragment_to_FirstFragment);
+                                                        } else {
+                                                            unsuccessful.setVisibility(
+                                                                    View.VISIBLE);
+                                                        }
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                } else {
+                                                    unsuccessful.setVisibility(View.VISIBLE);
+                                                }
+                                            }
+                                        },
+                                        new Response.ErrorListener() {
 
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                unsuccessful.setVisibility(View.VISIBLE);
+                                                /**
+                                                 * VolleyLog.d(TAG, "Error: " + error.getMessage());
+                                                 * Toast.makeText(getContext(), error.getMessage(),
+                                                 * Toast.LENGTH_SHORT).show();*
+                                                 */
+                                                // hide the progress dialog
+                                            }
+                                        });
 
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        unsuccessful.setVisibility(View.VISIBLE);
-                        /**VolleyLog.d(TAG, "Error: " + error.getMessage());
-                         Toast.makeText(getContext(),
-                         error.getMessage(), Toast.LENGTH_SHORT).show();**/
-                        // hide the progress dialog
+                        queue.add(jsonObjectRequest);
                     }
                 });
-                queue.add(jsonObjectRequest);
 
-                loginButton.callOnClick();
-
-                url = "";
-                if(patternMatches(usernameEditText.getText().toString())){
-                    url = MainActivity.url+"user/loginByEmail?key="+MainActivity.apiKey+"&email="+usernameEditText.getText().toString()+"&password="+passwordEditText.getText().toString();
-                }else{
-                    url = MainActivity.url+"user/loginByUsername?key="+MainActivity.apiKey+"&username="+usernameEditText.getText().toString()+"&password="+passwordEditText.getText().toString();
-                }
-                JsonObjectRequest jsonObjectRequest2 = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>(){
+        registerButton.setOnClickListener(
+                new View.OnClickListener() {
                     @Override
-                    public void onResponse(JSONObject response){
-                        if(response != null){
-                            try {
-                                if(response.length()>0){
-                                    int uId = response.getInt("id");
-                                    MainActivity.setLoggedInUserId(uId);
-                                    NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_loginFragment_to_FirstFragment);
-                                }else{
-                                    unsuccessful.setVisibility(View.VISIBLE);
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }else{
-                            unsuccessful.setVisibility(View.VISIBLE);
+                    public void onClick(View v) {
+                        RequestQueue queue = Volley.newRequestQueue(getContext());
+                        String url = "";
+                        url =
+                                MainActivity.url
+                                        + "user/newUser?key="
+                                        + MainActivity.apiKey
+                                        + "&username="
+                                        + usernameEditText.getText().toString()
+                                        + "&password="
+                                        + passwordEditText.getText().toString();
+
+                        JsonObjectRequest jsonObjectRequest =
+                                new JsonObjectRequest(
+                                        Request.Method.POST,
+                                        url,
+                                        null,
+                                        new Response.Listener<JSONObject>() {
+                                            @Override
+                                            public void onResponse(JSONObject response) {
+                                                if (response != null) {
+                                                    try {
+                                                        if (response.length() > 0) {
+                                                            int uId = response.getInt("id");
+                                                            MainActivity.setLoggedInUserId(uId);
+                                                            NavHostFragment.findNavController(
+                                                                            LoginFragment.this)
+                                                                    .navigate(
+                                                                            R.id.action_loginFragment_to_FirstFragment);
+                                                        } else {
+                                                            unsuccessful.setVisibility(
+                                                                    View.VISIBLE);
+                                                        }
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                } else {
+                                                    unsuccessful.setVisibility(View.VISIBLE);
+                                                }
+                                            }
+                                        },
+                                        new Response.ErrorListener() {
+
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                unsuccessful.setVisibility(View.VISIBLE);
+                                                /**
+                                                 * VolleyLog.d(TAG, "Error: " + error.getMessage());
+                                                 * Toast.makeText(getContext(), error.getMessage(),
+                                                 * Toast.LENGTH_SHORT).show();*
+                                                 */
+                                                // hide the progress dialog
+                                            }
+                                        });
+                        queue.add(jsonObjectRequest);
+
+                        loginButton.callOnClick();
+
+                        url = "";
+                        if (patternMatches(usernameEditText.getText().toString())) {
+                            url =
+                                    MainActivity.url
+                                            + "user/loginByEmail?key="
+                                            + MainActivity.apiKey
+                                            + "&email="
+                                            + usernameEditText.getText().toString()
+                                            + "&password="
+                                            + passwordEditText.getText().toString();
+                        } else {
+                            url =
+                                    MainActivity.url
+                                            + "user/loginByUsername?key="
+                                            + MainActivity.apiKey
+                                            + "&username="
+                                            + usernameEditText.getText().toString()
+                                            + "&password="
+                                            + passwordEditText.getText().toString();
                         }
-                    }
-                }, new Response.ErrorListener() {
+                        JsonObjectRequest jsonObjectRequest2 =
+                                new JsonObjectRequest(
+                                        Request.Method.GET,
+                                        url,
+                                        null,
+                                        new Response.Listener<JSONObject>() {
+                                            @Override
+                                            public void onResponse(JSONObject response) {
+                                                if (response != null) {
+                                                    try {
+                                                        if (response.length() > 0) {
+                                                            int uId = response.getInt("id");
+                                                            MainActivity.setLoggedInUserId(uId);
+                                                            NavHostFragment.findNavController(
+                                                                            LoginFragment.this)
+                                                                    .navigate(
+                                                                            R.id.action_loginFragment_to_FirstFragment);
+                                                        } else {
+                                                            unsuccessful.setVisibility(
+                                                                    View.VISIBLE);
+                                                        }
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                } else {
+                                                    unsuccessful.setVisibility(View.VISIBLE);
+                                                }
+                                            }
+                                        },
+                                        new Response.ErrorListener() {
 
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        unsuccessful.setVisibility(View.VISIBLE);
-                        /**VolleyLog.d(TAG, "Error: " + error.getMessage());
-                         Toast.makeText(getContext(),
-                         error.getMessage(), Toast.LENGTH_SHORT).show();**/
-                        // hide the progress dialog
+                                            @Override
+                                            public void onErrorResponse(VolleyError error) {
+                                                unsuccessful.setVisibility(View.VISIBLE);
+                                                /**
+                                                 * VolleyLog.d(TAG, "Error: " + error.getMessage());
+                                                 * Toast.makeText(getContext(), error.getMessage(),
+                                                 * Toast.LENGTH_SHORT).show();*
+                                                 */
+                                                // hide the progress dialog
+                                            }
+                                        });
+                        queue.add(jsonObjectRequest2);
                     }
                 });
-                queue.add(jsonObjectRequest2);
-            }
-
-        });
-
     }
 
     private boolean patternMatches(String emailAddress) {
-        return Pattern.compile("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
-                + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")
+        return Pattern.compile(
+                        "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+                                + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")
                 .matcher(emailAddress)
                 .matches();
     }
+
     private void updateUiWithUser() {
         String welcome = getString(R.string.welcome) + "AYAYA";
         // TODO : initiate successful logged in experience
@@ -215,10 +280,8 @@ public class LoginFragment extends Fragment {
 
     private void showLoginFailed(@StringRes Integer errorString) {
         if (getContext() != null && getContext().getApplicationContext() != null) {
-            Toast.makeText(
-                    getContext().getApplicationContext(),
-                    errorString,
-                    Toast.LENGTH_LONG).show();
+            Toast.makeText(getContext().getApplicationContext(), errorString, Toast.LENGTH_LONG)
+                    .show();
         }
     }
 

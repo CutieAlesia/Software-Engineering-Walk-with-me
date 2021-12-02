@@ -22,7 +22,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query(
             value =
                     "SELECT * FROM walkwithme.user WHERE username = :username AND password ="
-                        + " :password",
+                            + " :password",
             nativeQuery = true)
     User loginByUsername(String username, String password);
 

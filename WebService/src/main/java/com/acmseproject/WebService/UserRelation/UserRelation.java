@@ -1,6 +1,5 @@
 package com.acmseproject.WebService.UserRelation;
 
-
 import javax.persistence.*;
 
 @Entity

@@ -18,16 +18,12 @@ public class TopUsers extends Fragment {
 
     private FragmentTopUsersBinding binding;
 
-
     @Override
     public View onCreateView(
-            LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         binding = FragmentTopUsersBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
@@ -38,34 +34,33 @@ public class TopUsers extends Fragment {
         TextView textView;
         ImageView imageView;
         TableRow tRow;
-        final TableLayout.LayoutParams params = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, TableLayout.LayoutParams.WRAP_CONTENT);
-        final TableRow.LayoutParams rowParams = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT,
-                TableRow.LayoutParams.WRAP_CONTENT);
+        final TableLayout.LayoutParams params =
+                new TableLayout.LayoutParams(
+                        TableLayout.LayoutParams.MATCH_PARENT,
+                        TableLayout.LayoutParams.WRAP_CONTENT);
+        final TableRow.LayoutParams rowParams =
+                new TableRow.LayoutParams(
+                        TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
 
-
-        for(int c = 1; c < 100; c++){
+        for (int c = 1; c < 100; c++) {
             tRow = new TableRow(getContext());
             imageView = new ImageView(getContext());
             imageView.setId(c);
             imageView.setImageResource(R.drawable.testi);
-            tRow.addView(imageView, 250,250);
+            tRow.addView(imageView, 250, 250);
 
             textView = new TextView(getContext());
-            textView.setText("Text"+c);
+            textView.setText("Text" + c);
             textView.setId(c);
             tRow.addView(textView, rowParams);
 
             tableLayout.addView(tRow);
-
         }
     }
-
-
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
-
 }
