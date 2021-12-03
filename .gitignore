@@ -29,6 +29,8 @@ out/*
 WebService/.mvn/*
 WebService/.settings/*
 WebService/target/*
+/WebService/.project
+/WebService/.classpath
 
 # Alesia
 .gradle/*
