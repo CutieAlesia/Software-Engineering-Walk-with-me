@@ -89,7 +89,6 @@ GET /getRandom?key={api_key}&first={userid}
   "create_time": "2021-12-01T23:00:23"
 }
 ```
-```
 #### Find user by ID
 ```html
 GET /findByID?key={api_key}&id={id}
