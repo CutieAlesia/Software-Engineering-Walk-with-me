@@ -76,6 +76,20 @@ GET /getUsers?key={api_key}
   "create_time": null
 }
 ```
+#### Getting a random user
+```html
+GET /getRandom?key={api_key}&first={userid}
+```
+```json
+{
+  "id": 2,
+  "username": "alesia",
+  "password": "pw74adadaca",
+  "email": null,
+  "create_time": "2021-12-01T23:00:23"
+}
+```
+```
 #### Find user by ID
 ```html
 GET /findByID?key={api_key}&id={id}
