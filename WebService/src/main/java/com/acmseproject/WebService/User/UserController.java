@@ -10,7 +10,7 @@ import java.util.Objects;
 
 /**
  * @author Dubsky
- * @version 1.7
+ * @version 1.8
  */
 @RestController
 @RequestMapping("api/v1/user")
@@ -89,6 +89,24 @@ public class UserController {
         if (Objects.equals(key, userRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
             return userRepository.findAll();
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * GET-Method to receive a random user unliked/un-disliked/unblocked from the db
+     *
+     * @param key API-Key for authentication
+     * @param first User ID of the user who is swiping
+     * @return User information in a JSON format
+     */
+    @GetMapping(path = "/getRandom")
+    public User getRandom(@RequestParam String key, @RequestParam int first) {
+        System.out.format("[Request] getRandom\n[Key] %s\n", key);
+        if (Objects.equals(key, userRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            return userRepository.findById(userRepository.getRandom(first));
         } else {
             return null;
         }

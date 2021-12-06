@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 
 /**
  * @author Dubsky
- * @version 1.3
+ * @version 1.4
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
@@ -30,6 +30,13 @@ public interface UserRepository extends JpaRepository<User, Integer> {
             value = "SELECT * FROM walkwithme.user WHERE email = :email AND password = :password",
             nativeQuery = true)
     User loginByEmail(String email, String password);
+
+    @Query(value = "SELECT walkwithme.user_relation.second FROM walkwithme.user\n" +
+            "INNER JOIN walkwithme.user_relation ON walkwithme.user.id=walkwithme.user_relation.first\n" +
+            "WHERE walkwithme.user_relation.first = :first AND walkwithme.user_relation.second != :first AND liked = 0 AND blocked = 0\n" +
+            "ORDER BY RAND()\n" +
+            "LIMIT 1", nativeQuery = true)
+    int getRandom(int first);
 
     @Modifying(clearAutomatically = true)
     @Query(value = "UPDATE walkwithme.user SET email = :email WHERE id = :id", nativeQuery = true)
