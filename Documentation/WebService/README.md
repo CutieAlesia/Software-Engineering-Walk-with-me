@@ -14,7 +14,7 @@ ___
 ### API layout
 > /api/{version}/{module}/{function}?{api_key}{parameters}
 ___
-### User API (_/api/v1/users_)
+### User API (_/api/v1/user_)
 
 #### Login by username
 ```html
