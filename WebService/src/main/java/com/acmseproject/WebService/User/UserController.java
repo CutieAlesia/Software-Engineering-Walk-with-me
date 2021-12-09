@@ -2,6 +2,9 @@ package com.acmseproject.WebService.User;
 
 import com.acmseproject.WebService.UserInfo.UserInfo;
 import com.acmseproject.WebService.UserInfo.UserInfoRepository;
+import com.acmseproject.WebService.UserRelation.UserRelation;
+import com.acmseproject.WebService.UserRelation.UserRelationRepository;
+import org.springframework.aop.AopInvocationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,18 +13,20 @@ import java.util.Objects;
 
 /**
  * @author Dubsky
- * @version 1.8
+ * @version 1.9
  */
 @RestController
 @RequestMapping("api/v1/user")
 public class UserController {
 
     private final UserRepository userRepository;
+    private final UserRelationRepository userRelationRepository;
     private final UserInfoRepository userInfoRepository;
 
     @Autowired
-    public UserController(UserRepository userRepository, UserInfoRepository userInfoRepository) {
+    public UserController(UserRepository userRepository, UserInfoRepository userInfoRepository, UserRelationRepository userRelationRepository) {
         this.userRepository = userRepository;
+        this.userRelationRepository = userRelationRepository;
         this.userInfoRepository = userInfoRepository;
     }
 
@@ -106,7 +111,16 @@ public class UserController {
         System.out.format("[Request] getRandom\n[Key] %s\n", key);
         if (Objects.equals(key, userRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
-            return userRepository.findById(userRepository.getRandom(first));
+            User neutralRandom = null;
+            try {
+                neutralRandom = userRepository.findById(userRepository.getRandom(first));
+                return neutralRandom;
+            } catch (AopInvocationException e) {
+                System.out.println("No relation found -> New match");
+                User newMatch = userRepository.getMatch(first);
+                userRelationRepository.save(new UserRelation(first, newMatch.getId(), 0, 0));
+                return newMatch;
+            }
         } else {
             return null;
         }

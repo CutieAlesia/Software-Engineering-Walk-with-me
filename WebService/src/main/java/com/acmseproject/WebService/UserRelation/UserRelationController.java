@@ -86,13 +86,14 @@ public class UserRelationController {
      * @param key API-Key for authentication
      * @param id First User ID
      * @param id2 Second User ID
+     * @param like Like mode
      */
-    @PostMapping(path = "/addLike")
-    public String addLike(@RequestParam String key, @RequestParam int id, @RequestParam int id2) {
-        System.out.format("[Request] addLike\n[Key] %s\n", key);
+    @PostMapping(path = "/changeLike")
+    public String changeLike(@RequestParam String key, @RequestParam int id, @RequestParam int id2, @RequestParam int like) {
+        System.out.format("[Request] changeLike\n[Key] %s\n", key);
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
-            userRelationRepository.addLike(id, id2);
+            userRelationRepository.changeLike(id, id2, like);
             return "done";
         } else {
             System.out.format("[Verification] Failed\n");
@@ -102,6 +103,7 @@ public class UserRelationController {
 
     /**
      * POST-Method to remove a like
+     * @deprecated This method is no longer needed as of v2.1 - Replaced by the changeLike method
      *
      * @param key API-Key for authentication
      * @param id First User ID

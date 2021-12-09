@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 
 /**
  * @author Dubsky
- * @version 1.4
+ * @version 1.5
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
@@ -43,6 +43,12 @@ public interface UserRepository extends JpaRepository<User, Integer> {
                         + "LIMIT 1",
             nativeQuery = true)
     int getRandom(int first);
+
+    @Query(value = "SELECT * FROM walkwithme.user\n" +
+            "WHERE walkwithme.user.id NOT IN (SELECT walkwithme.user_relation.second FROM walkwithme.user_relation WHERE walkwithme.user_relation.first = :first)\n" +
+            "AND walkwithme.user.id != :first ORDER BY RAND()\n" +
+            "LIMIT 1", nativeQuery = true)
+    User getMatch(int first);
 
     @Modifying(clearAutomatically = true)
     @Query(value = "UPDATE walkwithme.user SET email = :email WHERE id = :id", nativeQuery = true)
