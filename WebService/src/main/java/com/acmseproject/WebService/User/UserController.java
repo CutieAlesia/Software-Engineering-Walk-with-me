@@ -24,7 +24,10 @@ public class UserController {
     private final UserInfoRepository userInfoRepository;
 
     @Autowired
-    public UserController(UserRepository userRepository, UserInfoRepository userInfoRepository, UserRelationRepository userRelationRepository) {
+    public UserController(
+            UserRepository userRepository,
+            UserInfoRepository userInfoRepository,
+            UserRelationRepository userRelationRepository) {
         this.userRepository = userRepository;
         this.userRelationRepository = userRelationRepository;
         this.userInfoRepository = userInfoRepository;
