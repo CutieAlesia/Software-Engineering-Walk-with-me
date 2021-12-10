@@ -16,6 +16,7 @@ import java.util.Objects;
  * @version 1.9
  */
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("api/v1/user")
 public class UserController {
 

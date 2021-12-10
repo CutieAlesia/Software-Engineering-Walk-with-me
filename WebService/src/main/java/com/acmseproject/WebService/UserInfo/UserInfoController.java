@@ -12,6 +12,7 @@ import java.util.Objects;
  * @version 1.3
  */
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("api/v1/info")
 public class UserInfoController {
 

@@ -11,6 +11,7 @@ import java.util.Objects;
  * @version 1.3
  */
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("api/v1/relations")
 public class UserRelationController {
 
@@ -73,10 +74,10 @@ public class UserRelationController {
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
             userRelationRepository.save(new UserRelation(id, id2, 0, 0));
-            return "done";
+            return "200";
         } else {
             System.out.format("[Verification] Failed\n");
-            return "error";
+            return "400";
         }
     }
 
@@ -98,10 +99,10 @@ public class UserRelationController {
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
             userRelationRepository.changeLike(id, id2, like);
-            return "done";
+            return "200";
         } else {
             System.out.format("[Verification] Failed\n");
-            return "error";
+            return "400";
         }
     }
 
@@ -120,10 +121,10 @@ public class UserRelationController {
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
             userRelationRepository.removeLike(id, id2);
-            return "done";
+            return "200";
         } else {
             System.out.format("[Verification] Failed\n");
-            return "error";
+            return "400";
         }
     }
 
@@ -140,10 +141,10 @@ public class UserRelationController {
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
             userRelationRepository.addBlock(id, id2);
-            return "done";
+            return "200";
         } else {
             System.out.format("[Verification] Failed\n");
-            return "error";
+            return "400";
         }
     }
 
@@ -161,10 +162,10 @@ public class UserRelationController {
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
             userRelationRepository.removeBlock(id, id2);
-            return "done";
+            return "200";
         } else {
             System.out.format("[Verification] Failed\n");
-            return "error";
+            return "400";
         }
     }
 }
