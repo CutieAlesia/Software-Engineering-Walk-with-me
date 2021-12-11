@@ -20,7 +20,7 @@ public interface UserInfoRepository extends JpaRepository<UserInfo, Integer> {
     @Query(
             value =
                     "SELECT walkwithme.user_info.ranking FROM walkwithme.user_info WHERE"
-                        + " walkwithme.user_info.userid = :id",
+                            + " walkwithme.user_info.userid = :id",
             nativeQuery = true)
     int getRank(int id);
 
@@ -37,7 +37,7 @@ public interface UserInfoRepository extends JpaRepository<UserInfo, Integer> {
     @Query(
             value =
                     "UPDATE walkwithme.user_info SET walkwithme.user_info.ranking = :newRank WHERE"
-                        + " userid = :id",
+                            + " userid = :id",
             nativeQuery = true)
     @Transactional
     void changeRank(int id, int newRank);
