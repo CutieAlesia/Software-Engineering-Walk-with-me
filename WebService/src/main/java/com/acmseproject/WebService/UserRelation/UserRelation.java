@@ -1,9 +1,6 @@
 package com.acmseproject.WebService.UserRelation;
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table
@@ -12,14 +9,13 @@ public class UserRelation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int relation_id;
+
     private int first;
     private int second;
     private int liked;
     private int blocked;
 
-    public UserRelation() {
-
-    }
+    public UserRelation() {}
 
     public UserRelation(int id_first, int id_second, int liked, int blocked) {
         this.first = id_first;
@@ -38,13 +34,18 @@ public class UserRelation {
 
     @Override
     public String toString() {
-        return "UserRelation{" +
-                "relation_id=" + relation_id +
-                ", first=" + first +
-                ", second=" + second +
-                ", liked=" + liked +
-                ", blocked=" + blocked +
-                '}';
+        return "UserRelation{"
+                + "relation_id="
+                + relation_id
+                + ", first="
+                + first
+                + ", second="
+                + second
+                + ", liked="
+                + liked
+                + ", blocked="
+                + blocked
+                + '}';
     }
 
     public int getRelation_id() {

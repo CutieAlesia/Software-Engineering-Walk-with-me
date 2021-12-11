@@ -22,7 +22,16 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-# Clemens - IDE & Atom
+# Clemens - IntelliJ & Atom
 *.iml
 out/*
 .idea/*
+WebService/.mvn/*
+WebService/.settings/*
+WebService/target/*
+/WebService/.project
+/WebService/.classpath
+
+# Alesia
+.gradle/*
+local.properties
