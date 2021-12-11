@@ -52,7 +52,7 @@ POST /newUser?key={api_key}&username={username}&password={password}
 ```
 #### Deleting a user
 ```html
-POST /deleteUser?key={api_key}&id={id}
+POST /deleteUser?key={api_key}&id={uid}
 ```
 ```text
 ```
@@ -78,7 +78,7 @@ GET /getUsers?key={api_key}
 ```
 #### Getting a random user
 ```html
-GET /getRandom?key={api_key}&first={userid}
+GET /getRandom?key={api_key}&first={uid}
 ```
 ```json
 {
@@ -91,7 +91,7 @@ GET /getRandom?key={api_key}&first={userid}
 ```
 #### Find user by ID
 ```html
-GET /findByID?key={api_key}&id={id}
+GET /findByID?key={api_key}&id={uid}
 ```
 ```json
 {
@@ -130,13 +130,13 @@ GET /findByEmail?key={api_key}&email={email}
 ```
 #### Changing user email
 ```html
-POST /changeEmail?key={api_key}&id={id}&email={new_email}
+POST /changeEmail?key={api_key}&id={uid}&email={new_email}
 ```
 ```text
 ```
 #### Changing user password
 ```html
-POST /changePassword?key={api_key}&id={id}&password={new_password}
+POST /changePassword?key={api_key}&id={uid}&password={new_password}
 ```
 ```text
 ```
@@ -163,7 +163,7 @@ GET /getRelations?key={api_key}
 
 #### Getting a relationship
 ```html
-GET /getRelation?key={api_key}&id={id}&id2={id2}
+GET /getRelation?key={api_key}&id={uid}&id2={uid2}
 ```
 ```json
 {
@@ -176,34 +176,34 @@ GET /getRelation?key={api_key}&id={id}&id2={id2}
 
 #### Creating a relationship
 ```html
-POST /addRelation?key={api_key}&id={id}&id2={id2}
+POST /addRelation?key={api_key}&id={uid}&id2={uid2}
 ```
 ```text
 ```
 
-#### Adding a like
+#### Changing a like relation
 ```html
-POST /addLike?key={api_key}&id={id}&id2={id2}
+POST /changeLike?key={api_key}&id={uid}&id2={uid2}&like={0,1,2}
 ```
 ```text
 ```
 
 #### Removing a like
 ```html
-POST /removeLike?key={api_key}&id={id}&id2={id2}
+POST /removeLike?key={api_key}&id={uid}&id2={uid2}
 ```
 ```text
 ```
 
 #### Adding a block
 ```html
-POST /addBlock?key={api_key}&id={id}&id2={id2}
+POST /addBlock?key={api_key}&id={uid}&id2={uid2}
 ```
 ```text
 ```
 #### Removing a block
 ```html
-GET /removeBlock?key={api_key}&id={id}&id2={id2}
+POST /removeBlock?key={api_key}&id={uid}&id2={uid2}
 ```
 ```text
 ```
@@ -244,7 +244,7 @@ GET /getRelations?key={api_key}
 ```
 #### Getting specific user information
 ```html
-GET /getRelation?key={api_key}&id={id}
+GET /getRelation?key={api_key}&id={uid}
 ```
 ```json
 {
@@ -267,4 +267,56 @@ GET /getRelation?key={api_key}&id={id}
 POST /changeAvatar?key={api_key}&id={id}&image={image_id}
 ```
 ```text
+```
+
+#### Getting user ranking
+```html
+GET /getRank?key={api_key}&id={id}
+```
+```java
+x: int // -1 when null or error
+```
+
+#### Change user ranking
+```html
+POST /changeAvatar?key={api_key}&id={id}&newrank={newrank}
+```
+```text
+```
+
+#### Get the Top10 users
+```html
+GET /topUsers?key={api_key}
+```
+```json
+[
+  {
+    "id": 1,
+    "userid": 1,
+    "username": "dubsky",
+    "bio": "I am root",
+    "gender": null,
+    "race": null,
+    "friendly": 0,
+    "height": 0,
+    "weight": 0,
+    "avatar": "{\"image\": \"5\"}",
+    "images": "{\"image\": \"8\"}",
+    "ranking": 1
+  },
+  {
+    "id": 2,
+    "userid": 2,
+    "username": "alesia",
+    "bio": null,
+    "gender": null,
+    "race": null,
+    "friendly": 0,
+    "height": 0,
+    "weight": 0,
+    "avatar": "{\"image\": \"9\"}",
+    "images": null,
+    "ranking": 2
+  }
+]
 ```
