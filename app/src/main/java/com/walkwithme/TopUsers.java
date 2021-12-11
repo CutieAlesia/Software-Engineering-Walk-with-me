@@ -58,10 +58,9 @@ public class TopUsers extends Fragment {
                         TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
 
         getTopUser(tableLayout, rowParams);
-
     }
 
-    public void getTopUser(TableLayout tableLayout, TableRow.LayoutParams rowParams){
+    public void getTopUser(TableLayout tableLayout, TableRow.LayoutParams rowParams) {
 
         RequestQueue queue = Volley.newRequestQueue(getContext());
         String url = MainActivity.url + "info/TopUser?key=" + MainActivity.apiKey;
@@ -76,7 +75,7 @@ public class TopUsers extends Fragment {
                                 if (response != null) {
                                     try {
                                         JSONArray topUsers = response.getJSONArray("topUsers");
-                                        for(int i = 0; i < topUsers.length(); i++){
+                                        for (int i = 0; i < topUsers.length(); i++) {
                                             JSONObject topUser = topUsers.getJSONObject(i);
                                             loadUserInfo(tableLayout, rowParams, topUser);
                                         }
@@ -100,13 +99,14 @@ public class TopUsers extends Fragment {
         queue.add(jsonObjectRequest);
     }
 
-    public void loadUserInfo(TableLayout tableLayout, TableRow.LayoutParams rowParams, JSONObject jsonObject){
+    public void loadUserInfo(
+            TableLayout tableLayout, TableRow.LayoutParams rowParams, JSONObject jsonObject) {
         tRow = new TableRow(getContext());
         imageView = new ImageView(getContext());
         JSONObject avatarJson;
         String name;
         int rank;
-        try{
+        try {
             name = jsonObject.getString("username");
             rank = jsonObject.getInt("rank");
             avatarJson = new JSONObject(jsonObject.getString("avatar"));
@@ -121,7 +121,6 @@ public class TopUsers extends Fragment {
         } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void loadAvatar(JSONObject response) throws IOException, JSONException {
@@ -132,6 +131,7 @@ public class TopUsers extends Fragment {
 
         new DownloadImageTask(imageView).execute(imageURL);
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
