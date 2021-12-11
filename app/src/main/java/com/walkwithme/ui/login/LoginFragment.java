@@ -38,8 +38,6 @@ public class LoginFragment extends Fragment {
     private FragmentLoginBinding binding;
     private static final String TAG = "LoginFragment";
 
-
-
     @Nullable
     @Override
     public View onCreateView(
@@ -105,8 +103,11 @@ public class LoginFragment extends Fragment {
                                             public void onErrorResponse(VolleyError error) {
                                                 unsuccessful.setVisibility(View.VISIBLE);
                                                 VolleyLog.d(TAG, "Error: " + error.getMessage());
-                                                Toast.makeText(getContext(), error.getMessage(),
-                                                        Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(
+                                                                getContext(),
+                                                                error.getMessage(),
+                                                                Toast.LENGTH_SHORT)
+                                                        .show();
                                             }
                                         });
                         queue.add(stringRequest);
@@ -137,7 +138,7 @@ public class LoginFragment extends Fragment {
         }
     }
 
-    public void userLogin(){
+    public void userLogin() {
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;
         final TextView unsuccessful = binding.success;
@@ -175,13 +176,11 @@ public class LoginFragment extends Fragment {
                                         if (response.length() > 0) {
                                             int uId = response.getInt("id");
                                             MainActivity.setLoggedInUserId(uId);
-                                            NavHostFragment.findNavController(
-                                                    LoginFragment.this)
+                                            NavHostFragment.findNavController(LoginFragment.this)
                                                     .navigate(
                                                             R.id.action_loginFragment_to_FirstFragment);
                                         } else {
-                                            unsuccessful.setVisibility(
-                                                    View.VISIBLE);
+                                            unsuccessful.setVisibility(View.VISIBLE);
                                         }
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -197,8 +196,8 @@ public class LoginFragment extends Fragment {
                             public void onErrorResponse(VolleyError error) {
                                 unsuccessful.setVisibility(View.VISIBLE);
                                 VolleyLog.d(TAG, "Error: " + error.getMessage());
-                                Toast.makeText(getContext(), error.getMessage(),
-                                Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT)
+                                        .show();
                                 // hide the progress dialog
                             }
                         });

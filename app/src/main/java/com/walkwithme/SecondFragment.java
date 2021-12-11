@@ -46,7 +46,6 @@ public class SecondFragment extends Fragment {
     TextView userInfoView;
     TextView preferencesView;
 
-
     public SecondFragment() throws IOException {}
 
     @Override
@@ -78,10 +77,19 @@ public class SecondFragment extends Fragment {
                 });
     }
 
-    public void likeDislike(int likeDislike){
+    public void likeDislike(int likeDislike) {
         String url;
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        url = MainActivity.url + "relations/changeLike?key=" + MainActivity.apiKey + "&id=" + MainActivity.getLoggedInUserId()+"&id2="+randomUId+"&like="+likeDislike;
+        url =
+                MainActivity.url
+                        + "relations/changeLike?key="
+                        + MainActivity.apiKey
+                        + "&id="
+                        + MainActivity.getLoggedInUserId()
+                        + "&id2="
+                        + randomUId
+                        + "&like="
+                        + likeDislike;
         StringRequest stringRequest =
                 new StringRequest(
                         Request.Method.POST,
@@ -89,7 +97,7 @@ public class SecondFragment extends Fragment {
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                    updateViewData();
+                                updateViewData();
                             }
                         },
                         new Response.ErrorListener() {
@@ -108,8 +116,12 @@ public class SecondFragment extends Fragment {
         String url;
         RequestQueue queue = Volley.newRequestQueue(getContext());
 
-
-        url = MainActivity.url + "user/getRandom?key=" + MainActivity.apiKey + "&first=" + MainActivity.getLoggedInUserId();
+        url =
+                MainActivity.url
+                        + "user/getRandom?key="
+                        + MainActivity.apiKey
+                        + "&first="
+                        + MainActivity.getLoggedInUserId();
         JsonObjectRequest jsonObjectRequestRandomId =
                 new JsonObjectRequest(
                         Request.Method.GET,
@@ -141,9 +153,10 @@ public class SecondFragment extends Fragment {
         queue.add(jsonObjectRequestRandomId);
     }
 
-    public void onGetRandomSuccess(){
+    public void onGetRandomSuccess() {
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String url = MainActivity.url + "info/getUser?key=" + MainActivity.apiKey + "&id=" + randomUId;
+        String url =
+                MainActivity.url + "info/getUser?key=" + MainActivity.apiKey + "&id=" + randomUId;
         JsonObjectRequest jsonObjectRequest =
                 new JsonObjectRequest(
                         Request.Method.GET,
