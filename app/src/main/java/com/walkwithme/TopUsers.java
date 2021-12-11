@@ -19,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.walkwithme.databinding.FragmentTopUsersBinding;
 
@@ -64,18 +65,18 @@ public class TopUsers extends Fragment {
     public void getTopUser(TableLayout tableLayout, TableRow.LayoutParams rowParams){
 
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String url = MainActivity.url + "info/TopUser?key=" + MainActivity.apiKey;
-        JsonObjectRequest jsonObjectRequest =
-                new JsonObjectRequest(
+        String url = MainActivity.url + "info/topUsers?key=" + MainActivity.apiKey;
+        StringRequest stringRequest =
+                new StringRequest(
                         Request.Method.GET,
                         url,
-                        null,
-                        new Response.Listener<JSONObject>() {
+                        new Response.Listener<String>() {
                             @Override
-                            public void onResponse(JSONObject response) {
+                            public void onResponse(String response) {
                                 if (response != null) {
                                     try {
-                                        JSONArray topUsers = response.getJSONArray("topUsers");
+                                        JSONArray topUsers = new JSONArray(response);
+
                                         for(int i = 0; i < topUsers.length(); i++){
                                             JSONObject topUser = topUsers.getJSONObject(i);
                                             loadUserInfo(tableLayout, rowParams, topUser);
@@ -97,10 +98,10 @@ public class TopUsers extends Fragment {
                             }
                         });
 
-        queue.add(jsonObjectRequest);
+        queue.add(stringRequest);
     }
 
-    public void loadUserInfo(TableLayout tableLayout, TableRow.LayoutParams rowParams, JSONObject jsonObject){
+    public void loadUserInfo(@NonNull TableLayout tableLayout, TableRow.LayoutParams rowParams, @NonNull JSONObject jsonObject){
         tRow = new TableRow(getContext());
         imageView = new ImageView(getContext());
         JSONObject avatarJson;
@@ -108,7 +109,7 @@ public class TopUsers extends Fragment {
         int rank;
         try{
             name = jsonObject.getString("username");
-            rank = jsonObject.getInt("rank");
+            rank = jsonObject.getInt("ranking");
             avatarJson = new JSONObject(jsonObject.getString("avatar"));
             loadAvatar(avatarJson);
             tRow.addView(imageView, 350, 350);
@@ -124,7 +125,7 @@ public class TopUsers extends Fragment {
 
     }
 
-    public void loadAvatar(JSONObject response) throws IOException, JSONException {
+    public void loadAvatar(@NonNull JSONObject response) throws IOException, JSONException {
 
         String imageURL =
                 "http://185.194.217.213:8080/resources/" + response.getString("image") + ".jpg";
