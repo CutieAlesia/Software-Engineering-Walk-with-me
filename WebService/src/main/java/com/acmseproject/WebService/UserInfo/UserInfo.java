@@ -34,7 +34,14 @@ public class UserInfo {
         this.username = username;
     }
 
-    public UserInfo(int id, int userid, String username, int friendly, int height, int weight, int ranking) {
+    public UserInfo(
+            int id,
+            int userid,
+            String username,
+            int friendly,
+            int height,
+            int weight,
+            int ranking) {
         this.id = id;
         this.userid = userid;
         this.username = username;
@@ -46,20 +53,38 @@ public class UserInfo {
 
     @Override
     public String toString() {
-        return "UserInfo{" +
-                "id=" + id +
-                ", userid=" + userid +
-                ", username='" + username + '\'' +
-                ", bio='" + bio + '\'' +
-                ", gender='" + gender + '\'' +
-                ", race='" + race + '\'' +
-                ", friendly=" + friendly +
-                ", height=" + height +
-                ", weight=" + weight +
-                ", avatar='" + avatar + '\'' +
-                ", images='" + images + '\'' +
-                ", ranking=" + ranking +
-                '}';
+        return "UserInfo{"
+                + "id="
+                + id
+                + ", userid="
+                + userid
+                + ", username='"
+                + username
+                + '\''
+                + ", bio='"
+                + bio
+                + '\''
+                + ", gender='"
+                + gender
+                + '\''
+                + ", race='"
+                + race
+                + '\''
+                + ", friendly="
+                + friendly
+                + ", height="
+                + height
+                + ", weight="
+                + weight
+                + ", avatar='"
+                + avatar
+                + '\''
+                + ", images='"
+                + images
+                + '\''
+                + ", ranking="
+                + ranking
+                + '}';
     }
 
     public int getRanking() {

@@ -72,7 +72,6 @@ public class UserInfoController {
         }
     }
 
-
     /**
      * GET-Method to receive a users ranking
      *
