@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +19,9 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.walkwithme.MainActivity;
 import com.walkwithme.databinding.FragmentLoginBinding;
@@ -37,6 +38,8 @@ public class LoginFragment extends Fragment {
     private FragmentLoginBinding binding;
     private static final String TAG = "LoginFragment";
 
+
+
     @Nullable
     @Override
     public View onCreateView(
@@ -51,13 +54,11 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;
+        final TextView unsuccessful = binding.success;
         final Button loginButton = binding.login;
         final Button registerButton = binding.register;
-        final ProgressBar loadingProgressBar = binding.loading;
-        final TextView unsuccessful = binding.success;
 
         unsuccessful.setVisibility(View.GONE);
 
@@ -65,72 +66,7 @@ public class LoginFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
-                        RequestQueue queue = Volley.newRequestQueue(getContext());
-                        String url = "";
-                        if (patternMatches(usernameEditText.getText().toString())) {
-                            url =
-                                    MainActivity.url
-                                            + "user/loginByEmail?key="
-                                            + MainActivity.apiKey
-                                            + "&email="
-                                            + usernameEditText.getText().toString()
-                                            + "&password="
-                                            + passwordEditText.getText().toString();
-                        } else {
-                            url =
-                                    MainActivity.url
-                                            + "user/loginByUsername?key="
-                                            + MainActivity.apiKey
-                                            + "&username="
-                                            + usernameEditText.getText().toString()
-                                            + "&password="
-                                            + passwordEditText.getText().toString();
-                        }
-                        JsonObjectRequest jsonObjectRequest =
-                                new JsonObjectRequest(
-                                        Request.Method.GET,
-                                        url,
-                                        null,
-                                        new Response.Listener<JSONObject>() {
-                                            @Override
-                                            public void onResponse(JSONObject response) {
-                                                if (response != null) {
-                                                    try {
-                                                        if (response.length() > 0) {
-                                                            int uId = response.getInt("id");
-                                                            MainActivity.setLoggedInUserId(uId);
-                                                            NavHostFragment.findNavController(
-                                                                            LoginFragment.this)
-                                                                    .navigate(
-                                                                            R.id.action_loginFragment_to_FirstFragment);
-                                                        } else {
-                                                            unsuccessful.setVisibility(
-                                                                    View.VISIBLE);
-                                                        }
-                                                    } catch (JSONException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                } else {
-                                                    unsuccessful.setVisibility(View.VISIBLE);
-                                                }
-                                            }
-                                        },
-                                        new Response.ErrorListener() {
-
-                                            @Override
-                                            public void onErrorResponse(VolleyError error) {
-                                                unsuccessful.setVisibility(View.VISIBLE);
-                                                /**
-                                                 * VolleyLog.d(TAG, "Error: " + error.getMessage());
-                                                 * Toast.makeText(getContext(), error.getMessage(),
-                                                 * Toast.LENGTH_SHORT).show();*
-                                                 */
-                                                // hide the progress dialog
-                                            }
-                                        });
-
-                        queue.add(jsonObjectRequest);
+                        userLogin();
                     }
                 });
 
@@ -149,30 +85,15 @@ public class LoginFragment extends Fragment {
                                         + "&password="
                                         + passwordEditText.getText().toString();
 
-                        JsonObjectRequest jsonObjectRequest =
-                                new JsonObjectRequest(
+                        StringRequest stringRequest =
+                                new StringRequest(
                                         Request.Method.POST,
                                         url,
-                                        null,
-                                        new Response.Listener<JSONObject>() {
+                                        new Response.Listener<String>() {
                                             @Override
-                                            public void onResponse(JSONObject response) {
-                                                if (response != null) {
-                                                    try {
-                                                        if (response.length() > 0) {
-                                                            int uId = response.getInt("id");
-                                                            MainActivity.setLoggedInUserId(uId);
-                                                            NavHostFragment.findNavController(
-                                                                            LoginFragment.this)
-                                                                    .navigate(
-                                                                            R.id.action_loginFragment_to_FirstFragment);
-                                                        } else {
-                                                            unsuccessful.setVisibility(
-                                                                    View.VISIBLE);
-                                                        }
-                                                    } catch (JSONException e) {
-                                                        e.printStackTrace();
-                                                    }
+                                            public void onResponse(String response) {
+                                                if (response.equals("200")) {
+                                                    userLogin();
                                                 } else {
                                                     unsuccessful.setVisibility(View.VISIBLE);
                                                 }
@@ -183,81 +104,12 @@ public class LoginFragment extends Fragment {
                                             @Override
                                             public void onErrorResponse(VolleyError error) {
                                                 unsuccessful.setVisibility(View.VISIBLE);
-                                                /**
-                                                 * VolleyLog.d(TAG, "Error: " + error.getMessage());
-                                                 * Toast.makeText(getContext(), error.getMessage(),
-                                                 * Toast.LENGTH_SHORT).show();*
-                                                 */
-                                                // hide the progress dialog
+                                                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                                                Toast.makeText(getContext(), error.getMessage(),
+                                                        Toast.LENGTH_SHORT).show();
                                             }
                                         });
-                        queue.add(jsonObjectRequest);
-
-                        loginButton.callOnClick();
-
-                        url = "";
-                        if (patternMatches(usernameEditText.getText().toString())) {
-                            url =
-                                    MainActivity.url
-                                            + "user/loginByEmail?key="
-                                            + MainActivity.apiKey
-                                            + "&email="
-                                            + usernameEditText.getText().toString()
-                                            + "&password="
-                                            + passwordEditText.getText().toString();
-                        } else {
-                            url =
-                                    MainActivity.url
-                                            + "user/loginByUsername?key="
-                                            + MainActivity.apiKey
-                                            + "&username="
-                                            + usernameEditText.getText().toString()
-                                            + "&password="
-                                            + passwordEditText.getText().toString();
-                        }
-                        JsonObjectRequest jsonObjectRequest2 =
-                                new JsonObjectRequest(
-                                        Request.Method.GET,
-                                        url,
-                                        null,
-                                        new Response.Listener<JSONObject>() {
-                                            @Override
-                                            public void onResponse(JSONObject response) {
-                                                if (response != null) {
-                                                    try {
-                                                        if (response.length() > 0) {
-                                                            int uId = response.getInt("id");
-                                                            MainActivity.setLoggedInUserId(uId);
-                                                            NavHostFragment.findNavController(
-                                                                            LoginFragment.this)
-                                                                    .navigate(
-                                                                            R.id.action_loginFragment_to_FirstFragment);
-                                                        } else {
-                                                            unsuccessful.setVisibility(
-                                                                    View.VISIBLE);
-                                                        }
-                                                    } catch (JSONException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                } else {
-                                                    unsuccessful.setVisibility(View.VISIBLE);
-                                                }
-                                            }
-                                        },
-                                        new Response.ErrorListener() {
-
-                                            @Override
-                                            public void onErrorResponse(VolleyError error) {
-                                                unsuccessful.setVisibility(View.VISIBLE);
-                                                /**
-                                                 * VolleyLog.d(TAG, "Error: " + error.getMessage());
-                                                 * Toast.makeText(getContext(), error.getMessage(),
-                                                 * Toast.LENGTH_SHORT).show();*
-                                                 */
-                                                // hide the progress dialog
-                                            }
-                                        });
-                        queue.add(jsonObjectRequest2);
+                        queue.add(stringRequest);
                     }
                 });
     }
@@ -283,6 +135,75 @@ public class LoginFragment extends Fragment {
             Toast.makeText(getContext().getApplicationContext(), errorString, Toast.LENGTH_LONG)
                     .show();
         }
+    }
+
+    public void userLogin(){
+        final EditText usernameEditText = binding.username;
+        final EditText passwordEditText = binding.password;
+        final TextView unsuccessful = binding.success;
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        String url = "";
+        if (patternMatches(usernameEditText.getText().toString())) {
+            url =
+                    MainActivity.url
+                            + "user/loginByEmail?key="
+                            + MainActivity.apiKey
+                            + "&email="
+                            + usernameEditText.getText().toString()
+                            + "&password="
+                            + passwordEditText.getText().toString();
+        } else {
+            url =
+                    MainActivity.url
+                            + "user/loginByUsername?key="
+                            + MainActivity.apiKey
+                            + "&username="
+                            + usernameEditText.getText().toString()
+                            + "&password="
+                            + passwordEditText.getText().toString();
+        }
+        JsonObjectRequest jsonObjectRequest =
+                new JsonObjectRequest(
+                        Request.Method.GET,
+                        url,
+                        null,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                if (response != null) {
+                                    try {
+                                        if (response.length() > 0) {
+                                            int uId = response.getInt("id");
+                                            MainActivity.setLoggedInUserId(uId);
+                                            NavHostFragment.findNavController(
+                                                    LoginFragment.this)
+                                                    .navigate(
+                                                            R.id.action_loginFragment_to_FirstFragment);
+                                        } else {
+                                            unsuccessful.setVisibility(
+                                                    View.VISIBLE);
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                } else {
+                                    unsuccessful.setVisibility(View.VISIBLE);
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                unsuccessful.setVisibility(View.VISIBLE);
+                                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                                Toast.makeText(getContext(), error.getMessage(),
+                                Toast.LENGTH_SHORT).show();
+                                // hide the progress dialog
+                            }
+                        });
+
+        queue.add(jsonObjectRequest);
     }
 
     @Override

@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.walkwithme.databinding.FragmentSecondBinding;
 
@@ -35,15 +36,16 @@ public class SecondFragment extends Fragment {
     private static final int IO_BUFFER_SIZE = Integer.MAX_VALUE;
     private FragmentSecondBinding binding;
     ImageView previewImages;
-
     ArrayList<String> values = new ArrayList<>();
     ArrayList<String> imagesUrls = new ArrayList<>();
     ArrayList<Integer> images = new ArrayList<>();
     ImageView avatarView;
-    Integer uId;
+    static int randomUId;
+    static int uId;
     TextView userNameView;
     TextView userInfoView;
     TextView preferencesView;
+
 
     public SecondFragment() throws IOException {}
 
@@ -56,6 +58,8 @@ public class SecondFragment extends Fragment {
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        int dislike = 2;
+        int like = 1;
 
         super.onViewCreated(view, savedInstanceState);
 
@@ -65,18 +69,81 @@ public class SecondFragment extends Fragment {
         avatarView.setOnTouchListener(
                 new OnSwipeTouchListener(getContext()) {
                     public void onSwipeRight() {
-                        updateViewData();
+                        likeDislike(like);
                     }
 
                     public void onSwipeLeft() {
-                        updateViewData();
+                        likeDislike(dislike);
                     }
                 });
     }
 
-    public void updateViewData() {
+    public void likeDislike(int likeDislike){
+        String url;
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String url = MainActivity.url + "info/getUser?key=" + MainActivity.apiKey + "&id=" + 1;
+        url = MainActivity.url + "relations/changeLike?key=" + MainActivity.apiKey + "&id=" + MainActivity.getLoggedInUserId()+"&id2="+randomUId+"&like="+likeDislike;
+        StringRequest stringRequest =
+                new StringRequest(
+                        Request.Method.POST,
+                        url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                    updateViewData();
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT)
+                                        .show();
+                                // hide the progress dialog
+                            }
+                        });
+        queue.add(stringRequest);
+    }
+
+    public void updateViewData() {
+        String url;
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+
+
+        url = MainActivity.url + "user/getRandom?key=" + MainActivity.apiKey + "&first=" + MainActivity.getLoggedInUserId();
+        JsonObjectRequest jsonObjectRequestRandomId =
+                new JsonObjectRequest(
+                        Request.Method.GET,
+                        url,
+                        null,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                if (response != null) {
+                                    try {
+                                        randomUId = response.getInt("id");
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                onGetRandomSuccess();
+                            }
+                        },
+                        new Response.ErrorListener() {
+
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT)
+                                        .show();
+                                // hide the progress dialog
+                            }
+                        });
+        queue.add(jsonObjectRequestRandomId);
+    }
+
+    public void onGetRandomSuccess(){
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+        String url = MainActivity.url + "info/getUser?key=" + MainActivity.apiKey + "&id=" + randomUId;
         JsonObjectRequest jsonObjectRequest =
                 new JsonObjectRequest(
                         Request.Method.GET,
@@ -135,7 +202,6 @@ public class SecondFragment extends Fragment {
                         });
 
         queue.add(jsonObjectRequest);
-
         ListView lv = (ListView) getView().findViewById(R.id.previewList);
         ImageListAdapter adapter = new ImageListAdapter(getActivity(), values, imagesUrls);
         lv.setAdapter(adapter);
