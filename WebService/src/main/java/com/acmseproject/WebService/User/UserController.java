@@ -115,7 +115,7 @@ public class UserController {
         System.out.format("[Request] getRandom\n[Key] %s\n", key);
         if (Objects.equals(key, userRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
-            User neutralRandom = null;
+            User neutralRandom;
             try {
                 neutralRandom = userRepository.findById(userRepository.getRandom(first));
                 return neutralRandom;
@@ -201,7 +201,7 @@ public class UserController {
             System.out.format("[Verification] Valid\n");
             userRepository.save(new User(username, password));
             User tmpuser = userRepository.findByUsername(username);
-            userInfoRepository.save(new UserInfo(0, tmpuser.getId(), tmpuser.getUsername()));
+            userInfoRepository.save(new UserInfo(50, tmpuser.getId(), tmpuser.getUsername()));
             return "200";
         } else {
             return "400";

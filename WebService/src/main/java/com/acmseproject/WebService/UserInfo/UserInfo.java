@@ -24,6 +24,7 @@ public class UserInfo {
     private int weight;
     private String avatar;
     private String images;
+    private int ranking;
 
     public UserInfo() {}
 
@@ -33,49 +34,40 @@ public class UserInfo {
         this.username = username;
     }
 
-    public UserInfo(
-            int id, String bio, String gender, String race, int friendly, int height, int weight) {
+    public UserInfo(int id, int userid, String username, int friendly, int height, int weight, int ranking) {
         this.id = id;
-        this.bio = bio;
-        this.gender = gender;
-        this.race = race;
+        this.userid = userid;
+        this.username = username;
         this.friendly = friendly;
         this.height = height;
         this.weight = weight;
+        this.ranking = ranking;
     }
 
     @Override
     public String toString() {
-        return "UserInfo{"
-                + "id="
-                + id
-                + ", userid="
-                + userid
-                + ", username='"
-                + username
-                + '\''
-                + ", bio='"
-                + bio
-                + '\''
-                + ", gender='"
-                + gender
-                + '\''
-                + ", race='"
-                + race
-                + '\''
-                + ", friendly="
-                + friendly
-                + ", height="
-                + height
-                + ", weight="
-                + weight
-                + ", avatar='"
-                + avatar
-                + '\''
-                + ", images='"
-                + images
-                + '\''
-                + '}';
+        return "UserInfo{" +
+                "id=" + id +
+                ", userid=" + userid +
+                ", username='" + username + '\'' +
+                ", bio='" + bio + '\'' +
+                ", gender='" + gender + '\'' +
+                ", race='" + race + '\'' +
+                ", friendly=" + friendly +
+                ", height=" + height +
+                ", weight=" + weight +
+                ", avatar='" + avatar + '\'' +
+                ", images='" + images + '\'' +
+                ", ranking=" + ranking +
+                '}';
+    }
+
+    public int getRanking() {
+        return ranking;
+    }
+
+    public void setRanking(int ranking) {
+        this.ranking = ranking;
     }
 
     public String getAvatar() {

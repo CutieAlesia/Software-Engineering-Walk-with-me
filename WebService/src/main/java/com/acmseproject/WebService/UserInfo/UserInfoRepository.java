@@ -7,8 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 
-import javax.transaction.Transactional;
-
 /**
  * @author Dubsky
  * @version 1.0
@@ -18,9 +16,19 @@ public interface UserInfoRepository extends JpaRepository<UserInfo, Integer> {
 
     UserInfo findByUserid(int userid);
 
+    @Query(value = "SELECT walkwithme.user_info.ranking FROM walkwithme.user_info WHERE walkwithme.user_info.userid = :id", nativeQuery = true)
+    int getRank(int id);
+
     @Modifying(clearAutomatically = true)
     @Query(
-            value = "UPDATE walkwithme.user_info SET avatar = :image WHERE id = :id",
+            value = "UPDATE walkwithme.user_info SET walkwithme.user_info.ranking = :newRank WHERE userid = :id",
+            nativeQuery = true)
+    @Transactional
+    void changeRank(int id, int newRank);
+
+    @Modifying(clearAutomatically = true)
+    @Query(
+            value = "UPDATE walkwithme.user_info SET avatar = :image WHERE userid = :id",
             nativeQuery = true)
     @Transactional
     void changeAvatar(int id, String image);

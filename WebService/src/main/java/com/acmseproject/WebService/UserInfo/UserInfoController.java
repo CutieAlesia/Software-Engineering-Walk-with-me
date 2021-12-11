@@ -1,6 +1,7 @@
 package com.acmseproject.WebService.UserInfo;
 
 import org.json.JSONObject;
+import org.springframework.aop.AopInvocationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,6 +57,46 @@ public class UserInfoController {
         } else {
             System.out.format("[Verification] Failed\n");
             return null;
+        }
+    }
+
+    /**
+     * GET-Method to receive a users ranking
+     *
+     * @param key API-Key for authentication
+     * @param id User ID
+     */
+    @GetMapping(path = "/getRank")
+    public int getRank(@RequestParam String key, @RequestParam int id) {
+        System.out.format("[Request] getRank\n[Key] %s\n", key);
+        if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            try {
+                return userInfoRepository.getRank(id);
+            } catch (AopInvocationException e) {
+                System.out.println("[Response -1] User has null rank");
+                return -1;
+            }
+        } else {
+            System.out.format("[Verification] Failed\n");
+            return -1;
+        }
+    }
+
+    /**
+     * POST-Method to change a user ranking
+     *
+     * @param key API-Key for authentication
+     * @param id User ID connected to the change
+     * @param newrank New ranking
+     */
+    @PostMapping(path = "/changeRank")
+    public void changeRank(
+            @RequestParam String key, @RequestParam int id, @RequestParam int newrank) {
+        System.out.format("[Request] changeRank\n[Key] %s\n", key);
+        if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            userInfoRepository.changeRank(id, newrank);
         }
     }
 
