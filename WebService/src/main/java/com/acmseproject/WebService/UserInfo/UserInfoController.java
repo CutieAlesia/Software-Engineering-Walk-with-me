@@ -60,6 +60,19 @@ public class UserInfoController {
         }
     }
 
+    @GetMapping(path = "/topUsers")
+    public List<UserInfo> topUsers(@RequestParam String key) {
+        System.out.format("[Request] topUsers\n[Key] %s\n", key);
+        if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            return userInfoRepository.topUsers();
+        } else {
+            System.out.format("[Verification] Failed\n");
+            return null;
+        }
+    }
+
+
     /**
      * GET-Method to receive a users ranking
      *

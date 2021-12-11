@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * @author Dubsky
@@ -18,6 +19,12 @@ public interface UserInfoRepository extends JpaRepository<UserInfo, Integer> {
 
     @Query(value = "SELECT walkwithme.user_info.ranking FROM walkwithme.user_info WHERE walkwithme.user_info.userid = :id", nativeQuery = true)
     int getRank(int id);
+
+    @Query(value = "SELECT * FROM walkwithme.user_info\n" +
+            "WHERE ranking > 0 AND ranking < 11\n" +
+            "ORDER BY ranking\n" +
+            "LIMIT 10", nativeQuery = true)
+    List<UserInfo> topUsers();
 
     @Modifying(clearAutomatically = true)
     @Query(
