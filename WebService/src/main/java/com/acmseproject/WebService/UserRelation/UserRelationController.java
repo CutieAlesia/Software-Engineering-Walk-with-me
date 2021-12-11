@@ -11,6 +11,7 @@ import java.util.Objects;
  * @version 1.3
  */
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("api/v1/relations")
 public class UserRelationController {
 
@@ -73,10 +74,10 @@ public class UserRelationController {
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
             userRelationRepository.save(new UserRelation(id, id2, 0, 0));
-            return "done";
+            return "200";
         } else {
             System.out.format("[Verification] Failed\n");
-            return "error";
+            return "400";
         }
     }
 
@@ -86,23 +87,29 @@ public class UserRelationController {
      * @param key API-Key for authentication
      * @param id First User ID
      * @param id2 Second User ID
+     * @param like Like mode
      */
-    @PostMapping(path = "/addLike")
-    public String addLike(@RequestParam String key, @RequestParam int id, @RequestParam int id2) {
-        System.out.format("[Request] addLike\n[Key] %s\n", key);
+    @PostMapping(path = "/changeLike")
+    public String changeLike(
+            @RequestParam String key,
+            @RequestParam int id,
+            @RequestParam int id2,
+            @RequestParam int like) {
+        System.out.format("[Request] changeLike\n[Key] %s\n", key);
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
-            userRelationRepository.addLike(id, id2);
-            return "done";
+            userRelationRepository.changeLike(id, id2, like);
+            return "200";
         } else {
             System.out.format("[Verification] Failed\n");
-            return "error";
+            return "400";
         }
     }
 
     /**
      * POST-Method to remove a like
      *
+     * @deprecated This method is no longer needed as of v2.1 - Replaced by the changeLike method
      * @param key API-Key for authentication
      * @param id First User ID
      * @param id2 Second User ID
@@ -114,10 +121,10 @@ public class UserRelationController {
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
             userRelationRepository.removeLike(id, id2);
-            return "done";
+            return "200";
         } else {
             System.out.format("[Verification] Failed\n");
-            return "error";
+            return "400";
         }
     }
 
@@ -134,10 +141,10 @@ public class UserRelationController {
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
             userRelationRepository.addBlock(id, id2);
-            return "done";
+            return "200";
         } else {
             System.out.format("[Verification] Failed\n");
-            return "error";
+            return "400";
         }
     }
 
@@ -155,10 +162,10 @@ public class UserRelationController {
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
             userRelationRepository.removeBlock(id, id2);
-            return "done";
+            return "200";
         } else {
             System.out.format("[Verification] Failed\n");
-            return "error";
+            return "400";
         }
     }
 }

@@ -33,11 +33,11 @@ public interface UserRelationRepository extends JpaRepository<UserRelation, Inte
             value =
                     ""
                             + "UPDATE walkwithme.user_relation "
-                            + "SET liked = 1 "
+                            + "SET liked = :like "
                             + "WHERE first = :id "
                             + "AND second = :id2",
             nativeQuery = true)
-    void addLike(int id, int id2);
+    void changeLike(int id, int id2, int like);
 
     @Modifying
     @Transactional

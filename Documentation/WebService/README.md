@@ -14,7 +14,7 @@ ___
 ### API layout
 > /api/{version}/{module}/{function}?{api_key}{parameters}
 ___
-### User API (_/api/v1/users_)
+### User API (_/api/v1/user_)
 
 #### Login by username
 ```html
@@ -74,6 +74,19 @@ GET /getUsers?key={api_key}
   "password": "testPW",
   "email": "test@gmail.com",
   "create_time": null
+}
+```
+#### Getting a random user
+```html
+GET /getRandom?key={api_key}&first={userid}
+```
+```json
+{
+  "id": 2,
+  "username": "alesia",
+  "password": "pw74adadaca",
+  "email": null,
+  "create_time": "2021-12-01T23:00:23"
 }
 ```
 #### Find user by ID
