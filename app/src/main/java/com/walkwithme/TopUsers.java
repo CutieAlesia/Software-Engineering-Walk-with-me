@@ -18,7 +18,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.walkwithme.databinding.FragmentTopUsersBinding;
@@ -59,10 +58,9 @@ public class TopUsers extends Fragment {
                         TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
 
         getTopUser(tableLayout, rowParams);
-
     }
 
-    public void getTopUser(TableLayout tableLayout, TableRow.LayoutParams rowParams){
+    public void getTopUser(TableLayout tableLayout, TableRow.LayoutParams rowParams) {
 
         RequestQueue queue = Volley.newRequestQueue(getContext());
         String url = MainActivity.url + "info/topUsers?key=" + MainActivity.apiKey;
@@ -77,7 +75,7 @@ public class TopUsers extends Fragment {
                                     try {
                                         JSONArray topUsers = new JSONArray(response);
 
-                                        for(int i = 0; i < topUsers.length(); i++){
+                                        for (int i = 0; i < topUsers.length(); i++) {
                                             JSONObject topUser = topUsers.getJSONObject(i);
                                             loadUserInfo(tableLayout, rowParams, topUser);
                                         }
@@ -101,13 +99,16 @@ public class TopUsers extends Fragment {
         queue.add(stringRequest);
     }
 
-    public void loadUserInfo(@NonNull TableLayout tableLayout, TableRow.LayoutParams rowParams, @NonNull JSONObject jsonObject){
+    public void loadUserInfo(
+            @NonNull TableLayout tableLayout,
+            TableRow.LayoutParams rowParams,
+            @NonNull JSONObject jsonObject) {
         tRow = new TableRow(getContext());
         imageView = new ImageView(getContext());
         JSONObject avatarJson;
         String name;
         int rank;
-        try{
+        try {
             name = jsonObject.getString("username");
             rank = jsonObject.getInt("ranking");
             avatarJson = new JSONObject(jsonObject.getString("avatar"));
@@ -122,7 +123,6 @@ public class TopUsers extends Fragment {
         } catch (JSONException | IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public void loadAvatar(@NonNull JSONObject response) throws IOException, JSONException {
@@ -133,6 +133,7 @@ public class TopUsers extends Fragment {
 
         new DownloadImageTask(imageView).execute(imageURL);
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
