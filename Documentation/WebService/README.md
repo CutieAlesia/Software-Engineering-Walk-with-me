@@ -212,7 +212,7 @@ POST /removeBlock?key={api_key}&id={uid}&id2={uid2}
 
 #### Getting all available user information
 ```html
-GET /getRelations?key={api_key}
+GET /getUsers?key={api_key}
 ```
 ```json
 {
@@ -244,7 +244,7 @@ GET /getRelations?key={api_key}
 ```
 #### Getting specific user information
 ```html
-GET /getRelation?key={api_key}&id={uid}
+GET /getUser?key={api_key}&id={uid}
 ```
 ```json
 {
