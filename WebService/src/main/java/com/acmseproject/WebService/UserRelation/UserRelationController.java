@@ -68,8 +68,7 @@ public class UserRelationController {
      * @return List of relations where users liked each others
      */
     @GetMapping(path = "/getMatches")
-    public List<UserRelation> getMatches(
-            @RequestParam String key, @RequestParam int id) {
+    public List<UserRelation> getMatches(@RequestParam String key, @RequestParam int id) {
         System.out.format("[Request] getMatches\n[Key] %s\n", key);
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
