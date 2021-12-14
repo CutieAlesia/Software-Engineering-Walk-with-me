@@ -61,6 +61,26 @@ public class UserRelationController {
     }
 
     /**
+     * GET-Method for all mutual like relations for a specific user
+     *
+     * @param key API-Key for authentication
+     * @param id User ID to search by
+     * @return List of relations where users liked each others
+     */
+    @GetMapping(path = "/getMatches")
+    public List<UserRelation> getMatches(
+            @RequestParam String key, @RequestParam int id) {
+        System.out.format("[Request] getMatches\n[Key] %s\n", key);
+        if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            return userRelationRepository.getMatches(id);
+        } else {
+            System.out.format("[Verification] Failed\n");
+            return null;
+        }
+    }
+
+    /**
      * POST-Method to add a new user relation
      *
      * @param key API-Key for authentication
