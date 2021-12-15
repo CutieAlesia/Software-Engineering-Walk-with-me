@@ -1,16 +1,12 @@
 package com.walkwithme;
 
-import static com.walkwithme.databinding.FragmentTopUsersBinding.inflate;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TableRow;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -93,29 +89,25 @@ public class TopUsers extends Fragment {
                         });
 
         queue.add(stringRequest);
-
-
-
-
-
     }
 
-    public void updateView(){
+    public void updateView() {
         ListView lv = (ListView) getView().findViewById(R.id.topUsers_listview);
         FriendListAdapter adapter = new FriendListAdapter(getActivity(), names, avatars, ids);
         lv.setAdapter(adapter);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                TopUsersDirections.ActionTopUsersToProfile action = TopUsersDirections.actionTopUsersToProfile();
+        lv.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(
+                            AdapterView<?> parent, View view, int position, long id) {
+                        TopUsersDirections.ActionTopUsersToProfile action =
+                                TopUsersDirections.actionTopUsersToProfile();
 
-
-                int targetId = (int) view.getTag();
-                action.setId(targetId);
-                NavHostFragment.findNavController(TopUsers.this)
-                        .navigate(action);
-            }
-        });
+                        int targetId = (int) view.getTag();
+                        action.setId(targetId);
+                        NavHostFragment.findNavController(TopUsers.this).navigate(action);
+                    }
+                });
     }
 
     public void loadUserInfo(@NonNull JSONObject jsonObject) {
@@ -125,20 +117,19 @@ public class TopUsers extends Fragment {
             ids.add(topUserId);
 
             String name = jsonObject.getString("username");
-            JSONObject avatarJson =
-                    new JSONObject(jsonObject.getString("avatar"));
+            JSONObject avatarJson = new JSONObject(jsonObject.getString("avatar"));
             String avatarURL =
-                    "http://185.194.217.213:8080/resources/" + avatarJson.getString("image") + ".jpg";
+                    "http://185.194.217.213:8080/resources/"
+                            + avatarJson.getString("image")
+                            + ".jpg";
             names.add(name);
             avatars.add(avatarURL);
             updateView();
-
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-
 
     @Override
     public void onDestroyView() {

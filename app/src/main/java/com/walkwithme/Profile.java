@@ -6,16 +6,13 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -27,7 +24,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.walkwithme.databinding.FragmentProfileBinding;
-import com.walkwithme.databinding.FragmentSecondBinding;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,17 +34,16 @@ import java.net.URL;
 import java.util.ArrayList;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link Profile} factory method to
- * create an instance of this fragment.
+ * A simple {@link Fragment} subclass. Use the {@link Profile} factory method to create an instance
+ * of this fragment.
  */
 public class Profile extends Fragment {
 
     private static final String TAG = "Swipe Fragment";
     private static final int IO_BUFFER_SIZE = Integer.MAX_VALUE;
     private FragmentProfileBinding binding;
-    final static int VOID = 0;
-    final static int LIKE = 1;
+    static final int VOID = 0;
+    static final int LIKE = 1;
     ImageView previewImages;
     ArrayList<String> values = new ArrayList<>();
     ArrayList<String> imagesUrls = new ArrayList<>();
@@ -94,77 +89,114 @@ public class Profile extends Fragment {
         preferencesView.setFocusableInTouchMode(false);
         preferencesView.setClickable(false);
         updateViewData();
-        if(MainActivity.getLoggedInUserId() == getuId()){
+        if (MainActivity.getLoggedInUserId() == getuId()) {
             binding.save.setVisibility(View.VISIBLE);
             binding.remove.setVisibility(View.GONE);
             binding.chat.setVisibility(View.GONE);
-            binding.save.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    saveChanges();
-                }
-            });
-        }else{
+            binding.save.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            saveChanges();
+                        }
+                    });
+        } else {
             userInfoView.setFocusable(false);
             userInfoView.setFocusableInTouchMode(false);
             userInfoView.setClickable(false);
 
-            if(isFriend()){
-                binding.remove.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        new AlertDialog.Builder(getContext())
-                                .setTitle("Remove friend?")
-                                .setMessage("Do you really want to remove this friend?")
-                                .setIcon(android.R.drawable.ic_dialog_alert)
-                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-                                        Toast.makeText(getContext(), "Removing Friend", Toast.LENGTH_SHORT).show();
-                                        removeAddFriend(VOID);
-                                    }})
-                                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int whichButton) {
+            if (isFriend()) {
+                binding.remove.setOnClickListener(
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                new AlertDialog.Builder(getContext())
+                                        .setTitle("Remove friend?")
+                                        .setMessage("Do you really want to remove this friend?")
+                                        .setIcon(android.R.drawable.ic_dialog_alert)
+                                        .setPositiveButton(
+                                                android.R.string.yes,
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(
+                                                            DialogInterface dialog,
+                                                            int whichButton) {
+                                                        Toast.makeText(
+                                                                        getContext(),
+                                                                        "Removing Friend",
+                                                                        Toast.LENGTH_SHORT)
+                                                                .show();
+                                                        removeAddFriend(VOID);
+                                                    }
+                                                })
+                                        .setNegativeButton(
+                                                android.R.string.no,
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(
+                                                            DialogInterface dialog,
+                                                            int whichButton) {}
+                                                })
+                                        .show();
+                            }
+                        });
 
-                                    }}).show();
-                    }
-                });
-
-            }else{
+            } else {
                 binding.remove.setText("Add");
-                binding.remove.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        new AlertDialog.Builder(getContext())
-                                .setTitle("Add friend?")
-                                .setMessage("Do you really want to add this person?")
-                                .setIcon(android.R.drawable.ic_dialog_alert)
-                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-                                        Toast.makeText(getContext(), "Adding Friend", Toast.LENGTH_SHORT).show();
-                                        removeAddFriend(LIKE);
-                                    }})
-                                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-
-                                    }}).show();
-                    }
-                });
+                binding.remove.setOnClickListener(
+                        new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                new AlertDialog.Builder(getContext())
+                                        .setTitle("Add friend?")
+                                        .setMessage("Do you really want to add this person?")
+                                        .setIcon(android.R.drawable.ic_dialog_alert)
+                                        .setPositiveButton(
+                                                android.R.string.yes,
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(
+                                                            DialogInterface dialog,
+                                                            int whichButton) {
+                                                        Toast.makeText(
+                                                                        getContext(),
+                                                                        "Adding Friend",
+                                                                        Toast.LENGTH_SHORT)
+                                                                .show();
+                                                        removeAddFriend(LIKE);
+                                                    }
+                                                })
+                                        .setNegativeButton(
+                                                android.R.string.no,
+                                                new DialogInterface.OnClickListener() {
+                                                    public void onClick(
+                                                            DialogInterface dialog,
+                                                            int whichButton) {}
+                                                })
+                                        .show();
+                            }
+                        });
             }
-            binding.chat.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    new AlertDialog.Builder(getContext())
-                            .setTitle("Not implemented yet.")
-                            .setMessage("This functionality is not yet implemented.")
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int whichButton) {
-                                }})
-                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int whichButton) {
-                                }}).show();
-                }
-            });
+            binding.chat.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            new AlertDialog.Builder(getContext())
+                                    .setTitle("Not implemented yet.")
+                                    .setMessage("This functionality is not yet implemented.")
+                                    .setIcon(android.R.drawable.ic_dialog_alert)
+                                    .setPositiveButton(
+                                            android.R.string.yes,
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(
+                                                        DialogInterface dialog, int whichButton) {}
+                                            })
+                                    .setNegativeButton(
+                                            android.R.string.no,
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(
+                                                        DialogInterface dialog, int whichButton) {}
+                                            })
+                                    .show();
+                        }
+                    });
         }
     }
 
@@ -172,7 +204,13 @@ public class Profile extends Fragment {
         final boolean[] friends = {false};
         RequestQueue queue = Volley.newRequestQueue(getContext());
         String url =
-                MainActivity.url + "relations/getRelation?key=" + MainActivity.apiKey + "&id="+MainActivity.getLoggedInUserId()+ "&id2="+ getuId();
+                MainActivity.url
+                        + "relations/getRelation?key="
+                        + MainActivity.apiKey
+                        + "&id="
+                        + MainActivity.getLoggedInUserId()
+                        + "&id2="
+                        + getuId();
         JsonObjectRequest jsonObjectRequest =
                 new JsonObjectRequest(
                         Request.Method.GET,
@@ -184,9 +222,9 @@ public class Profile extends Fragment {
                                 if (response != null) {
                                     try {
                                         int liked = response.getInt("liked");
-                                        if(liked == 1){
+                                        if (liked == 1) {
                                             friends[0] = true;
-                                        }else{
+                                        } else {
                                             friends[0] = false;
                                         }
                                     } catch (JSONException e) {
@@ -214,7 +252,16 @@ public class Profile extends Fragment {
     private void removeAddFriend(int change) {
 
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String url = MainActivity.url + "relations/changeLike?key=" + MainActivity.apiKey + "&id=" + MainActivity.getLoggedInUserId() +"&id2=" + getuId() +"&like="+change;
+        String url =
+                MainActivity.url
+                        + "relations/changeLike?key="
+                        + MainActivity.apiKey
+                        + "&id="
+                        + MainActivity.getLoggedInUserId()
+                        + "&id2="
+                        + getuId()
+                        + "&like="
+                        + change;
         StringRequest stringRequest =
                 new StringRequest(
                         Request.Method.POST,
@@ -223,9 +270,13 @@ public class Profile extends Fragment {
                             @Override
                             public void onResponse(String response) {
                                 if (response.equals("200")) {
-                                    Fragment frg = getFragmentManager().findFragmentByTag("profile");
-                                    getFragmentManager().beginTransaction().detach(frg).attach(frg).commit();
-
+                                    Fragment frg =
+                                            getFragmentManager().findFragmentByTag("profile");
+                                    getFragmentManager()
+                                            .beginTransaction()
+                                            .detach(frg)
+                                            .attach(frg)
+                                            .commit();
                                 }
                             }
                         },
@@ -246,7 +297,14 @@ public class Profile extends Fragment {
     private void saveChanges() {
 
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String url = MainActivity.url + "info/changeBio?key=" + MainActivity.apiKey + "&id=" + MainActivity.getLoggedInUserId() +"&newBio=" + userInfoView.getText();
+        String url =
+                MainActivity.url
+                        + "info/changeBio?key="
+                        + MainActivity.apiKey
+                        + "&id="
+                        + MainActivity.getLoggedInUserId()
+                        + "&newBio="
+                        + userInfoView.getText();
         StringRequest stringRequest =
                 new StringRequest(
                         Request.Method.POST,
@@ -255,9 +313,13 @@ public class Profile extends Fragment {
                             @Override
                             public void onResponse(String response) {
                                 if (response.equals("200")) {
-                                    Fragment frg = getFragmentManager().findFragmentByTag("profile");
-                                    getFragmentManager().beginTransaction().detach(frg).attach(frg).commit();
-
+                                    Fragment frg =
+                                            getFragmentManager().findFragmentByTag("profile");
+                                    getFragmentManager()
+                                            .beginTransaction()
+                                            .detach(frg)
+                                            .attach(frg)
+                                            .commit();
                                 }
                             }
                         },
@@ -273,8 +335,6 @@ public class Profile extends Fragment {
                         });
 
         queue.add(stringRequest);
-
-
     }
 
     public void updateViewData() {
@@ -333,7 +393,6 @@ public class Profile extends Fragment {
         ImageListAdapter adapter = new ImageListAdapter(getActivity(), values, imagesUrls);
         lv.setAdapter(adapter);
     }
-
 
     public void loadPreviewImages(JSONObject response) throws JSONException {
         values.clear();

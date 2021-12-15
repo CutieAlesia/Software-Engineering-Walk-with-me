@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -19,7 +18,10 @@ public class FriendListAdapter extends ArrayAdapter<String> {
     private ArrayList<String> mNames;
 
     public FriendListAdapter(
-            Activity context, ArrayList<String> listOfValues, ArrayList<String> images, ArrayList<Integer> ids) {
+            Activity context,
+            ArrayList<String> listOfValues,
+            ArrayList<String> images,
+            ArrayList<Integer> ids) {
         // The listOfValues is used when you make item click to get value
         // Each image must to have a text value
         super(context, R.layout.friendlist_item, listOfValues);

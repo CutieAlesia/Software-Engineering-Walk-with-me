@@ -5,10 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TableRow;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -58,7 +55,12 @@ public class Friends extends Fragment {
     public void getFriends() {
 
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String url = MainActivity.url + "relations/getMatches?key=" + MainActivity.apiKey + "&id=" +MainActivity.getLoggedInUserId();
+        String url =
+                MainActivity.url
+                        + "relations/getMatches?key="
+                        + MainActivity.apiKey
+                        + "&id="
+                        + MainActivity.getLoggedInUserId();
         StringRequest stringRequest =
                 new StringRequest(
                         Request.Method.GET,
@@ -92,39 +94,39 @@ public class Friends extends Fragment {
                         });
 
         queue.add(stringRequest);
-
-
-
-
-
     }
 
-    public void updateView(){
+    public void updateView() {
         ListView lv = (ListView) getView().findViewById(R.id.friend_listview);
         FriendListAdapter adapter = new FriendListAdapter(getActivity(), names, avatars, ids);
         lv.setAdapter(adapter);
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                FriendsDirections.ActionFriendsToProfile action = FriendsDirections.actionFriendsToProfile();
+        lv.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(
+                            AdapterView<?> parent, View view, int position, long id) {
+                        FriendsDirections.ActionFriendsToProfile action =
+                                FriendsDirections.actionFriendsToProfile();
 
-                int targetId = (int) view.getTag();
-                action.setId(targetId);
-                NavHostFragment.findNavController(Friends.this)
-                        .navigate(action);
-            }
-        });
+                        int targetId = (int) view.getTag();
+                        action.setId(targetId);
+                        NavHostFragment.findNavController(Friends.this).navigate(action);
+                    }
+                });
     }
 
     public void loadUserInfo(@NonNull JSONObject jsonObject) {
         try {
-        int friendId = jsonObject.getInt("second");
-        ids.add(friendId);
-
+            int friendId = jsonObject.getInt("second");
+            ids.add(friendId);
 
             RequestQueue queue = Volley.newRequestQueue(getContext());
             String url =
-                    MainActivity.url + "info/getUser?key=" + MainActivity.apiKey + "&id=" + friendId;
+                    MainActivity.url
+                            + "info/getUser?key="
+                            + MainActivity.apiKey
+                            + "&id="
+                            + friendId;
             JsonObjectRequest jsonObjectRequest =
                     new JsonObjectRequest(
                             Request.Method.GET,
@@ -139,7 +141,10 @@ public class Friends extends Fragment {
                                             JSONObject avatarJson =
                                                     new JSONObject(response.getString("avatar"));
                                             String avatarURL =
-                                                    "http://185.194.217.213:8080/resources/" + avatarJson.getString("image") + ".jpg";;
+                                                    "http://185.194.217.213:8080/resources/"
+                                                            + avatarJson.getString("image")
+                                                            + ".jpg";
+                                            ;
 
                                             names.add(name);
                                             avatars.add(avatarURL);
@@ -156,7 +161,10 @@ public class Friends extends Fragment {
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
                                     VolleyLog.d(TAG, "Error: " + error.getMessage());
-                                    Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT)
+                                    Toast.makeText(
+                                                    getContext(),
+                                                    error.getMessage(),
+                                                    Toast.LENGTH_SHORT)
                                             .show();
                                     // hide the progress dialog
                                 }
@@ -167,7 +175,6 @@ public class Friends extends Fragment {
             e.printStackTrace();
         }
     }
-
 
     @Override
     public void onDestroyView() {

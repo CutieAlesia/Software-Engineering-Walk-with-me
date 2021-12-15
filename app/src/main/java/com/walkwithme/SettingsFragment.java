@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
@@ -23,11 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.walkwithme.databinding.FragmentSettingsBinding;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.IOException;
 
 public class SettingsFragment extends Fragment {
 
@@ -41,11 +36,10 @@ public class SettingsFragment extends Fragment {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        SettingsFragmentDirections.ActionSettingsFragmentToProfile action = SettingsFragmentDirections.actionSettingsFragmentToProfile();
+                        SettingsFragmentDirections.ActionSettingsFragmentToProfile action =
+                                SettingsFragmentDirections.actionSettingsFragmentToProfile();
                         action.setId(MainActivity.getLoggedInUserId());
-                        NavHostFragment.findNavController(SettingsFragment.this)
-                                .navigate(action);
-
+                        NavHostFragment.findNavController(SettingsFragment.this).navigate(action);
                     }
                 });
 
@@ -75,23 +69,39 @@ public class SettingsFragment extends Fragment {
                                 .setTitle("Delete Profile?")
                                 .setMessage("Do you really want to delete your Profile?")
                                 .setIcon(android.R.drawable.ic_dialog_alert)
-                                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-                                        Toast.makeText(getContext(), "Deleting Profile...", Toast.LENGTH_SHORT).show();
-                                        deleteProfile();
-                                    }})
-                                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-
-                                    }}).show();
+                                .setPositiveButton(
+                                        android.R.string.yes,
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(
+                                                    DialogInterface dialog, int whichButton) {
+                                                Toast.makeText(
+                                                                getContext(),
+                                                                "Deleting Profile...",
+                                                                Toast.LENGTH_SHORT)
+                                                        .show();
+                                                deleteProfile();
+                                            }
+                                        })
+                                .setNegativeButton(
+                                        android.R.string.no,
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(
+                                                    DialogInterface dialog, int whichButton) {}
+                                        })
+                                .show();
                     }
                 });
     }
 
-    public void deleteProfile(){
+    public void deleteProfile() {
 
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String url = MainActivity.url + "user/deleteUser?key=" + MainActivity.apiKey + "&id=" + MainActivity.getLoggedInUserId();
+        String url =
+                MainActivity.url
+                        + "user/deleteUser?key="
+                        + MainActivity.apiKey
+                        + "&id="
+                        + MainActivity.getLoggedInUserId();
         StringRequest stringRequest =
                 new StringRequest(
                         Request.Method.POST,
