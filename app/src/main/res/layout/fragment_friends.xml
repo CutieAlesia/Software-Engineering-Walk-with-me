@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".TopUsers">
+    tools:context=".Friends">
 
     <ListView
-        android:id="@+id/topUsers_listview"
+        android:id="@+id/friend_listview"
         android:layout_width="409dp"
         android:layout_height="729dp"
         app:layout_constraintBottom_toBottomOf="parent"
