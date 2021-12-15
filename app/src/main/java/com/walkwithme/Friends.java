@@ -117,8 +117,6 @@ public class Friends extends Fragment {
     }
 
     public void loadUserInfo(@NonNull JSONObject jsonObject) {
-        String avatarURL;
-        String name;
         try {
         int friendId = jsonObject.getInt("second");
         ids.add(friendId);

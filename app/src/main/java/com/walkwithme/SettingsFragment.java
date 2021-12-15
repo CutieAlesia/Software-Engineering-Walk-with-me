@@ -94,15 +94,13 @@ public class SettingsFragment extends Fragment {
         String url = MainActivity.url + "user/deleteUser?key=" + MainActivity.apiKey + "&id=" + MainActivity.getLoggedInUserId();
         StringRequest stringRequest =
                 new StringRequest(
-                        Request.Method.GET,
+                        Request.Method.POST,
                         url,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 if (response.equals("200")) {
                                     MainActivity.setLoggedInUserId(0);
-                                    NavHostFragment.findNavController(SettingsFragment.this)
-                                            .navigate(R.id.action_settingsFragment_to_FirstFragment);
                                 }
                             }
                         },
@@ -118,6 +116,8 @@ public class SettingsFragment extends Fragment {
                         });
 
         queue.add(stringRequest);
+        NavHostFragment.findNavController(SettingsFragment.this)
+                .navigate(R.id.action_settingsFragment_to_loginFragment);
     }
 
     @Override
