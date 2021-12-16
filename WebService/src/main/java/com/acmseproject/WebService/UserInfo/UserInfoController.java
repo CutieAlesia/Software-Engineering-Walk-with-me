@@ -76,7 +76,7 @@ public class UserInfoController {
      * GET-Method to receive a users ranking
      *
      * @param key API-Key for authentication
-     * @param id User ID
+     * @param id  User ID
      */
     @GetMapping(path = "/getRank")
     public int getRank(@RequestParam String key, @RequestParam int id) {
@@ -98,8 +98,8 @@ public class UserInfoController {
     /**
      * POST-Method to change a user bio
      *
-     * @param key API-Key for authentication
-     * @param id User ID connected to the change
+     * @param key    API-Key for authentication
+     * @param id     User ID connected to the change
      * @param newBio New bio string
      */
     @PostMapping(path = "/changeBio")
@@ -112,11 +112,12 @@ public class UserInfoController {
         }
     }
 
+
     /**
      * POST-Method to change a user gender
      *
-     * @param key API-Key for authentication
-     * @param id User ID connected to the change
+     * @param key       API-Key for authentication
+     * @param id        User ID connected to the change
      * @param newGender New gender
      */
     @PostMapping(path = "/changeGender")
@@ -132,8 +133,8 @@ public class UserInfoController {
     /**
      * POST-Method to change a user race
      *
-     * @param key API-Key for authentication
-     * @param id User ID connected to the change
+     * @param key     API-Key for authentication
+     * @param id      User ID connected to the change
      * @param newRace New race
      */
     @PostMapping(path = "/changeRace")
@@ -149,8 +150,8 @@ public class UserInfoController {
     /**
      * POST-Method to change a user's friendly status
      *
-     * @param key API-Key for authentication
-     * @param id User ID connected to the change
+     * @param key         API-Key for authentication
+     * @param id          User ID connected to the change
      * @param newFriendly Friendly status
      */
     @PostMapping(path = "/changeFriendly")
@@ -166,8 +167,8 @@ public class UserInfoController {
     /**
      * POST-Method to change a user's height
      *
-     * @param key API-Key for authentication
-     * @param id User ID connected to the change
+     * @param key       API-Key for authentication
+     * @param id        User ID connected to the change
      * @param newHeight User height
      */
     @PostMapping(path = "/changeHeight")
@@ -183,8 +184,8 @@ public class UserInfoController {
     /**
      * POST-Method to change a user's weight
      *
-     * @param key API-Key for authentication
-     * @param id User ID connected to the change
+     * @param key       API-Key for authentication
+     * @param id        User ID connected to the change
      * @param newWeight User weight
      */
     @PostMapping(path = "/changeWeight")
@@ -200,8 +201,8 @@ public class UserInfoController {
     /**
      * POST-Method to change a user avatar
      *
-     * @param key API-Key for authentication
-     * @param id User ID connected to the change
+     * @param key   API-Key for authentication
+     * @param id    User ID connected to the change
      * @param image Image ID
      */
     @PostMapping(path = "/changeAvatar")
@@ -218,8 +219,8 @@ public class UserInfoController {
     /**
      * POST-Method to change a user ranking
      *
-     * @param key API-Key for authentication
-     * @param id User ID connected to the change
+     * @param key     API-Key for authentication
+     * @param id      User ID connected to the change
      * @param newrank New ranking
      */
     @PostMapping(path = "/changeRank")

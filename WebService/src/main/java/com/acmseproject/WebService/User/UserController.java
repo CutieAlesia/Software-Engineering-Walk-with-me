@@ -37,7 +37,7 @@ public class UserController {
     /**
      * GET-Method to verify login information
      *
-     * @param key API-Key for authentication
+     * @param key      API-Key for authentication
      * @param username Username used to logging in
      * @param password Password used to logging in
      * @return User information in a JSON format
@@ -65,8 +65,8 @@ public class UserController {
     /**
      * GET-Method to verify login information
      *
-     * @param key API-Key for authentication
-     * @param email Username used to logging in
+     * @param key      API-Key for authentication
+     * @param email    Username used to logging in
      * @param password Password used to logging in
      * @return User information in a JSON format
      */
@@ -106,7 +106,7 @@ public class UserController {
     /**
      * GET-Method to receive a random user unliked/un-disliked/unblocked from the db
      *
-     * @param key API-Key for authentication
+     * @param key   API-Key for authentication
      * @param first User ID of the user who is swiping
      * @return User information in a JSON format
      */
@@ -133,7 +133,7 @@ public class UserController {
     /**
      * GET-Method to receive user information by username
      *
-     * @param key API-Key for authentication
+     * @param key      API-Key for authentication
      * @param username Username to search by
      * @return User information in a JSON format
      */
@@ -152,7 +152,7 @@ public class UserController {
      * GET-Method to receive user information by ID
      *
      * @param key API-Key for authentication
-     * @param id User ID to search by
+     * @param id  User ID to search by
      * @return User information in a JSON format
      */
     @GetMapping(path = "/findById")
@@ -186,7 +186,7 @@ public class UserController {
     /**
      * POST-Method to create a new user
      *
-     * @param key API-Key for authentication
+     * @param key      API-Key for authentication
      * @param username Username for the account to be created
      * @param password Password for the account to be created
      * @return Response code
@@ -212,7 +212,7 @@ public class UserController {
      * POST-Method to delete a user
      *
      * @param key API-Key for authentication
-     * @param id User ID to be deleted
+     * @param id  User ID to be deleted
      */
     @PostMapping(path = "/deleteUser")
     public void deleteUser(@RequestParam String key, @RequestParam int id) {
@@ -226,8 +226,8 @@ public class UserController {
     /**
      * POST-Method to change a user email
      *
-     * @param key API-Key for authentication
-     * @param id User ID connected to the change
+     * @param key   API-Key for authentication
+     * @param id    User ID connected to the change
      * @param email Email to be changed to
      */
     @PostMapping(path = "/changeEmail")
@@ -243,8 +243,8 @@ public class UserController {
     /**
      * POST-Method to change a user email
      *
-     * @param key API-Key for authentication
-     * @param id User ID connected to the change
+     * @param key      API-Key for authentication
+     * @param id       User ID connected to the change
      * @param password Password to be changed to
      */
     @PostMapping(path = "/changePassword")
