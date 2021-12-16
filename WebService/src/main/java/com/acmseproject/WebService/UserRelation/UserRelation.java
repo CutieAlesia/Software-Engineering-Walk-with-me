@@ -15,8 +15,7 @@ public class UserRelation {
     private int liked;
     private int blocked;
 
-    public UserRelation() {
-    }
+    public UserRelation() {}
 
     public UserRelation(int id_first, int id_second, int liked, int blocked) {
         this.first = id_first;

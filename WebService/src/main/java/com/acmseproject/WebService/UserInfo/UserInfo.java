@@ -26,8 +26,7 @@ public class UserInfo {
     private String images;
     private int ranking;
 
-    public UserInfo() {
-    }
+    public UserInfo() {}
 
     public UserInfo(int id, int userid, String username) {
         this.id = id;

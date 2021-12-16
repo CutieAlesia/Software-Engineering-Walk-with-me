@@ -22,8 +22,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.walkwithme.databinding.FragmentSettingsBinding;
 
-
-
 public class SettingsFragment extends Fragment {
 
     private static final String TAG = "Settings";

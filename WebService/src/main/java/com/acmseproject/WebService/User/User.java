@@ -20,8 +20,7 @@ public class User {
     private String email;
     private LocalDateTime create_time;
 
-    public User() {
-    }
+    public User() {}
 
     public User(String username, String password) {
         this.username = username;

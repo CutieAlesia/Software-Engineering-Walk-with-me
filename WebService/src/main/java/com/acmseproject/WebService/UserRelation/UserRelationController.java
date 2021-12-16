@@ -15,8 +15,7 @@ import java.util.Objects;
 @RequestMapping("api/v1/relations")
 public class UserRelationController {
 
-    @Autowired
-    public final UserRelationRepository userRelationRepository;
+    @Autowired public final UserRelationRepository userRelationRepository;
 
     public UserRelationController(UserRelationRepository userRelationRepository) {
         this.userRelationRepository = userRelationRepository;
@@ -44,7 +43,7 @@ public class UserRelationController {
      * GET-Method for a single relation information
      *
      * @param key API-Key for authentication
-     * @param id  First User ID
+     * @param id First User ID
      * @param id2 Second User ID
      * @return Single user relation
      */
@@ -65,7 +64,7 @@ public class UserRelationController {
      * GET-Method for all mutual like relations for a specific user
      *
      * @param key API-Key for authentication
-     * @param id  User ID to search by
+     * @param id User ID to search by
      * @return List of relations where users liked each others
      */
     @GetMapping(path = "/getMatches")
@@ -84,7 +83,7 @@ public class UserRelationController {
      * POST-Method to add a new user relation
      *
      * @param key API-Key for authentication
-     * @param id  First User ID
+     * @param id First User ID
      * @param id2 Second User ID
      */
     @PostMapping(path = "/addRelation")
@@ -104,9 +103,9 @@ public class UserRelationController {
     /**
      * POST-Method to add a like
      *
-     * @param key  API-Key for authentication
-     * @param id   First User ID
-     * @param id2  Second User ID
+     * @param key API-Key for authentication
+     * @param id First User ID
+     * @param id2 Second User ID
      * @param like Like mode
      */
     @PostMapping(path = "/changeLike")
@@ -130,7 +129,7 @@ public class UserRelationController {
      * POST-Method to remove a like
      *
      * @param key API-Key for authentication
-     * @param id  First User ID
+     * @param id First User ID
      * @param id2 Second User ID
      * @deprecated This method is no longer needed as of v2.1 - Replaced by the changeLike method
      */
@@ -152,7 +151,7 @@ public class UserRelationController {
      * POST-Method to add a block
      *
      * @param key API-Key for authentication
-     * @param id  First User ID
+     * @param id First User ID
      * @param id2 Second User ID
      */
     @PostMapping(path = "/addBlock")
@@ -172,7 +171,7 @@ public class UserRelationController {
      * POST-Method to remove a block
      *
      * @param key API-Key for authentication
-     * @param id  First User ID
+     * @param id First User ID
      * @param id2 Second User ID
      */
     @PostMapping(path = "/removeBlock")
