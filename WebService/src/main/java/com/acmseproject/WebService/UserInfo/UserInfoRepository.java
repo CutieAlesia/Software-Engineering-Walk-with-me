@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * @author Dubsky
- * @version 1.0
+ * @version 1.2
  */
 @Repository
 public interface UserInfoRepository extends JpaRepository<UserInfo, Integer> {

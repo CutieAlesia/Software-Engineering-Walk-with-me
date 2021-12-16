@@ -10,7 +10,7 @@ import java.util.Objects;
 
 /**
  * @author Dubsky
- * @version 1.3
+ * @version 1.5
  */
 @RestController
 @CrossOrigin(origins = "*")
