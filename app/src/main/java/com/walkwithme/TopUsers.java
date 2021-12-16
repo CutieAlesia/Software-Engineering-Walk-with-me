@@ -4,14 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -26,15 +25,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.net.URL;
+import java.util.ArrayList;
 
 public class TopUsers extends Fragment {
 
     private FragmentTopUsersBinding binding;
-    TextView textView;
-    ImageView imageView;
-    TableRow tRow;
+    ArrayList<String> names;
+    ArrayList<String> avatars;
+    ArrayList<Integer> ids;
     private static final String TAG = "TopUsers Fragment";
 
     @Override
@@ -47,20 +45,13 @@ public class TopUsers extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        TableLayout tableLayout = (TableLayout) getView().findViewById(R.id.topUserTable);
-        final TableLayout.LayoutParams params =
-                new TableLayout.LayoutParams(
-                        TableLayout.LayoutParams.MATCH_PARENT,
-                        TableLayout.LayoutParams.WRAP_CONTENT);
-        final TableRow.LayoutParams rowParams =
-                new TableRow.LayoutParams(
-                        TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
-
-        getTopUser(tableLayout, rowParams);
+        names = new ArrayList<>();
+        avatars = new ArrayList<>();
+        ids = new ArrayList<>();
+        getTopUsers();
     }
 
-    public void getTopUser(TableLayout tableLayout, TableRow.LayoutParams rowParams) {
+    public void getTopUsers() {
 
         RequestQueue queue = Volley.newRequestQueue(getContext());
         String url = MainActivity.url + "info/topUsers?key=" + MainActivity.apiKey;
@@ -77,7 +68,7 @@ public class TopUsers extends Fragment {
 
                                         for (int i = 0; i < topUsers.length(); i++) {
                                             JSONObject topUser = topUsers.getJSONObject(i);
-                                            loadUserInfo(tableLayout, rowParams, topUser);
+                                            loadUserInfo(topUser);
                                         }
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -99,39 +90,44 @@ public class TopUsers extends Fragment {
         queue.add(stringRequest);
     }
 
-    public void loadUserInfo(
-            @NonNull TableLayout tableLayout,
-            TableRow.LayoutParams rowParams,
-            @NonNull JSONObject jsonObject) {
-        tRow = new TableRow(getContext());
-        imageView = new ImageView(getContext());
-        JSONObject avatarJson;
-        String name;
-        int rank;
-        try {
-            name = jsonObject.getString("username");
-            rank = jsonObject.getInt("ranking");
-            avatarJson = new JSONObject(jsonObject.getString("avatar"));
-            loadAvatar(avatarJson);
-            tRow.addView(imageView, 350, 350);
-            imageView.setId(rank);
-            textView = new TextView(getContext());
-            textView.setText(name);
-            textView.setId(rank);
-            tRow.addView(textView, rowParams);
-            tableLayout.addView(tRow);
-        } catch (JSONException | IOException e) {
-            e.printStackTrace();
-        }
+    public void updateView() {
+        ListView lv = (ListView) getView().findViewById(R.id.topUsers_listview);
+        FriendListAdapter adapter = new FriendListAdapter(getActivity(), names, avatars, ids);
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(
+                            AdapterView<?> parent, View view, int position, long id) {
+                        TopUsersDirections.ActionTopUsersToProfile action =
+                                TopUsersDirections.actionTopUsersToProfile();
+
+                        int targetId = (int) view.getTag();
+                        action.setId(targetId);
+                        NavHostFragment.findNavController(TopUsers.this).navigate(action);
+                    }
+                });
     }
 
-    public void loadAvatar(@NonNull JSONObject response) throws IOException, JSONException {
+    public void loadUserInfo(@NonNull JSONObject jsonObject) {
 
-        String imageURL =
-                "http://185.194.217.213:8080/resources/" + response.getString("image") + ".jpg";
-        URL myUrl = new URL(imageURL);
+        try {
+            int topUserId = jsonObject.getInt("userid");
+            ids.add(topUserId);
 
-        new DownloadImageTask(imageView).execute(imageURL);
+            String name = jsonObject.getString("username");
+            JSONObject avatarJson = new JSONObject(jsonObject.getString("avatar"));
+            String avatarURL =
+                    "http://185.194.217.213:8080/resources/"
+                            + avatarJson.getString("image")
+                            + ".jpg";
+            names.add(name);
+            avatars.add(avatarURL);
+            updateView();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

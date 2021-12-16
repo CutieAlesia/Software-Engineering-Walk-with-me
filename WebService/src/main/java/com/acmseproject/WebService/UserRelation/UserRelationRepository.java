@@ -27,6 +27,15 @@ public interface UserRelationRepository extends JpaRepository<UserRelation, Inte
 
     UserRelation findByFirstAndSecond(int first, int second);
 
+    @Query(
+            value =
+                    "SELECT * FROM walkwithme.user_relation\n"
+                            + "WHERE first = 1 AND liked = 1 AND second IN (SELECT first FROM"
+                            + " walkwithme.user_relation\n"
+                            + "WHERE second = 1 AND liked = 1)",
+            nativeQuery = true)
+    List<UserRelation> getMatches(int id);
+
     @Modifying
     @Transactional
     @Query(

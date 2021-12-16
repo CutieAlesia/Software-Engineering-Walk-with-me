@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_friends"
+            app:destination="@id/friends" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -54,6 +57,9 @@
         <action
             android:id="@+id/action_topUsers_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_topUsers_to_profile"
+            app:destination="@id/profile" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -63,5 +69,38 @@
         <action
             android:id="@+id/action_settingsFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_profile"
+            app:destination="@id/profile" />
+        <action
+            android:id="@+id/action_settingsFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.walkwithme.Profile"
+        android:label="@string/fragment_profile"
+        tools:layout="@layout/fragment_profile">
+        <argument
+            android:name="Id"
+            android:defaultValue="0"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_profile_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_profile_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/friends"
+        android:name="com.walkwithme.Friends"
+        android:label="Friendlist"
+        app:launchSingleTop="true"
+        tools:layout="@layout/fragment_friends" >
+        <action
+            android:id="@+id/action_friends_to_profile"
+            app:destination="@id/profile"
+            app:popUpTo="@id/friends" />
     </fragment>
 </navigation>

@@ -10,7 +10,7 @@ import java.util.Objects;
 
 /**
  * @author Dubsky
- * @version 1.3
+ * @version 1.5
  */
 @RestController
 @CrossOrigin(origins = "*")
@@ -96,19 +96,104 @@ public class UserInfoController {
     }
 
     /**
-     * POST-Method to change a user ranking
+     * POST-Method to change a user bio
      *
      * @param key API-Key for authentication
      * @param id User ID connected to the change
-     * @param newrank New ranking
+     * @param newBio New bio string
      */
-    @PostMapping(path = "/changeRank")
-    public void changeRank(
-            @RequestParam String key, @RequestParam int id, @RequestParam int newrank) {
-        System.out.format("[Request] changeRank\n[Key] %s\n", key);
+    @PostMapping(path = "/changeBio")
+    public void changeBio(
+            @RequestParam String key, @RequestParam int id, @RequestParam String newBio) {
+        System.out.format("[Request] changeBio\n[Key] %s\n", key);
         if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
-            userInfoRepository.changeRank(id, newrank);
+            userInfoRepository.changeBio(id, newBio);
+        }
+    }
+
+    /**
+     * POST-Method to change a user gender
+     *
+     * @param key API-Key for authentication
+     * @param id User ID connected to the change
+     * @param newGender New gender
+     */
+    @PostMapping(path = "/changeGender")
+    public void changeGender(
+            @RequestParam String key, @RequestParam int id, @RequestParam String newGender) {
+        System.out.format("[Request] changeGender\n[Key] %s\n", key);
+        if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            userInfoRepository.changeGender(id, newGender);
+        }
+    }
+
+    /**
+     * POST-Method to change a user race
+     *
+     * @param key API-Key for authentication
+     * @param id User ID connected to the change
+     * @param newRace New race
+     */
+    @PostMapping(path = "/changeRace")
+    public void changeRace(
+            @RequestParam String key, @RequestParam int id, @RequestParam String newRace) {
+        System.out.format("[Request] changeRace\n[Key] %s\n", key);
+        if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            userInfoRepository.changeRace(id, newRace);
+        }
+    }
+
+    /**
+     * POST-Method to change a user's friendly status
+     *
+     * @param key API-Key for authentication
+     * @param id User ID connected to the change
+     * @param newFriendly Friendly status
+     */
+    @PostMapping(path = "/changeFriendly")
+    public void changeFriendly(
+            @RequestParam String key, @RequestParam int id, @RequestParam int newFriendly) {
+        System.out.format("[Request] changeFriendly\n[Key] %s\n", key);
+        if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            userInfoRepository.changeFriendly(id, newFriendly);
+        }
+    }
+
+    /**
+     * POST-Method to change a user's height
+     *
+     * @param key API-Key for authentication
+     * @param id User ID connected to the change
+     * @param newHeight User height
+     */
+    @PostMapping(path = "/changeHeight")
+    public void changeHeight(
+            @RequestParam String key, @RequestParam int id, @RequestParam int newHeight) {
+        System.out.format("[Request] changeHeight\n[Key] %s\n", key);
+        if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            userInfoRepository.changeHeight(id, newHeight);
+        }
+    }
+
+    /**
+     * POST-Method to change a user's weight
+     *
+     * @param key API-Key for authentication
+     * @param id User ID connected to the change
+     * @param newWeight User weight
+     */
+    @PostMapping(path = "/changeWeight")
+    public void changeWeight(
+            @RequestParam String key, @RequestParam int id, @RequestParam int newWeight) {
+        System.out.format("[Request] changeWeight\n[Key] %s\n", key);
+        if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            userInfoRepository.changeWeight(id, newWeight);
         }
     }
 
@@ -127,6 +212,23 @@ public class UserInfoController {
             System.out.format("[Verification] Valid\n");
             String jsonString = new JSONObject().put("image", Integer.toString(image)).toString();
             userInfoRepository.changeAvatar(id, jsonString);
+        }
+    }
+
+    /**
+     * POST-Method to change a user ranking
+     *
+     * @param key API-Key for authentication
+     * @param id User ID connected to the change
+     * @param newrank New ranking
+     */
+    @PostMapping(path = "/changeRank")
+    public void changeRank(
+            @RequestParam String key, @RequestParam int id, @RequestParam int newrank) {
+        System.out.format("[Request] changeRank\n[Key] %s\n", key);
+        if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            userInfoRepository.changeRank(id, newrank);
         }
     }
 }

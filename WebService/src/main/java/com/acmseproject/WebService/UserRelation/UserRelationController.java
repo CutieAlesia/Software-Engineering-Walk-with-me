@@ -8,7 +8,7 @@ import java.util.Objects;
 
 /**
  * @author Dubsky
- * @version 1.3
+ * @version 1.5
  */
 @RestController
 @CrossOrigin(origins = "*")
@@ -54,6 +54,25 @@ public class UserRelationController {
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
             return userRelationRepository.findByFirstAndSecond(id, id2);
+        } else {
+            System.out.format("[Verification] Failed\n");
+            return null;
+        }
+    }
+
+    /**
+     * GET-Method for all mutual like relations for a specific user
+     *
+     * @param key API-Key for authentication
+     * @param id User ID to search by
+     * @return List of relations where users liked each others
+     */
+    @GetMapping(path = "/getMatches")
+    public List<UserRelation> getMatches(@RequestParam String key, @RequestParam int id) {
+        System.out.format("[Request] getMatches\n[Key] %s\n", key);
+        if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            return userRelationRepository.getMatches(id);
         } else {
             System.out.format("[Verification] Failed\n");
             return null;
@@ -109,10 +128,10 @@ public class UserRelationController {
     /**
      * POST-Method to remove a like
      *
-     * @deprecated This method is no longer needed as of v2.1 - Replaced by the changeLike method
      * @param key API-Key for authentication
      * @param id First User ID
      * @param id2 Second User ID
+     * @deprecated This method is no longer needed as of v2.1 - Replaced by the changeLike method
      */
     @PostMapping(path = "/removeLike")
     public String removeLike(
