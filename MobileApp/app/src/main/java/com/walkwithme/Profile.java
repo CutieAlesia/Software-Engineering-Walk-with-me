@@ -354,9 +354,15 @@ public class Profile extends Fragment {
                                         String name = response.getString("username");
                                         String userInfo = response.getString("bio");
                                         String preferences =
-                                                response.getString("gender")
-                                                        + "\n"
-                                                        + response.getString("race");
+                                                "Gender: "+ response.getString("gender")
+                                                        + "\n" +
+                                                        "Race: " + response.getString("race")
+                                                        +"\n" +
+                                                        "Height: "+ response.getInt("height")
+                                                        +"\n" +
+                                                        "Weight: "+ response.getInt("weight")
+                                                        +"\n" +
+                                                        "Is Friendly: " + response.getInt("friendly");
 
                                         userInfoView.setText(userInfo);
 
