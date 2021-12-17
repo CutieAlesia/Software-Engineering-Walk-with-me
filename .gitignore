@@ -23,10 +23,7 @@
 hs_err_pid*
 
 # Clemens - IntelliJ & Atom
-*.iml
 out/*
-.idea/*
-WebService/.mvn/*
 WebService/.settings/*
 WebService/target/*
 /WebService/.project
