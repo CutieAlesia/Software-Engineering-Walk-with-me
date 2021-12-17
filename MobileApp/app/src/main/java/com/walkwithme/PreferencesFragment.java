@@ -29,9 +29,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link PreferencesFragment} factory method to
- * create an instance of this fragment.
+ * A simple {@link Fragment} subclass. Use the {@link PreferencesFragment} factory method to create
+ * an instance of this fragment.
  */
 public class PreferencesFragment extends Fragment {
     private static final String TAG = "Preferences";
@@ -39,13 +38,12 @@ public class PreferencesFragment extends Fragment {
     ListView listView;
     ArrayAdapter<String> adapter;
     ArrayList<String> preferences;
-    public PreferencesFragment() {
-    }
 
+    public PreferencesFragment() {}
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentPreferencesBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -62,12 +60,16 @@ public class PreferencesFragment extends Fragment {
                 });
     }
 
-    public void loadPreferences(){
+    public void loadPreferences() {
         preferences = new ArrayList<String>();
 
         RequestQueue queue = Volley.newRequestQueue(getContext());
         String url =
-                MainActivity.url + "info/getUser?key=" + MainActivity.apiKey + "&id=" + MainActivity.getLoggedInUserId();
+                MainActivity.url
+                        + "info/getUser?key="
+                        + MainActivity.apiKey
+                        + "&id="
+                        + MainActivity.getLoggedInUserId();
         JsonObjectRequest jsonObjectRequest =
                 new JsonObjectRequest(
                         Request.Method.GET,
@@ -109,29 +111,36 @@ public class PreferencesFragment extends Fragment {
 
     private void loadIsPreference(JSONObject response) throws JSONException {
         listView = getView().findViewById(R.id.preferencesChoiceList);
-        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_multiple_choice, preferences);
+        adapter =
+                new ArrayAdapter<String>(
+                        getContext(),
+                        android.R.layout.simple_list_item_multiple_choice,
+                        preferences);
         listView.setAdapter(adapter);
         JSONArray keys = response.names();
         for (int i = 0; i < keys.length(); i++) {
             String key = keys.getString(i);
-            if(response.getInt(key) == 1 ){
+            if (response.getInt(key) == 1) {
                 listView.setItemChecked(i, true);
             }
         }
-
     }
 
-    private void savePreferences(){
+    private void savePreferences() {
         listView = getView().findViewById(R.id.preferencesChoiceList);
-        String preferencesUrl = MainActivity.url + "info/changePref?key=" + MainActivity.apiKey +"&id="+MainActivity.getLoggedInUserId();
-        for(int i = 0; i<listView.getCount(); i++){
-            preferencesUrl += "&" + listView.getItemAtPosition(i).toString() +"=";
-            if(listView.isItemChecked(i)){
+        String preferencesUrl =
+                MainActivity.url
+                        + "info/changePref?key="
+                        + MainActivity.apiKey
+                        + "&id="
+                        + MainActivity.getLoggedInUserId();
+        for (int i = 0; i < listView.getCount(); i++) {
+            preferencesUrl += "&" + listView.getItemAtPosition(i).toString() + "=";
+            if (listView.isItemChecked(i)) {
                 preferencesUrl += "1";
-            }else{
+            } else {
                 preferencesUrl += "2";
             }
-
         }
 
         RequestQueue queue = Volley.newRequestQueue(getContext());
@@ -165,7 +174,5 @@ public class PreferencesFragment extends Fragment {
                         });
 
         queue.add(stringRequest);
-
     }
-
 }

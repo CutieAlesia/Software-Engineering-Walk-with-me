@@ -65,8 +65,6 @@ public class SettingsFragment extends Fragment {
                     }
                 });
 
-
-
         binding.DeleteProfileButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -105,72 +103,100 @@ public class SettingsFragment extends Fragment {
                         Intent intent = new Intent();
                         intent.setType("image/*");
                         intent.setAction(Intent.ACTION_PICK);
-                        startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE_REQUEST);
+                        startActivityForResult(
+                                Intent.createChooser(intent, "Select Image"), PICK_IMAGE_REQUEST);
                     }
                 });
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
+        if (requestCode == PICK_IMAGE_REQUEST
+                && resultCode == Activity.RESULT_OK
+                && data != null
+                && data.getData() != null) {
             Uri filePath = data.getData();
 
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), filePath);
+                bitmap =
+                        MediaStore.Images.Media.getBitmap(
+                                getContext().getContentResolver(), filePath);
                 uploadImage();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-
-
     }
+
     private void uploadImage() {
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage("Uploading, please wait...");
         progressDialog.show();
 
-        //converting image to base64 string
+        // converting image to base64 string
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
         final String imageString = Base64.encodeToString(imageBytes, Base64.DEFAULT);
 
-        String URL = MainActivity.url + "info/upload&key="+ MainActivity.apiKey + "&id=" + MainActivity.getLoggedInUserId() + "&image=" + imageString;
+        String URL =
+                MainActivity.url
+                        + "info/upload&key="
+                        + MainActivity.apiKey
+                        + "&id="
+                        + MainActivity.getLoggedInUserId()
+                        + "&image="
+                        + imageString;
 
-        //sending image to server
-        StringRequest request = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>(){
-            @Override
-            public void onResponse(String s) {
-                progressDialog.dismiss();
-                if(s.equals("200")){
-                    Toast.makeText(getContext(), "Upload Successful", Toast.LENGTH_LONG).show();
-                }
-                else{
-                    Toast.makeText(getContext(), "Some error occurred!", Toast.LENGTH_LONG).show();
-                }
-            }
-        },new Response.ErrorListener(){
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-                Toast.makeText(getContext(), "Some error occurred -> "+volleyError, Toast.LENGTH_LONG).show();;
-            }
-        }) {
-            //adding parameters to send
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parameters = new HashMap<String, String>();
-                parameters.put("image", imageString);
-                return parameters;
-            }
-        };
+        // sending image to server
+        StringRequest request =
+                new StringRequest(
+                        Request.Method.POST,
+                        URL,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String s) {
+                                progressDialog.dismiss();
+                                if (s.equals("200")) {
+                                    Toast.makeText(
+                                                    getContext(),
+                                                    "Upload Successful",
+                                                    Toast.LENGTH_LONG)
+                                            .show();
+                                } else {
+                                    Toast.makeText(
+                                                    getContext(),
+                                                    "Some error occurred!",
+                                                    Toast.LENGTH_LONG)
+                                            .show();
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError volleyError) {
+                                Toast.makeText(
+                                                getContext(),
+                                                "Some error occurred -> " + volleyError,
+                                                Toast.LENGTH_LONG)
+                                        .show();
+                                ;
+                            }
+                        }) {
+                    // adding parameters to send
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> parameters = new HashMap<String, String>();
+                        parameters.put("image", imageString);
+                        return parameters;
+                    }
+                };
 
         RequestQueue rQueue = Volley.newRequestQueue(getContext());
         rQueue.add(request);
-
     }
-
 
     public void deleteProfile() {
 

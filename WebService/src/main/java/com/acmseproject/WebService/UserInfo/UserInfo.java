@@ -38,19 +38,14 @@ public class UserInfo {
         this.username = username;
 
         Random gen = new Random();
-        String prefJson = new JSONObject()
-                .put("dog", 0)
-                .put("cat", 0)
-                .toString();
-        String avatarJson = new JSONObject()
-                .put("image", 1+gen.nextInt(28))
-                .toString();
+        String prefJson = new JSONObject().put("dog", 0).put("cat", 0).toString();
+        String avatarJson = new JSONObject().put("image", 1 + gen.nextInt(28)).toString();
         int amount = gen.nextInt(8);
         amount++;
         System.out.println("IMAGES:" + amount);
         JSONObject imageJson = new JSONObject();
-        for(int i = 0; i < amount; i++){
-            imageJson.put("image", 1+gen.nextInt(28));
+        for (int i = 0; i < amount; i++) {
+            imageJson.put("image", 1 + gen.nextInt(28));
         }
         this.pref = prefJson;
         this.avatar = avatarJson;
@@ -76,21 +71,41 @@ public class UserInfo {
 
     @Override
     public String toString() {
-        return "UserInfo{" +
-                "id=" + id +
-                ", userid=" + userid +
-                ", username='" + username + '\'' +
-                ", bio='" + bio + '\'' +
-                ", gender='" + gender + '\'' +
-                ", race='" + race + '\'' +
-                ", friendly=" + friendly +
-                ", height=" + height +
-                ", weight=" + weight +
-                ", avatar='" + avatar + '\'' +
-                ", images='" + images + '\'' +
-                ", ranking=" + ranking +
-                ", pref='" + pref + '\'' +
-                '}';
+        return "UserInfo{"
+                + "id="
+                + id
+                + ", userid="
+                + userid
+                + ", username='"
+                + username
+                + '\''
+                + ", bio='"
+                + bio
+                + '\''
+                + ", gender='"
+                + gender
+                + '\''
+                + ", race='"
+                + race
+                + '\''
+                + ", friendly="
+                + friendly
+                + ", height="
+                + height
+                + ", weight="
+                + weight
+                + ", avatar='"
+                + avatar
+                + '\''
+                + ", images='"
+                + images
+                + '\''
+                + ", ranking="
+                + ranking
+                + ", pref='"
+                + pref
+                + '\''
+                + '}';
     }
 
     public String getPref() {

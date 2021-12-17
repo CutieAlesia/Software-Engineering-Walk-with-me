@@ -354,15 +354,20 @@ public class Profile extends Fragment {
                                         String name = response.getString("username");
                                         String userInfo = response.getString("bio");
                                         String preferences =
-                                                "Gender: "+ response.getString("gender")
-                                                        + "\n" +
-                                                        "Race: " + response.getString("race")
-                                                        +"\n" +
-                                                        "Height: "+ response.getInt("height")
-                                                        +"\n" +
-                                                        "Weight: "+ response.getInt("weight")
-                                                        +"\n" +
-                                                        "Is Friendly: " + response.getInt("friendly");
+                                                "Gender: "
+                                                        + response.getString("gender")
+                                                        + "\n"
+                                                        + "Race: "
+                                                        + response.getString("race")
+                                                        + "\n"
+                                                        + "Height: "
+                                                        + response.getInt("height")
+                                                        + "\n"
+                                                        + "Weight: "
+                                                        + response.getInt("weight")
+                                                        + "\n"
+                                                        + "Is Friendly: "
+                                                        + response.getInt("friendly");
 
                                         userInfoView.setText(userInfo);
 
