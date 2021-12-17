@@ -29,7 +29,7 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="action_manage_pictures">Add/Remove Picture</string>
+    <string name="action_manage_pictures">Upload Image</string>
     <string name="action_delete_profile">Delete Profile</string>
     <string name="action_preferences">Manage Preferences</string>
     <string name="action_manage_profile">Manage Profile</string>
