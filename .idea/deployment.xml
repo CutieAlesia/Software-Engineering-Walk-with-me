@@ -5,7 +5,12 @@
       <paths name="LinuxVPS">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/home/WalkWithme/WebService" local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$/MobileApp" />
+            <mapping local="$PROJECT_DIR$/DesktopApp/src/main" />
+            <mapping local="$PROJECT_DIR$/WebService" />
+            <mapping local="$PROJECT_DIR$/DesktopApp" />
+            <mapping local="$PROJECT_DIR$/DesktopApp/src/test" />
           </mappings>
         </serverdata>
       </paths>
