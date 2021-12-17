@@ -1,0 +1,142 @@
+com/walkwithme/BuildConfig.java
+ com.walkwithme.BuildConfig
+com/walkwithme/ProfileArgs.java
+ com.walkwithme.ProfileArgs
+ com.walkwithme.ProfileArgs$1
+ com.walkwithme.ProfileArgs$Builder
+com/walkwithme/placeholder/PlaceholderContent.java
+ com.walkwithme.placeholder.PlaceholderContent
+ com.walkwithme.placeholder.PlaceholderContent$PlaceholderItem
+com/walkwithme/data/LoginRepository.java
+ com.walkwithme.data.LoginRepository
+com/walkwithme/DownloadImageTask.java
+ com.walkwithme.DownloadImageTask
+com/walkwithme/data/Result.java
+ com.walkwithme.data.Result
+ com.walkwithme.data.Result$1
+ com.walkwithme.data.Result$Error
+ com.walkwithme.data.Result$Success
+com/walkwithme/OnSwipeTouchListener.java
+ com.walkwithme.OnSwipeTouchListener
+ com.walkwithme.OnSwipeTouchListener$1
+ com.walkwithme.OnSwipeTouchListener$GestureListener
+com/walkwithme/data/model/LoggedInUser.java
+ com.walkwithme.data.model.LoggedInUser
+com/walkwithme/data/LoginDataSource.java
+ com.walkwithme.data.LoginDataSource
+com/walkwithme/ui/login/LoginFragment.java
+ com.walkwithme.ui.login.LoginFragment
+ com.walkwithme.ui.login.LoginFragment$1
+ com.walkwithme.ui.login.LoginFragment$2
+ com.walkwithme.ui.login.LoginFragment$2$1
+ com.walkwithme.ui.login.LoginFragment$2$2
+ com.walkwithme.ui.login.LoginFragment$3
+ com.walkwithme.ui.login.LoginFragment$4
+com/walkwithme/FriendsDirections.java
+ com.walkwithme.FriendsDirections
+ com.walkwithme.FriendsDirections$1
+ com.walkwithme.FriendsDirections$ActionFriendsToProfile
+com/walkwithme/ImageListAdapter.java
+ com.walkwithme.ImageListAdapter
+com/walkwithme/databinding/FragmentTopUsersBinding.java
+ com.walkwithme.databinding.FragmentTopUsersBinding
+com/walkwithme/databinding/FragmentFriendsBinding.java
+ com.walkwithme.databinding.FragmentFriendsBinding
+com/walkwithme/Friends.java
+ com.walkwithme.Friends
+ com.walkwithme.Friends$1
+ com.walkwithme.Friends$2
+ com.walkwithme.Friends$3
+ com.walkwithme.Friends$4
+ com.walkwithme.Friends$5
+com/walkwithme/databinding/FragmentSettingsBinding.java
+ com.walkwithme.databinding.FragmentSettingsBinding
+com/walkwithme/databinding/FragmentProfileBinding.java
+ com.walkwithme.databinding.FragmentProfileBinding
+com/walkwithme/SecondFragmentDirections.java
+ com.walkwithme.SecondFragmentDirections
+com/walkwithme/FriendListAdapter.java
+ com.walkwithme.FriendListAdapter
+com/walkwithme/databinding/FragmentFirstBinding.java
+ com.walkwithme.databinding.FragmentFirstBinding
+com/walkwithme/FirstFragment.java
+ com.walkwithme.FirstFragment
+ com.walkwithme.FirstFragment$1
+ com.walkwithme.FirstFragment$2
+ com.walkwithme.FirstFragment$3
+ com.walkwithme.FirstFragment$4
+ com.walkwithme.FirstFragment$5
+com/walkwithme/databinding/ImagelistItemBinding.java
+ com.walkwithme.databinding.ImagelistItemBinding
+com/walkwithme/databinding/LayoutBinding.java
+ com.walkwithme.databinding.LayoutBinding
+com/walkwithme/SettingsFragmentDirections.java
+ com.walkwithme.SettingsFragmentDirections
+ com.walkwithme.SettingsFragmentDirections$1
+ com.walkwithme.SettingsFragmentDirections$ActionSettingsFragmentToProfile
+com/walkwithme/databinding/FriendlistItemBinding.java
+ com.walkwithme.databinding.FriendlistItemBinding
+com/walkwithme/Profile.java
+ com.walkwithme.Profile
+ com.walkwithme.Profile$1
+ com.walkwithme.Profile$10
+ com.walkwithme.Profile$11
+ com.walkwithme.Profile$12
+ com.walkwithme.Profile$2
+ com.walkwithme.Profile$2$1
+ com.walkwithme.Profile$2$2
+ com.walkwithme.Profile$3
+ com.walkwithme.Profile$3$1
+ com.walkwithme.Profile$3$2
+ com.walkwithme.Profile$4
+ com.walkwithme.Profile$4$1
+ com.walkwithme.Profile$4$2
+ com.walkwithme.Profile$5
+ com.walkwithme.Profile$6
+ com.walkwithme.Profile$7
+ com.walkwithme.Profile$8
+ com.walkwithme.Profile$9
+com/walkwithme/TopUsersDirections.java
+ com.walkwithme.TopUsersDirections
+ com.walkwithme.TopUsersDirections$1
+ com.walkwithme.TopUsersDirections$ActionTopUsersToProfile
+com/walkwithme/ProfileDirections.java
+ com.walkwithme.ProfileDirections
+com/walkwithme/databinding/FragmentLoginBinding.java
+ com.walkwithme.databinding.FragmentLoginBinding
+com/walkwithme/databinding/ActivityMainBinding.java
+ com.walkwithme.databinding.ActivityMainBinding
+com/walkwithme/MainActivity.java
+ com.walkwithme.MainActivity
+com/walkwithme/TopUsers.java
+ com.walkwithme.TopUsers
+ com.walkwithme.TopUsers$1
+ com.walkwithme.TopUsers$2
+ com.walkwithme.TopUsers$3
+com/walkwithme/databinding/FragmentSecondBinding.java
+ com.walkwithme.databinding.FragmentSecondBinding
+com/walkwithme/FirstFragmentDirections.java
+ com.walkwithme.FirstFragmentDirections
+com/walkwithme/ui/login/LoginFragmentDirections.java
+ com.walkwithme.ui.login.LoginFragmentDirections
+com/walkwithme/SecondFragment.java
+ com.walkwithme.SecondFragment
+ com.walkwithme.SecondFragment$1
+ com.walkwithme.SecondFragment$2
+ com.walkwithme.SecondFragment$3
+ com.walkwithme.SecondFragment$4
+ com.walkwithme.SecondFragment$5
+ com.walkwithme.SecondFragment$6
+ com.walkwithme.SecondFragment$7
+com/walkwithme/databinding/ContentMainBinding.java
+ com.walkwithme.databinding.ContentMainBinding
+com/walkwithme/SettingsFragment.java
+ com.walkwithme.SettingsFragment
+ com.walkwithme.SettingsFragment$1
+ com.walkwithme.SettingsFragment$2
+ com.walkwithme.SettingsFragment$3
+ com.walkwithme.SettingsFragment$4
+ com.walkwithme.SettingsFragment$4$1
+ com.walkwithme.SettingsFragment$4$2
+ com.walkwithme.SettingsFragment$5
+ com.walkwithme.SettingsFragment$6
