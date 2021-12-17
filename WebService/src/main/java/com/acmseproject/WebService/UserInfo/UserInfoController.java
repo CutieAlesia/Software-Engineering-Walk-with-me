@@ -1,9 +1,13 @@
 package com.acmseproject.WebService.UserInfo;
 
+import org.apache.tomcat.util.http.fileupload.FileUpload;
 import org.json.JSONObject;
 import org.springframework.aop.AopInvocationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Objects;
@@ -94,6 +98,25 @@ public class UserInfoController {
             return -1;
         }
     }
+
+    /**
+     * GET-Method to receive a users preference
+     *
+     * @param key API-Key for authentication
+     * @param id User ID
+     */
+    @GetMapping(path = "/getPref")
+    public String getPref(@RequestParam String key, @RequestParam int id) {
+        System.out.format("[Request] getPref\n[Key] %s\n", key);
+        if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            return getUser(key, id).getPref();
+        } else {
+            System.out.format("[Verification] Failed\n");
+            return null;
+        }
+    }
+
 
     /**
      * POST-Method to change a user bio
@@ -231,4 +254,51 @@ public class UserInfoController {
             userInfoRepository.changeRank(id, newrank);
         }
     }
+
+    /**
+     * POST-Method to change a users preference
+     *
+     * @param key API-Key for authentication
+     * @param id User ID connected to the change
+     * @param dog Dog pref
+     * @param cat Cat pref
+     */
+    @PostMapping(path = "/changePref")
+    public void changePref(
+            @RequestParam String key, @RequestParam int id, @RequestParam int dog, @RequestParam int cat) {
+        System.out.format("[Request] changePref\n[Key] %s\n", key);
+        if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            UserInfo tmp = getUser(key, id);
+            String json = new JSONObject()
+                    .put("dog", dog)
+                    .put("cat", cat)
+                    .toString();
+            tmp.setPref(json);
+        }
+    }
+
+    /**
+     * POST-Method to upload images
+     *
+     * @param key API-Key for authentication
+     * @param id User ID connected to the change
+     * @param file File byte array
+     */
+//    @PostMapping(path = "/upload")
+//    public void upload(
+//            @RequestParam String key, @RequestParam int id, @RequestParam("image") MultipartFile file) {
+//        System.out.format("[Request] upload\n[Key] %s\n", key);
+//        if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
+//            System.out.format("[Verification] Valid\n");
+//            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+//            System.out.format("Filename: %s", fileName);
+//            UserInfo tmp = getUser(key, id);
+//            String json = new JSONObject()
+//                    .put("image", "avatar."+Integer.toString(id) )
+//                    .toString();
+//            userInfoRepository.changeAvatar(id, json);
+//            FileUploadUtil.saveFile("ressources/", "avatar."+Integer.toString(id), file);
+//        }
+//    }
 }

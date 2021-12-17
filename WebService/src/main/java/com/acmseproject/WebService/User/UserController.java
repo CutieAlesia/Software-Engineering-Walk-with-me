@@ -4,6 +4,7 @@ import com.acmseproject.WebService.UserInfo.UserInfo;
 import com.acmseproject.WebService.UserInfo.UserInfoRepository;
 import com.acmseproject.WebService.UserRelation.UserRelation;
 import com.acmseproject.WebService.UserRelation.UserRelationRepository;
+import org.json.JSONObject;
 import org.springframework.aop.AopInvocationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -201,7 +202,7 @@ public class UserController {
             System.out.format("[Verification] Valid\n");
             userRepository.save(new User(username, password));
             User tmpuser = userRepository.findByUsername(username);
-            userInfoRepository.save(new UserInfo(50, tmpuser.getId(), tmpuser.getUsername()));
+            UserInfo user = userInfoRepository.save(new UserInfo(50, tmpuser.getId(), tmpuser.getUsername()));
             return "200";
         } else {
             return "400";
