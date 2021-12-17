@@ -1,6 +1,9 @@
 package com.acmseproject.WebService.UserInfo;
 
+import org.json.JSONObject;
+
 import javax.persistence.*;
+import java.util.Random;
 
 /**
  * @author Dubsky
@@ -25,6 +28,7 @@ public class UserInfo {
     private String avatar;
     private String images;
     private int ranking;
+    private String pref;
 
     public UserInfo() {}
 
@@ -32,6 +36,25 @@ public class UserInfo {
         this.id = id;
         this.userid = userid;
         this.username = username;
+
+        Random gen = new Random();
+        String prefJson = new JSONObject()
+                .put("dog", 0)
+                .put("cat", 0)
+                .toString();
+        String avatarJson = new JSONObject()
+                .put("image", 1+gen.nextInt(28))
+                .toString();
+        int amount = gen.nextInt(8);
+        amount++;
+        System.out.println("IMAGES:" + amount);
+        JSONObject imageJson = new JSONObject();
+        for(int i = 0; i < amount; i++){
+            imageJson.put("image", 1+gen.nextInt(28));
+        }
+        this.pref = prefJson;
+        this.avatar = avatarJson;
+        this.images = imageJson.toString();
     }
 
     public UserInfo(
@@ -53,38 +76,29 @@ public class UserInfo {
 
     @Override
     public String toString() {
-        return "UserInfo{"
-                + "id="
-                + id
-                + ", userid="
-                + userid
-                + ", username='"
-                + username
-                + '\''
-                + ", bio='"
-                + bio
-                + '\''
-                + ", gender='"
-                + gender
-                + '\''
-                + ", race='"
-                + race
-                + '\''
-                + ", friendly="
-                + friendly
-                + ", height="
-                + height
-                + ", weight="
-                + weight
-                + ", avatar='"
-                + avatar
-                + '\''
-                + ", images='"
-                + images
-                + '\''
-                + ", ranking="
-                + ranking
-                + '}';
+        return "UserInfo{" +
+                "id=" + id +
+                ", userid=" + userid +
+                ", username='" + username + '\'' +
+                ", bio='" + bio + '\'' +
+                ", gender='" + gender + '\'' +
+                ", race='" + race + '\'' +
+                ", friendly=" + friendly +
+                ", height=" + height +
+                ", weight=" + weight +
+                ", avatar='" + avatar + '\'' +
+                ", images='" + images + '\'' +
+                ", ranking=" + ranking +
+                ", pref='" + pref + '\'' +
+                '}';
+    }
+
+    public String getPref() {
+        return pref;
+    }
+
+    public void setPref(String pref) {
+        this.pref = pref;
     }
 
     public int getRanking() {
