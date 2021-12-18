@@ -61,9 +61,7 @@ public class UserInfoController {
         }
     }
 
-    /**
-     * TODO || JavaDoc missing
-     */
+    /** TODO || JavaDoc missing */
     @GetMapping(path = "/topUsers")
     public List<UserInfo> topUsers(@RequestParam String key) {
         System.out.format("[Request] topUsers\n[Key] %s\n", key);
