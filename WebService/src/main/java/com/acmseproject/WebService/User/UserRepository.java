@@ -55,7 +55,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
                         + "WHERE\n"
                         + "walkwithme.user.id NOT IN \n"
                         + "(SELECT walkwithme.user_relation.second FROM walkwithme.user_relation\n"
-                        + "WHERE walkwithme.user_relation.first = :first)\n"
+                        + "WHERE walkwithme.user_relation.first = :first AND walkwithme.user_relation.liked != 0)\n"
                         + "AND\n"
                         + "walkwithme.user.id NOT IN (\n"
                         + "SELECT walkwithme.user_relation.first FROM walkwithme.user_relation\n"
