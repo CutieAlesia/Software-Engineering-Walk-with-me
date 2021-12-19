@@ -78,7 +78,7 @@ GET /getUsers?key={api_key}
 ```
 #### Getting a random user
 ```html
-GET /getRandom?key={api_key}&first={uid}
+GET /getMatch?key={api_key}&first={uid}
 ```
 ```json
 {
