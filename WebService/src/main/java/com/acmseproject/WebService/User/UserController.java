@@ -130,22 +130,22 @@ public class UserController {
         }
     }
 
-//    /**
-//     * GET-Method to receive user information by email
-//     *
-//     * @param key API-Key for authentication
-//     * @return User information in a JSON format
-//     */
-//    @GetMapping(path = "/getPrefMatch")
-//    public User getPrefMatch(@RequestParam String key, @RequestParam int first) {
-//        System.out.format("[Request] getPrefMatch\n[Key] %s\n", key);
-//        if (Objects.equals(key, userRepository.checkAuth(key))) {
-//            System.out.format("[Verification] Valid\n");
-//            return userRepository.getMatch(first);
-//        } else {
-//            return null;
-//        }
-//    }
+    //    /**
+    //     * GET-Method to receive user information by email
+    //     *
+    //     * @param key API-Key for authentication
+    //     * @return User information in a JSON format
+    //     */
+    //    @GetMapping(path = "/getPrefMatch")
+    //    public User getPrefMatch(@RequestParam String key, @RequestParam int first) {
+    //        System.out.format("[Request] getPrefMatch\n[Key] %s\n", key);
+    //        if (Objects.equals(key, userRepository.checkAuth(key))) {
+    //            System.out.format("[Verification] Valid\n");
+    //            return userRepository.getMatch(first);
+    //        } else {
+    //            return null;
+    //        }
+    //    }
 
     /**
      * GET-Method to receive user information by username
