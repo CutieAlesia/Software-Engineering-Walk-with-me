@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 /**
  * @author Dubsky
@@ -33,27 +34,39 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query(
             value =
-                    "SELECT walkwithme.user_relation.second FROM walkwithme.user\n"
-                        + "INNER JOIN walkwithme.user_relation ON"
-                        + " walkwithme.user.id=walkwithme.user_relation.first\n"
-                        + "WHERE walkwithme.user_relation.first = :first AND"
-                        + " walkwithme.user_relation.second != :first AND liked = 0 AND blocked ="
-                        + " 0\n"
-                        + "ORDER BY RAND()\n"
-                        + "LIMIT 1",
+                    "SELECT * FROM walkwithme.user\n" +
+                            "WHERE\n" +
+                            "walkwithme.user.id NOT IN \n" +
+                            "(SELECT walkwithme.user_relation.second FROM walkwithme.user_relation\n" +
+                            "WHERE walkwithme.user_relation.first = 1)\n" +
+                            "AND\n" +
+                            "walkwithme.user.id NOT IN (\n" +
+                            "SELECT walkwithme.user_relation.first FROM walkwithme.user_relation\n" +
+                            "WHERE walkwithme.user_relation.second = 1 AND walkwithme.user_relation.blocked = 1\n" +
+                            ")\n" +
+                            "AND\n" +
+                            "walkwithme.user.id != 1",
             nativeQuery = true)
-    int getRandom(int first);
+    int getAllMatches(int first);
 
     @Query(
             value =
-                    "SELECT * FROM walkwithme.user\n"
-                        + "WHERE walkwithme.user.id NOT IN (SELECT walkwithme.user_relation.second"
-                        + " FROM walkwithme.user_relation WHERE walkwithme.user_relation.first ="
-                        + " :first)\n"
-                        + "AND walkwithme.user.id != :first ORDER BY RAND()\n"
-                        + "LIMIT 1",
+                    "SELECT id FROM walkwithme.user\n" +
+                            "WHERE\n" +
+                            "walkwithme.user.id NOT IN \n" +
+                            "(SELECT walkwithme.user_relation.second FROM walkwithme.user_relation\n" +
+                            "WHERE walkwithme.user_relation.first = :first)\n" +
+                            "AND\n" +
+                            "walkwithme.user.id NOT IN (\n" +
+                            "SELECT walkwithme.user_relation.first FROM walkwithme.user_relation\n" +
+                            "WHERE walkwithme.user_relation.second = :first AND walkwithme.user_relation.blocked = :first\n" +
+                            ")\n" +
+                            "AND\n" +
+                            "walkwithme.user.id != :first\n" +
+                            "ORDER BY RAND()\n" +
+                            "LIMIT 1",
             nativeQuery = true)
-    User getMatch(int first);
+    int getMatch(int first);
 
     @Modifying(clearAutomatically = true)
     @Query(value = "UPDATE walkwithme.user SET email = :email WHERE id = :id", nativeQuery = true)

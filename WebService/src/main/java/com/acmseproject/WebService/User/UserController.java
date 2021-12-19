@@ -110,25 +110,42 @@ public class UserController {
      * @param first User ID of the user who is swiping
      * @return User information in a JSON format
      */
-    @GetMapping(path = "/getRandom")
-    public User getRandom(@RequestParam String key, @RequestParam int first) {
+    @GetMapping(path = "/getMatch")
+    public User getMatch(@RequestParam String key, @RequestParam int first) {
         System.out.format("[Request] getRandom\n[Key] %s\n", key);
         if (Objects.equals(key, userRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
             User neutralRandom;
             try {
-                neutralRandom = userRepository.findById(userRepository.getRandom(first));
+                neutralRandom = userRepository.findById(userRepository.getMatch(first));
+                System.out.println("Match found" + neutralRandom);
+                userRelationRepository.save(new UserRelation(first, neutralRandom.getId(), 0, 0));
                 return neutralRandom;
             } catch (AopInvocationException e) {
-                System.out.println("No relation found -> New match");
-                User newMatch = userRepository.getMatch(first);
-                userRelationRepository.save(new UserRelation(first, newMatch.getId(), 0, 0));
-                return newMatch;
+                System.out.println("No user found for matching!");
+                return null;
             }
         } else {
             return null;
         }
     }
+
+//    /**
+//     * GET-Method to receive user information by email
+//     *
+//     * @param key API-Key for authentication
+//     * @return User information in a JSON format
+//     */
+//    @GetMapping(path = "/getPrefMatch")
+//    public User getPrefMatch(@RequestParam String key, @RequestParam int first) {
+//        System.out.format("[Request] getPrefMatch\n[Key] %s\n", key);
+//        if (Objects.equals(key, userRepository.checkAuth(key))) {
+//            System.out.format("[Verification] Valid\n");
+//            return userRepository.getMatch(first);
+//        } else {
+//            return null;
+//        }
+//    }
 
     /**
      * GET-Method to receive user information by username
