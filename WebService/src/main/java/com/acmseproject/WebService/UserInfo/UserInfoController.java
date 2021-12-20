@@ -264,8 +264,8 @@ public class UserInfoController {
     public void changePref(
             @RequestParam String key,
             @RequestParam int id,
-            @RequestParam int dog,
-            @RequestParam int cat) {
+            @RequestParam int cat,
+            @RequestParam int dog) {
         System.out.format("[Request] changePref\n[Key] %s\n", key);
         if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
