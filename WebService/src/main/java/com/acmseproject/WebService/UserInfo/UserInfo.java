@@ -50,6 +50,8 @@ public class UserInfo {
         this.pref = prefJson;
         this.avatar = avatarJson;
         this.images = imageJson.toString();
+        this.weight = 1 + gen.nextInt(35);
+        this.height = 1 + gen.nextInt(70);
     }
 
     public UserInfo(
