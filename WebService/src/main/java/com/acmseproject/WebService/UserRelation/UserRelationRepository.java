@@ -30,9 +30,9 @@ public interface UserRelationRepository extends JpaRepository<UserRelation, Inte
     @Query(
             value =
                     "SELECT * FROM walkwithme.user_relation\n"
-                            + "WHERE first = 1 AND liked = 1 AND second IN (SELECT first FROM"
+                            + "WHERE first = :id AND liked = 1 AND second IN (SELECT first FROM"
                             + " walkwithme.user_relation\n"
-                            + "WHERE second = 1 AND liked = 1)",
+                            + "WHERE second = :id AND liked = 1)",
             nativeQuery = true)
     List<UserRelation> getMatches(int id);
 
