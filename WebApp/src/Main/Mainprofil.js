@@ -31,8 +31,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 export default function Main() {
-  setID(),
-    getallinfo()
+  setID()
   var i = 0;
   
   return (

@@ -49,11 +49,7 @@ const Signuppage = () => {
 
 export default Signuppage;
 
-async function registration() {
-  var anmelden = false;
-  var ID = 0;
-  var nutzer;
-
+ function registration() {
   var username = document.querySelector("#Username").value
   var pw = document.querySelector("#Password").value
   var url = IP + 'user/newUser?' + Key + '&username=' + username + '&password=' + pw;
@@ -80,12 +76,13 @@ async function registration() {
       }
 
 
-      await fetch(url, fetchData)
+      fetch(url, fetchData)
 
       fetch(URL)
         .then(response => response.json())
         .then(function (data) {
           alert("Anmeldung abgeschlossen");
+          window.location.href = "/main/" + data.id;
         }).catch((error) => {
           alert('user schon vorhanden')
         });
