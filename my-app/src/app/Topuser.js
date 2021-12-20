@@ -8,23 +8,22 @@ import Avatar from "@mui/material/Avatar";
 import { IP, jan, Key, getactiveUser } from "../variable";
 
 var ID;
-let username = ["dubsky",
- "alesia",
- "marck",
- "heinrich",
- "skadi",
-"chuckTesta",
- "testerTheSecond",
- "theThirdTest",
- "theFinalTest",
- "itNoWorkICrie"];
+let username = [];
 
 
 export default function Topuser() {
-  getallinfo()
+
+const  [loaded,setloaded] = React.useState(false);
+
+   getallinfo().then(()=>{
+  setloaded(true)
+  console.log(username)
+  })
+
+
 
   return (
-    <div>
+    <div style={loaded? null:{display:"none"}}>
       <List
         sx={{
           width: "100%",
@@ -33,6 +32,7 @@ export default function Topuser() {
           overflow: "auto",
           maxHeight: 500,
           "& ul": { padding: 0 }
+
         }}
         subheader={<li />}
       >
@@ -53,14 +53,18 @@ export default function Topuser() {
           );
         })}
       </List>
+
+
     </div>
   );
 }
 
-function getallinfo() {
-  var URL = IP + "info/topUsers?" + Key;
 
-  return asyncCall(URL)
+
+
+function getallinfo() {
+  var URL = IP + "user/getUsers?" + Key;
+  return  asyncCall(URL)
 }
 
 async function asyncCall(URL) {
@@ -68,7 +72,8 @@ async function asyncCall(URL) {
     let response = await fetch(URL);
     let user = await response.json();
     var i = 0;
-    user.forEach(element => {
+    console.log(user)
+    user.forEach((element) => {
       username[i] = element.username
       i = i + 1
     });

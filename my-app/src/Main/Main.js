@@ -33,6 +33,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Main() {
   setID()
   var i = 0;
+  
   return (
     <div className="Main">
       <Grid container spacing={2}>

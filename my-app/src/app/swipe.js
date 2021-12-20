@@ -40,7 +40,7 @@ let fetchData = {
 export default function Swipe() {
   const [value, setValue] = React.useState("Controlled");
   setID(),
-    getallinfo()
+  getallinfo()
   return (
     <div className="swipe">
       <Grid container spacing={3} height={400}>
@@ -136,9 +136,8 @@ function getid(index) {
 
 }
 function getallinfo() {
-  var URL = IP + "user/getRandom?" + Key + "&first=" + ID;
+  var URL = IP + "user//getMatch?" + Key + "&first=" + ID;
   asyncCall(URL)
-
 }
 
 async function asyncCall(URL) {
@@ -147,9 +146,6 @@ async function asyncCall(URL) {
   randomID = await user.id
   Username = await user.username
   document.querySelector("#Username").value = Username
-
-
-
   var URLa = IP + "info/getUser?" + Key + "&id="+randomID 
    response = await fetch(URLa);
    user = await response.json();
@@ -158,6 +154,8 @@ async function asyncCall(URL) {
   bio = await user.bio
   document.querySelector("#bio").value = bio
   profilpic = await user.avatar
+
+
 }
 
 async function Like() {
