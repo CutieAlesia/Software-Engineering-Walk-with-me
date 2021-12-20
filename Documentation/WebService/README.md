@@ -283,70 +283,6 @@ GET /getUser?key={api_key}&id={uid}
 }
 ```
 
-#### Getting user ranking
-```html
-GET /getRank?key={api_key}&id={id}
-```
-```java
-x: int // -1 when null or error
-```
-
-#### Changing user bio
-```html
-POST /changeBio?key={api_key}&id={id}&newBio={String}
-```
-```text
-```
-
-#### Changing user gender
-```html
-POST /changeGender?key={api_key}&id={id}&newGender={String}
-```
-```text
-```
-
-#### Changing user race
-```html
-POST /changeRace?key={api_key}&id={id}&newRace={String}
-```
-```text
-```
-
-#### Changing user friendly status
-```html
-POST /changeFriendly?key={api_key}&id={id}&newFriendly={0,1}
-```
-```text
-```
-
-#### Changing user height
-```html
-POST /changeHeight?key={api_key}&id={id}&newHeight={int}
-```
-```text
-```
-
-#### Changing user weight
-```html
-POST /changeWeight?key={api_key}&id={id}&newWeight={int}
-```
-```text
-```
-
-#### Changing user avatar
-```html
-POST /changeAvatar?key={api_key}&id={id}&image={image_id}
-```
-```text
-```
-
-#### Change user ranking
-```html
-POST /changeAvatar?key={api_key}&id={id}&newrank={newrank}
-```
-```text
-```
-
 #### Get the Top10 users
 ```html
 GET /topUsers?key={api_key}
@@ -383,3 +319,84 @@ GET /topUsers?key={api_key}
   }
 ]
 ```
+
+#### Getting user ranking
+```html
+GET /getRank?key={api_key}&id={uid}
+```
+```java
+x: int // -1 when null or error
+```
+
+#### Getting a user preference
+```html
+GET /getPref?key={api_key}&id={uid}
+```
+```json
+{"cat": 1, "dog": 1}
+```
+
+#### Changing user bio
+```html
+POST /changeBio?key={api_key}&id={uid}&newBio={String}
+```
+```text
+```
+
+#### Changing user gender
+```html
+POST /changeGender?key={api_key}&id={uid}&newGender={String}
+```
+```text
+```
+
+#### Changing user race
+```html
+POST /changeRace?key={api_key}&id={uid}&newRace={String}
+```
+```text
+```
+
+#### Changing user friendly status
+```html
+POST /changeFriendly?key={api_key}&id={uid}&newFriendly={0,1}
+```
+```text
+```
+
+#### Changing user height
+```html
+POST /changeHeight?key={api_key}&id={uid}&newHeight={int}
+```
+```text
+```
+
+#### Changing user weight
+```html
+POST /changeWeight?key={api_key}&id={uid}&newWeight={int}
+```
+```text
+```
+
+#### Changing user avatar
+```html
+POST /changeAvatar?key={api_key}&id={uid}&image={image_id}
+```
+```text
+```
+
+#### Change user ranking
+```html
+POST /changeAvatar?key={api_key}&id={uid}&newrank={newrank}
+```
+```text
+```
+
+#### Changing a users preference
+```html
+POST /changePref?key={api_key}&id={uid}&cat={0,1}&dog={0,1}
+```
+```text
+```
+
+
