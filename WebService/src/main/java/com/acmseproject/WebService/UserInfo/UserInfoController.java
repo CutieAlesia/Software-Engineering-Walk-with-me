@@ -272,6 +272,7 @@ public class UserInfoController {
             UserInfo tmp = getUser(key, id);
             String json = new JSONObject().put("dog", dog).put("cat", cat).toString();
             tmp.setPref(json);
+            userInfoRepository.save(tmp);
         }
     }
 
