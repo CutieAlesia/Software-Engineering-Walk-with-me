@@ -1,6 +1,9 @@
 package com.acmseproject.WebService.UserInfo;
 
+import org.json.JSONObject;
+
 import javax.persistence.*;
+import java.util.Random;
 
 /**
  * @author Dubsky
@@ -17,6 +20,7 @@ public class UserInfo {
     private int userid;
     private String username;
     private String bio;
+    private String animal;
     private String gender;
     private String race;
     private int friendly;
@@ -25,6 +29,7 @@ public class UserInfo {
     private String avatar;
     private String images;
     private int ranking;
+    private String pref;
 
     public UserInfo() {}
 
@@ -32,6 +37,22 @@ public class UserInfo {
         this.id = id;
         this.userid = userid;
         this.username = username;
+
+        Random gen = new Random();
+        String prefJson = new JSONObject().put("dog", 0).put("cat", 0).toString();
+        String avatarJson = new JSONObject().put("image", 1 + gen.nextInt(28)).toString();
+        int amount = gen.nextInt(8);
+        amount++;
+        System.out.println("IMAGES:" + amount);
+        JSONObject imageJson = new JSONObject();
+        for (int i = 0; i < amount; i++) {
+            imageJson.put("image", 1 + gen.nextInt(28));
+        }
+        this.pref = prefJson;
+        this.avatar = avatarJson;
+        this.images = imageJson.toString();
+        this.weight = 1 + gen.nextInt(35);
+        this.height = 1 + gen.nextInt(70);
     }
 
     public UserInfo(
@@ -64,6 +85,9 @@ public class UserInfo {
                 + ", bio='"
                 + bio
                 + '\''
+                + ", animal='"
+                + animal
+                + '\''
                 + ", gender='"
                 + gender
                 + '\''
@@ -84,7 +108,26 @@ public class UserInfo {
                 + '\''
                 + ", ranking="
                 + ranking
+                + ", pref='"
+                + pref
+                + '\''
                 + '}';
+    }
+
+    public String getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(String animal) {
+        this.animal = animal;
+    }
+
+    public String getPref() {
+        return pref;
+    }
+
+    public void setPref(String pref) {
+        this.pref = pref;
     }
 
     public int getRanking() {

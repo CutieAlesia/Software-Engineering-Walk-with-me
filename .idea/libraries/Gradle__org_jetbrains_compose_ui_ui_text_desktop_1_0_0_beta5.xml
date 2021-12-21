@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jetbrains.compose.ui:ui-text-desktop:1.0.0-beta5">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.compose.ui/ui-text-desktop/1.0.0-beta5/8a3b4577696908557bc7849faf60c0279c1cfb87/ui-text-desktop-1.0.0-beta5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.compose.ui/ui-text-desktop/1.0.0-beta5/1e57a7a4a8abe86ed1b8b73def7e645a5f82a017/ui-text-desktop-1.0.0-beta5-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -4,6 +4,7 @@ import org.json.JSONObject;
 import org.springframework.aop.AopInvocationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Objects;
@@ -60,6 +61,7 @@ public class UserInfoController {
         }
     }
 
+    /** TODO || JavaDoc missing */
     @GetMapping(path = "/topUsers")
     public List<UserInfo> topUsers(@RequestParam String key) {
         System.out.format("[Request] topUsers\n[Key] %s\n", key);
@@ -96,6 +98,24 @@ public class UserInfoController {
     }
 
     /**
+     * GET-Method to receive a users preference
+     *
+     * @param key API-Key for authentication
+     * @param id User ID
+     */
+    @GetMapping(path = "/getPref")
+    public String getPref(@RequestParam String key, @RequestParam int id) {
+        System.out.format("[Request] getPref\n[Key] %s\n", key);
+        if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            return getUser(key, id).getPref();
+        } else {
+            System.out.format("[Verification] Failed\n");
+            return null;
+        }
+    }
+
+    /**
      * POST-Method to change a user bio
      *
      * @param key API-Key for authentication
@@ -109,6 +129,25 @@ public class UserInfoController {
         if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
             userInfoRepository.changeBio(id, newBio);
+        }
+    }
+
+    /**
+     * POST-Method to change a users animal type
+     *
+     * @param key API-Key for authentication
+     * @param id User ID connected to the change
+     * @param animal Animal to be
+     */
+    @PostMapping(path = "/changeAnimal")
+    public void changeAnimal(
+            @RequestParam String key, @RequestParam int id, @RequestParam String animal) {
+        System.out.format("[Request] changeAnimal\n[Key] %s\n", key);
+        if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            UserInfo tmp = getUser(key, id);
+            tmp.setAnimal(animal);
+            userInfoRepository.save(tmp);
         }
     }
 
@@ -231,4 +270,53 @@ public class UserInfoController {
             userInfoRepository.changeRank(id, newrank);
         }
     }
+
+    /**
+     * POST-Method to change a users preference
+     *
+     * @param key API-Key for authentication
+     * @param id User ID connected to the change
+     * @param dog Dog pref
+     * @param cat Cat pref
+     */
+    @PostMapping(path = "/changePref")
+    public void changePref(
+            @RequestParam String key,
+            @RequestParam int id,
+            @RequestParam int cat,
+            @RequestParam int dog) {
+        System.out.format("[Request] changePref\n[Key] %s\n", key);
+        if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            UserInfo tmp = getUser(key, id);
+            String json = new JSONObject().put("dog", dog).put("cat", cat).toString();
+            tmp.setPref(json);
+            userInfoRepository.save(tmp);
+        }
+    }
+
+    /**
+     * POST-Method to upload images
+     *
+     * @param key API-Key for authentication
+     * @param id User ID connected to the change
+     * @param file File byte array
+     */
+    //    @PostMapping(path = "/upload")
+    //    public void upload(
+    //            @RequestParam String key, @RequestParam int id, @RequestParam("image")
+    // MultipartFile file) {
+    //        System.out.format("[Request] upload\n[Key] %s\n", key);
+    //        if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
+    //            System.out.format("[Verification] Valid\n");
+    //            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+    //            System.out.format("Filename: %s", fileName);
+    //            UserInfo tmp = getUser(key, id);
+    //            String json = new JSONObject()
+    //                    .put("image", "avatar."+Integer.toString(id) )
+    //                    .toString();
+    //            userInfoRepository.changeAvatar(id, json);
+    //            FileUploadUtil.saveFile("ressources/", "avatar."+Integer.toString(id), file);
+    //        }
+    //    }
 }
