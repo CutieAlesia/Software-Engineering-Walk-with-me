@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -152,13 +153,7 @@ public class PreferencesFragment extends Fragment {
                             @Override
                             public void onResponse(String response) {
                                 if (response.equals("200")) {
-                                    Fragment frg =
-                                            getFragmentManager().findFragmentByTag("profile");
-                                    getFragmentManager()
-                                            .beginTransaction()
-                                            .detach(frg)
-                                            .attach(frg)
-                                            .commit();
+                                    refresh();
                                 }
                             }
                         },
@@ -174,5 +169,10 @@ public class PreferencesFragment extends Fragment {
                         });
 
         queue.add(stringRequest);
+    }
+
+    private void refresh() {
+        NavHostFragment.findNavController(PreferencesFragment.this)
+                .navigate(PreferencesFragmentDirections.actionPreferencesFragmentSelf());
     }
 }

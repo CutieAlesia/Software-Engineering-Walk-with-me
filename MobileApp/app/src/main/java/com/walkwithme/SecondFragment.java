@@ -118,7 +118,7 @@ public class SecondFragment extends Fragment {
 
         url =
                 MainActivity.url
-                        + "user/getRandom?key="
+                        + "user/getMatch?key="
                         + MainActivity.apiKey
                         + "&first="
                         + MainActivity.getLoggedInUserId();
@@ -144,7 +144,8 @@ public class SecondFragment extends Fragment {
 
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                                VolleyLog.d(
+                                        TAG, "No more users to display, please try again later.");
                                 Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT)
                                         .show();
                                 // hide the progress dialog
