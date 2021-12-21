@@ -117,12 +117,11 @@ public class UserRelationController {
         System.out.format("[Request] changeLike\n[Key] %s\n", key);
         if (Objects.equals(key, userRelationRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");
-            if(getRelation(key, id, id2) == null) {
+            if (getRelation(key, id, id2) == null) {
                 addRelation(key, id, id2);
                 userRelationRepository.changeLike(id, id2, like);
                 return "200";
-            } else
-            {
+            } else {
                 userRelationRepository.changeLike(id, id2, like);
                 return "200";
             }

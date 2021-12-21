@@ -141,9 +141,7 @@ public class UserInfoController {
      */
     @PostMapping(path = "/changeAnimal")
     public void changeAnimal(
-            @RequestParam String key,
-            @RequestParam int id,
-            @RequestParam String animal) {
+            @RequestParam String key, @RequestParam int id, @RequestParam String animal) {
         System.out.format("[Request] changeAnimal\n[Key] %s\n", key);
         if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
             System.out.format("[Verification] Valid\n");

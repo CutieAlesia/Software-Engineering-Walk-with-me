@@ -74,22 +74,44 @@ public class UserInfo {
 
     @Override
     public String toString() {
-        return "UserInfo{" +
-                "id=" + id +
-                ", userid=" + userid +
-                ", username='" + username + '\'' +
-                ", bio='" + bio + '\'' +
-                ", animal='" + animal + '\'' +
-                ", gender='" + gender + '\'' +
-                ", race='" + race + '\'' +
-                ", friendly=" + friendly +
-                ", height=" + height +
-                ", weight=" + weight +
-                ", avatar='" + avatar + '\'' +
-                ", images='" + images + '\'' +
-                ", ranking=" + ranking +
-                ", pref='" + pref + '\'' +
-                '}';
+        return "UserInfo{"
+                + "id="
+                + id
+                + ", userid="
+                + userid
+                + ", username='"
+                + username
+                + '\''
+                + ", bio='"
+                + bio
+                + '\''
+                + ", animal='"
+                + animal
+                + '\''
+                + ", gender='"
+                + gender
+                + '\''
+                + ", race='"
+                + race
+                + '\''
+                + ", friendly="
+                + friendly
+                + ", height="
+                + height
+                + ", weight="
+                + weight
+                + ", avatar='"
+                + avatar
+                + '\''
+                + ", images='"
+                + images
+                + '\''
+                + ", ranking="
+                + ranking
+                + ", pref='"
+                + pref
+                + '\''
+                + '}';
     }
 
     public String getAnimal() {
