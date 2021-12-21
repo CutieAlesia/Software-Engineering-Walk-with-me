@@ -118,7 +118,7 @@ public class SecondFragment extends Fragment {
 
         url =
                 MainActivity.url
-                        + "user/getRandom?key="
+                        + "user/getMatch?key="
                         + MainActivity.apiKey
                         + "&first="
                         + MainActivity.getLoggedInUserId();

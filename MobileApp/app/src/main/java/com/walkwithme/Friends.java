@@ -117,8 +117,17 @@ public class Friends extends Fragment {
 
     public void loadUserInfo(@NonNull JSONObject jsonObject) {
         try {
-            int friendId = jsonObject.getInt("second");
-            ids.add(friendId);
+            int friendId2 = jsonObject.getInt("second");
+            int friendId1 = jsonObject.getInt("first");
+            int friendId;
+
+            if(friendId2 != MainActivity.getLoggedInUserId()){
+                ids.add(friendId2);
+                friendId = friendId2;
+            }else {
+                ids.add(friendId1);
+                friendId = friendId1;
+            }
 
             RequestQueue queue = Volley.newRequestQueue(getContext());
             String url =

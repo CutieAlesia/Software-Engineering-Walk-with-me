@@ -6,6 +6,11 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,16 +44,17 @@ import java.util.ArrayList;
  */
 public class Profile extends Fragment {
 
-    private static final String TAG = "Swipe Fragment";
+    private static final String TAG = "profile";
     private static final int IO_BUFFER_SIZE = Integer.MAX_VALUE;
     private FragmentProfileBinding binding;
-    static final int VOID = 0;
+    static final int DISLIKE = 2;
     static final int LIKE = 1;
     ImageView previewImages;
     ArrayList<String> values = new ArrayList<>();
     ArrayList<String> imagesUrls = new ArrayList<>();
     ArrayList<Integer> images = new ArrayList<>();
     ImageView avatarView;
+    static boolean friends = false;
 
     public static int getuId() {
         return uId;
@@ -104,76 +110,83 @@ public class Profile extends Fragment {
             userInfoView.setFocusable(false);
             userInfoView.setFocusableInTouchMode(false);
             userInfoView.setClickable(false);
-
-            if (isFriend()) {
-                binding.remove.setOnClickListener(
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                new AlertDialog.Builder(getContext())
-                                        .setTitle("Remove friend?")
-                                        .setMessage("Do you really want to remove this friend?")
-                                        .setIcon(android.R.drawable.ic_dialog_alert)
-                                        .setPositiveButton(
-                                                android.R.string.yes,
-                                                new DialogInterface.OnClickListener() {
-                                                    public void onClick(
-                                                            DialogInterface dialog,
-                                                            int whichButton) {
-                                                        Toast.makeText(
+            isFriend(new VolleyCallBack(){
+                @Override
+                public void onSuccess() {
+                    if (friends) {
+                        binding.remove.setText("Remove");
+                        binding.remove.setOnClickListener(
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        new AlertDialog.Builder(getContext())
+                                                .setTitle("Remove friend?")
+                                                .setMessage("Do you really want to remove this friend?")
+                                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                                .setPositiveButton(
+                                                        android.R.string.yes,
+                                                        new DialogInterface.OnClickListener() {
+                                                            public void onClick(
+                                                                    DialogInterface dialog,
+                                                                    int whichButton) {
+                                                                Toast.makeText(
                                                                         getContext(),
                                                                         "Removing Friend",
                                                                         Toast.LENGTH_SHORT)
-                                                                .show();
-                                                        removeAddFriend(VOID);
-                                                    }
-                                                })
-                                        .setNegativeButton(
-                                                android.R.string.no,
-                                                new DialogInterface.OnClickListener() {
-                                                    public void onClick(
-                                                            DialogInterface dialog,
-                                                            int whichButton) {}
-                                                })
-                                        .show();
-                            }
-                        });
+                                                                        .show();
+                                                                removeAddFriend(DISLIKE);
+                                                            }
+                                                        })
+                                                .setNegativeButton(
+                                                        android.R.string.no,
+                                                        new DialogInterface.OnClickListener() {
+                                                            public void onClick(
+                                                                    DialogInterface dialog,
+                                                                    int whichButton) {}
+                                                        })
+                                                .show();
+                                    }
+                                });
 
-            } else {
-                binding.remove.setText("Add");
-                binding.remove.setOnClickListener(
-                        new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                new AlertDialog.Builder(getContext())
-                                        .setTitle("Add friend?")
-                                        .setMessage("Do you really want to add this person?")
-                                        .setIcon(android.R.drawable.ic_dialog_alert)
-                                        .setPositiveButton(
-                                                android.R.string.yes,
-                                                new DialogInterface.OnClickListener() {
-                                                    public void onClick(
-                                                            DialogInterface dialog,
-                                                            int whichButton) {
-                                                        Toast.makeText(
+                    } else {
+                        binding.remove.setText("Add");
+                        binding.remove.setOnClickListener(
+                                new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        new AlertDialog.Builder(getContext())
+                                                .setTitle("Add friend?")
+                                                .setMessage("Do you really want to add this person?")
+                                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                                .setPositiveButton(
+                                                        android.R.string.yes,
+                                                        new DialogInterface.OnClickListener() {
+                                                            public void onClick(
+                                                                    DialogInterface dialog,
+                                                                    int whichButton) {
+                                                                Toast.makeText(
                                                                         getContext(),
                                                                         "Adding Friend",
                                                                         Toast.LENGTH_SHORT)
-                                                                .show();
-                                                        removeAddFriend(LIKE);
-                                                    }
-                                                })
-                                        .setNegativeButton(
-                                                android.R.string.no,
-                                                new DialogInterface.OnClickListener() {
-                                                    public void onClick(
-                                                            DialogInterface dialog,
-                                                            int whichButton) {}
-                                                })
-                                        .show();
-                            }
-                        });
-            }
+                                                                        .show();
+                                                                removeAddFriend(LIKE);
+                                                            }
+                                                        })
+                                                .setNegativeButton(
+                                                        android.R.string.no,
+                                                        new DialogInterface.OnClickListener() {
+                                                            public void onClick(
+                                                                    DialogInterface dialog,
+                                                                    int whichButton) {}
+                                                        })
+                                                .show();
+                                    }
+                                });
+                    }
+                }
+
+            });
+
             binding.chat.setOnClickListener(
                     new View.OnClickListener() {
                         @Override
@@ -200,8 +213,7 @@ public class Profile extends Fragment {
         }
     }
 
-    private boolean isFriend() {
-        final boolean[] friends = {false};
+    private void isFriend(final VolleyCallBack callBack) {
         RequestQueue queue = Volley.newRequestQueue(getContext());
         String url =
                 MainActivity.url
@@ -223,14 +235,16 @@ public class Profile extends Fragment {
                                     try {
                                         int liked = response.getInt("liked");
                                         if (liked == 1) {
-                                            friends[0] = true;
+                                            friends = true;
                                         } else {
-                                            friends[0] = false;
+                                            friends = false;
                                         }
+                                        callBack.onSuccess();
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
                                 }
+
                             }
                         },
                         new Response.ErrorListener() {
@@ -245,9 +259,8 @@ public class Profile extends Fragment {
                         });
 
         queue.add(jsonObjectRequest);
-
-        return true;
     }
+
 
     private void removeAddFriend(int change) {
 
@@ -270,13 +283,7 @@ public class Profile extends Fragment {
                             @Override
                             public void onResponse(String response) {
                                 if (response.equals("200")) {
-                                    Fragment frg =
-                                            getFragmentManager().findFragmentByTag("profile");
-                                    getFragmentManager()
-                                            .beginTransaction()
-                                            .detach(frg)
-                                            .attach(frg)
-                                            .commit();
+                                    refresh();
                                 }
                             }
                         },
@@ -292,6 +299,12 @@ public class Profile extends Fragment {
                         });
 
         queue.add(stringRequest);
+    }
+
+    private void refresh() {
+        ProfileDirections.ActionProfileSelf action = ProfileDirections.actionProfileSelf();
+        action.setId(uId);
+        NavHostFragment.findNavController(Profile.this).navigate(action);
     }
 
     private void saveChanges() {
@@ -313,13 +326,7 @@ public class Profile extends Fragment {
                             @Override
                             public void onResponse(String response) {
                                 if (response.equals("200")) {
-                                    Fragment frg =
-                                            getFragmentManager().findFragmentByTag("profile");
-                                    getFragmentManager()
-                                            .beginTransaction()
-                                            .detach(frg)
-                                            .attach(frg)
-                                            .commit();
+                                    refresh();
                                 }
                             }
                         },
@@ -354,7 +361,10 @@ public class Profile extends Fragment {
                                         String name = response.getString("username");
                                         String userInfo = response.getString("bio");
                                         String preferences =
-                                                "Gender: "
+                                                        "Animal: "
+                                                        + response.getString("animal")
+                                                        + "\n"
+                                                        + "Gender: "
                                                         + response.getString("gender")
                                                         + "\n"
                                                         + "Race: "
