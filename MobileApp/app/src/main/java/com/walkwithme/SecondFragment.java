@@ -144,8 +144,12 @@ public class SecondFragment extends Fragment {
 
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                VolleyLog.d(TAG, "No more users to display, please try again later.");
-                                Toast.makeText(getContext(), "No more users to display, please try again later.", Toast.LENGTH_SHORT)
+                                VolleyLog.d(
+                                        TAG, "No more users to display, please try again later.");
+                                Toast.makeText(
+                                                getContext(),
+                                                "No more users to display, please try again later.",
+                                                Toast.LENGTH_SHORT)
                                         .show();
                                 NavHostFragment.findNavController(SecondFragment.this)
                                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
@@ -208,8 +212,12 @@ public class SecondFragment extends Fragment {
 
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                VolleyLog.d(TAG, "No more users to display, please try again later.");
-                                Toast.makeText(getContext(), "No more users to display, please try again later.", Toast.LENGTH_SHORT)
+                                VolleyLog.d(
+                                        TAG, "No more users to display, please try again later.");
+                                Toast.makeText(
+                                                getContext(),
+                                                "No more users to display, please try again later.",
+                                                Toast.LENGTH_SHORT)
                                         .show();
                                 NavHostFragment.findNavController(SecondFragment.this)
                                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
