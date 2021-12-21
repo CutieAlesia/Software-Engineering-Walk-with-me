@@ -122,10 +122,8 @@ public class Friends extends Fragment {
             int friendId;
 
             if (friendId2 != MainActivity.getLoggedInUserId()) {
-                ids.add(friendId2);
                 friendId = friendId2;
             } else {
-                ids.add(friendId1);
                 friendId = friendId1;
             }
 
@@ -157,6 +155,7 @@ public class Friends extends Fragment {
 
                                             names.add(name);
                                             avatars.add(avatarURL);
+                                            ids.add(friendId);
                                             updateView();
 
                                         } catch (JSONException e) {

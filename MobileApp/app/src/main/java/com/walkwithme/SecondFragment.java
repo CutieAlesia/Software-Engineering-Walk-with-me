@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -103,9 +104,8 @@ public class SecondFragment extends Fragment {
                         new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                VolleyLog.d(TAG, "Error: " + error.getMessage());
-                                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT)
-                                        .show();
+                                NavHostFragment.findNavController(SecondFragment.this)
+                                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
                                 // hide the progress dialog
                             }
                         });
@@ -147,6 +147,8 @@ public class SecondFragment extends Fragment {
                                 VolleyLog.d(TAG, "No more users to display, please try again later.");
                                 Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT)
                                         .show();
+                                NavHostFragment.findNavController(SecondFragment.this)
+                                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
                                 // hide the progress dialog
                             }
                         });
@@ -167,7 +169,6 @@ public class SecondFragment extends Fragment {
                             public void onResponse(JSONObject response) {
                                 if (response != null) {
                                     try {
-                                        uId = response.getInt("userid");
                                         String name = response.getString("username");
                                         String userInfo = response.getString("bio");
                                         String preferences =
@@ -207,9 +208,11 @@ public class SecondFragment extends Fragment {
 
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                                VolleyLog.d(TAG, "No more users to display, please try again later.");
                                 Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT)
                                         .show();
+                                NavHostFragment.findNavController(SecondFragment.this)
+                                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
                                 // hide the progress dialog
                             }
                         });

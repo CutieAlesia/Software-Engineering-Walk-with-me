@@ -258,10 +258,8 @@ public class Profile extends Fragment {
 
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                VolleyLog.d(TAG, "Error: " + error.getMessage());
-                                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT)
-                                        .show();
-                                // hide the progress dialog
+                                friends = false;
+                                callBack.onSuccess();
                             }
                         });
 
@@ -408,9 +406,6 @@ public class Profile extends Fragment {
 
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                VolleyLog.d(TAG, "Error: " + error.getMessage());
-                                Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT)
-                                        .show();
                                 // hide the progress dialog
                             }
                         });
