@@ -144,7 +144,8 @@ public class SecondFragment extends Fragment {
 
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                VolleyLog.d(TAG, "No more users to display, please try again later.");
+                                VolleyLog.d(
+                                        TAG, "No more users to display, please try again later.");
                                 Toast.makeText(getContext(), error.getMessage(), Toast.LENGTH_SHORT)
                                         .show();
                                 // hide the progress dialog
