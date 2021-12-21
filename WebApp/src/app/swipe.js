@@ -40,7 +40,7 @@ let fetchData = {
 export default function Swipe() {
   const [value, setValue] = React.useState("Controlled");
   setID(),
-  getallinfo()
+    getallinfo()
   return (
     <div className="swipe">
       <Grid container spacing={3} height={400}>
@@ -136,8 +136,8 @@ function getid(index) {
 
 }
 function getallinfo() {
- var URL = IP + "user/getMatch?" + Key + "&first=" + ID;
-asyncCall(URL)
+  var URL = IP + "user/getMatch?" + Key + "&first=" + ID;
+  asyncCall(URL)
 }
 
 async function asyncCall(URL) {
@@ -146,9 +146,9 @@ async function asyncCall(URL) {
   randomID = await user.id
   Username = await user.username
   document.querySelector("#Username").value = Username
-  var URLa = IP + "info/getUser?" + Key + "&id="+randomID 
-   response = await fetch(URLa);
-   user = await response.json();
+  var URLa = IP + "info/getUser?" + Key + "&id=" + randomID
+  response = await fetch(URLa);
+  user = await response.json();
   Username = await user.username
   document.querySelector("#Username").value = Username
   bio = await user.bio
@@ -158,14 +158,14 @@ async function asyncCall(URL) {
 
 async function Like() {
 
-  var URL = IP + "relations/changeLike?" + Key + "&id=" + ID + '&id2=' + randomID+"&like="+1;
+  var URL = IP + "relations/changeLike?" + Key + "&id=" + ID + '&id2=' + randomID + "&like=" + 1;
   console.log(URL)
   await fetch(URL, fetchData)
   window.location.href = "/main/" + ID;
 }
 
 async function Dislike() {
-  var URL = IP + "relations/changeLike?" + Key + "&id=" + ID + '&id2=' + randomID+"&like="+2;
+  var URL = IP + "relations/changeLike?" + Key + "&id=" + ID + '&id2=' + randomID + "&like=" + 2;
   await fetch(URL, fetchData)
   window.location.href = "/main/" + ID;
 }
