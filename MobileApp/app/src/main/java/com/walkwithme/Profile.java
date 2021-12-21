@@ -120,7 +120,7 @@ public class Profile extends Fragment {
                                                         .setTitle("Remove friend?")
                                                         .setMessage(
                                                                 "Do you really want to remove this"
-                                                                    + " friend?")
+                                                                        + " friend?")
                                                         .setIcon(android.R.drawable.ic_dialog_alert)
                                                         .setPositiveButton(
                                                                 android.R.string.yes,
@@ -161,7 +161,7 @@ public class Profile extends Fragment {
                                                         .setTitle("Add friend?")
                                                         .setMessage(
                                                                 "Do you really want to add this"
-                                                                    + " person?")
+                                                                        + " person?")
                                                         .setIcon(android.R.drawable.ic_dialog_alert)
                                                         .setPositiveButton(
                                                                 android.R.string.yes,
