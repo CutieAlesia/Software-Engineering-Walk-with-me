@@ -70,7 +70,7 @@ function login() {
       .then(response => response.json())
       .then(function (data) {
         alert("Anmeldung abgeschlossen");
-        window.location.href = "/main/" + data.id;
+        window.location.href = "/main/options/" + data.id;
       }).catch((error) => {
         alert('user oder passwort falsch')
       });
