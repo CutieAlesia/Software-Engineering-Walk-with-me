@@ -121,10 +121,10 @@ public class Friends extends Fragment {
             int friendId1 = jsonObject.getInt("first");
             int friendId;
 
-            if(friendId2 != MainActivity.getLoggedInUserId()){
+            if (friendId2 != MainActivity.getLoggedInUserId()) {
                 ids.add(friendId2);
                 friendId = friendId2;
-            }else {
+            } else {
                 ids.add(friendId1);
                 friendId = friendId1;
             }
