@@ -10,23 +10,20 @@ import { IP, jan, Key, getactiveUser } from "../variable";
 
 
 var ID;
-let username = ["dubsky",
- "alesia",
- "marck",
- "heinrich",
- "skadi",
-"chuckTesta",
- "testerTheSecond",
- "theThirdTest",
- "theFinalTest",
- "itNoWorkICrie"];
+let username = [];
 
 
 export default function Friendlist() {
-  getallinfo()
+  setID()
+
+  const [loaded, setloaded] = React.useState(false);
+
+  getallinfo().then(() => {
+    setloaded(true)
+  })
   return (
     <div>
-      <List
+     <List style={loaded? null:{display:"none"}}
         sx={{
           width: "100%",
           maxWidth: "100%",
@@ -72,7 +69,7 @@ function setID() {
 }
 
 function getallinfo() {
-  var URL = IP + "info/topUsers?" + Key;
+  var URL = IP + "relations/getMatches?" + Key + "&id=" + ID;
 
   return asyncCall(URL)
 }
@@ -82,9 +79,13 @@ async function asyncCall(URL) {
     let response = await fetch(URL);
     let user = await response.json();
     var i = 0;
-    user.forEach(element => {
-      username[i] = element.username
-      i = i + 1
+    user.forEach((element) => {
+      var url = IP + "relations/getMatches?" + Key + "&id=" + element.id;
+      fetch(url).then(response => response.json())
+        .then(function (data) {
+          username[i] = data.username
+          i = i + 1
+        })
     });
     console.log(username)
   } catch (err) {

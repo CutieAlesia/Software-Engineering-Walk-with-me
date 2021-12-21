@@ -136,8 +136,8 @@ function getid(index) {
 
 }
 function getallinfo() {
-  var URL = IP + "user//getMatch?" + Key + "&first=" + ID;
-  asyncCall(URL)
+ var URL = IP + "user/getMatch?" + Key + "&first=" + ID;
+asyncCall(URL)
 }
 
 async function asyncCall(URL) {
@@ -154,8 +154,6 @@ async function asyncCall(URL) {
   bio = await user.bio
   document.querySelector("#bio").value = bio
   profilpic = await user.avatar
-
-
 }
 
 async function Like() {
@@ -167,7 +165,6 @@ async function Like() {
 }
 
 async function Dislike() {
-
   var URL = IP + "relations/changeLike?" + Key + "&id=" + ID + '&id2=' + randomID+"&like="+2;
   await fetch(URL, fetchData)
   window.location.href = "/main/" + ID;

@@ -117,14 +117,6 @@ function getid(index) {
 
 }
 
-
-function getidsearch(index) {
-
-    var str = window.location.href;
-    return str.split("/")[index];
-
-}
-
 function setID() {
     ID = getid(4);
     console.log(ID)

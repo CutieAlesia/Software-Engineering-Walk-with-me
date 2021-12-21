@@ -76,16 +76,17 @@ export default Signuppage;
       }
 
 
-      fetch(url, fetchData)
-
-      fetch(URL)
+      fetch(url, fetchData).then(()=>{ 
+        fetch(URL)
         .then(response => response.json())
         .then(function (data) {
           alert("Anmeldung abgeschlossen");
           window.location.href = "/main/" + data.id;
         }).catch((error) => {
           alert('user schon vorhanden')
-        });
+        });})
+
+     
 
     }
   }

@@ -18,7 +18,7 @@ import { IP, jan, Key, getactiveUser } from "../variable";
 
 
 var ID;
-var Username = "";
+var username = [];
 
 
 
@@ -32,6 +32,12 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Main() {
   setID()
+  const [loaded, setloaded] = React.useState(false);
+
+  getallinfo().then(() => {
+    setloaded(true)
+  })
+
   var i = 0;
   
   return (
@@ -111,7 +117,7 @@ export default function Main() {
       <Grid container spacing={3}>
         <Grid item xs>
           <Item>
-            <List
+          <List style={loaded? null:{display:"none"}}
               sx={{
                 width: "100%",
                 maxWidth: "100%",
@@ -122,7 +128,7 @@ export default function Main() {
               }}
               subheader={<li />}
             >
-              {[1, 1, 2, 3, 1, 1, 1, 1, 1, 1, 1].map((value) => {
+              {username.map((value) => {
                 const labelId = `checkbox-list-secondary-label-${value}`;
                 return (
                   <ListItem key={value} disablePadding>
@@ -266,4 +272,27 @@ function getid(index) {
 function setID() {
   ID = getid(4);
   console.log(ID)
+}
+function getallinfo() {
+  var URL = IP + "relations/getMatches?" + Key + "&id=" + ID;
+
+  return asyncCall(URL)
+}
+async function asyncCall(URL) {
+  try {
+    let response = await fetch(URL);
+    let user = await response.json();
+    var i = 0;
+    user.forEach((element) => {
+      var url = IP + "relations/getMatches?" + Key + "&id=" + element.id;
+      fetch(url).then(response => response.json())
+        .then(function (data) {
+          username[i] = data.username
+          i = i + 1
+        })
+    });
+    console.log(username)
+  } catch (err) {
+    console.log(err)
+  }
 }
