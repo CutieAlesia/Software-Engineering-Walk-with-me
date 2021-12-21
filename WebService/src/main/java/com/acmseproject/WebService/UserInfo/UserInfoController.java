@@ -133,6 +133,27 @@ public class UserInfoController {
     }
 
     /**
+     * POST-Method to change a users animal type
+     *
+     * @param key API-Key for authentication
+     * @param id User ID connected to the change
+     * @param animal Animal to be
+     */
+    @PostMapping(path = "/changeAnimal")
+    public void changeAnimal(
+            @RequestParam String key,
+            @RequestParam int id,
+            @RequestParam String animal) {
+        System.out.format("[Request] changeAnimal\n[Key] %s\n", key);
+        if (Objects.equals(key, userInfoRepository.checkAuth(key))) {
+            System.out.format("[Verification] Valid\n");
+            UserInfo tmp = getUser(key, id);
+            tmp.setAnimal(animal);
+            userInfoRepository.save(tmp);
+        }
+    }
+
+    /**
      * POST-Method to change a user gender
      *
      * @param key API-Key for authentication

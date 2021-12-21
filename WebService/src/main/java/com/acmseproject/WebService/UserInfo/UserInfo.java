@@ -20,6 +20,7 @@ public class UserInfo {
     private int userid;
     private String username;
     private String bio;
+    private String animal;
     private String gender;
     private String race;
     private int friendly;
@@ -73,41 +74,30 @@ public class UserInfo {
 
     @Override
     public String toString() {
-        return "UserInfo{"
-                + "id="
-                + id
-                + ", userid="
-                + userid
-                + ", username='"
-                + username
-                + '\''
-                + ", bio='"
-                + bio
-                + '\''
-                + ", gender='"
-                + gender
-                + '\''
-                + ", race='"
-                + race
-                + '\''
-                + ", friendly="
-                + friendly
-                + ", height="
-                + height
-                + ", weight="
-                + weight
-                + ", avatar='"
-                + avatar
-                + '\''
-                + ", images='"
-                + images
-                + '\''
-                + ", ranking="
-                + ranking
-                + ", pref='"
-                + pref
-                + '\''
-                + '}';
+        return "UserInfo{" +
+                "id=" + id +
+                ", userid=" + userid +
+                ", username='" + username + '\'' +
+                ", bio='" + bio + '\'' +
+                ", animal='" + animal + '\'' +
+                ", gender='" + gender + '\'' +
+                ", race='" + race + '\'' +
+                ", friendly=" + friendly +
+                ", height=" + height +
+                ", weight=" + weight +
+                ", avatar='" + avatar + '\'' +
+                ", images='" + images + '\'' +
+                ", ranking=" + ranking +
+                ", pref='" + pref + '\'' +
+                '}';
+    }
+
+    public String getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(String animal) {
+        this.animal = animal;
     }
 
     public String getPref() {
